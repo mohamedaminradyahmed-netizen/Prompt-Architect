@@ -172,16 +172,17 @@ Respond in this exact format:
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500/50 via-orange-500/50 to-amber-500/50 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity" />
             
-            <div className="relative bg-[#12121a] border border-[#2a2a35] rounded-2xl p-6">
-              <label className="block text-xs uppercase tracking-[0.15em] text-[#e8e6e3]/40 mb-3">
+            <div className="relative bg-[#12121a] border border-[#2a2a35] rounded-2xl p-6 transition-all focus-within:border-amber-500/50 focus-within:ring-1 focus-within:ring-amber-500/50">
+              <label htmlFor="query-input" className="block text-xs uppercase tracking-[0.15em] text-[#e8e6e3]/70 mb-3">
                 Your Query
               </label>
               
               <textarea
+                id="query-input"
                 value={userQuery}
                 onChange={(e) => setUserQuery(e.target.value)}
                 placeholder="Enter your prompt to be optimized..."
-                className="w-full h-40 bg-transparent text-[#e8e6e3] text-lg placeholder:text-[#e8e6e3]/20 resize-none focus:outline-none font-light leading-relaxed"
+                className="w-full h-40 bg-transparent text-[#e8e6e3] text-lg placeholder:text-[#e8e6e3]/50 resize-y focus:outline-none font-light leading-relaxed"
               />
 
               {/* Example chips */}
