@@ -256,6 +256,15 @@ class InMemoryVectorStore {
 
 /**
  * Create a vector store instance
+ *
+ * For real vector database support (Pinecone, Weaviate), use:
+ * ```typescript
+ * import { createVectorStoreClient } from '../vectorstore/client';
+ * const store = await createVectorStoreClient(config);
+ * ```
+ *
+ * This function returns InMemoryVectorStore for backward compatibility.
+ * Use createVectorStoreClient for production with external vector DBs.
  */
 export function createVectorStore(
   config: VectorStoreConfig
@@ -265,20 +274,31 @@ export function createVectorStore(
       return new InMemoryVectorStore(config);
 
     case 'pinecone':
-      // In production, initialize Pinecone client
-      // const pinecone = new Pinecone({ apiKey: config.apiKey });
-      // const index = pinecone.index(config.indexName);
-      throw new Error('Pinecone integration not implemented. Use in-memory store.');
+      // For Pinecone support, use the new vectorstore client:
+      // import { createVectorStoreClient, PineconeConfig } from '../vectorstore/client';
+      // const store = await createVectorStoreClient(config as PineconeConfig);
+      console.warn(
+        '[VectorStore] For Pinecone, use createVectorStoreClient from ../vectorstore/client. ' +
+        'Falling back to in-memory store.'
+      );
+      return new InMemoryVectorStore({ ...config, provider: 'memory' });
 
     case 'weaviate':
-      // In production, initialize Weaviate client
-      // const weaviate = weaviateClient({ ...config });
-      throw new Error('Weaviate integration not implemented. Use in-memory store.');
+      // For Weaviate support, use the new vectorstore client:
+      // import { createVectorStoreClient, WeaviateConfig } from '../vectorstore/client';
+      // const store = await createVectorStoreClient(config as WeaviateConfig);
+      console.warn(
+        '[VectorStore] For Weaviate, use createVectorStoreClient from ../vectorstore/client. ' +
+        'Falling back to in-memory store.'
+      );
+      return new InMemoryVectorStore({ ...config, provider: 'memory' });
 
     case 'chroma':
-      // In production, initialize Chroma client
-      // const chroma = new ChromaClient();
-      throw new Error('Chroma integration not implemented. Use in-memory store.');
+      // Chroma support can be added in vectorstore/client.ts
+      console.warn(
+        '[VectorStore] Chroma not yet implemented. Falling back to in-memory store.'
+      );
+      return new InMemoryVectorStore({ ...config, provider: 'memory' });
 
     default:
       return new InMemoryVectorStore(config);

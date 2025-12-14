@@ -7,10 +7,12 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@pinecone-database/pinecone": "^4.2.0",
         "lucide-react": "^0.460.0",
         "node-cache": "^5.1.2",
         "react": "^19.2.1",
-        "react-dom": "^19.2.1"
+        "react-dom": "^19.2.1",
+        "weaviate-client": "^3.5.0"
     },
     "devDependencies": {
         "@types/jest": "^30.0.0",
