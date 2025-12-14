@@ -35,6 +35,7 @@
     "scripts": {
         "dev": "vite",
         "build": "prisma generate && tsc && vite build",
+        "start": "vite preview --port 3000 --host",
         "preview": "vite preview",
         "test": "jest",
         "db:generate": "prisma generate",
