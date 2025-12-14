@@ -8,6 +8,7 @@
     "license": "ISC",
     "dependencies": {
         "@pinecone-database/pinecone": "^4.2.0",
+        "groq-sdk": "^0.37.0",
         "lucide-react": "^0.460.0",
         "node-cache": "^5.1.2",
         "react": "^19.2.1",
