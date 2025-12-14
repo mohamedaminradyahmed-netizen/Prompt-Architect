@@ -1685,8 +1685,6 @@ spec:
 
 الملفات: `k8s/deployment.yaml`, `k8s/service.yaml`, `k8s/hpa.yaml`
 
-```text
-
 ### DIRECTIVE-049: إعداد عُقد GPU للـ RL/Fine-tune
 
 ```text
@@ -1813,6 +1811,8 @@ class FeatureFlags {
 الملف: `src/features/flags.ts`
 
 ```text
+End of DIRECTIVE-051
+```
 
 ---
 
@@ -1850,11 +1850,7 @@ interface PopulationConfig {
 }
 ```
 
-الملف: `src/search/populationSearch.ts`
-
 الهدف: إيجاد variations متنوعة وعالية الجودة
-
-```text
 
 ### DIRECTIVE-053: تطوير Sandbox Run على Test Suite
 
@@ -1895,8 +1891,6 @@ interface SandboxResult {
 ```
 
 الملف: `src/sandbox/sandboxRunner.ts`
-
-```text
 
 ### DIRECTIVE-054: جمع Human Feedback وبناء Reward Dataset
 
@@ -1974,11 +1968,9 @@ interface ScoredSuggestion {
   hallucinationScore?: number;
   hallucinationWarning?: string;
 }
-```text
+```
 
 الملف: `src/evaluator.ts` (تحديث)
-
-```
 
 ### DIRECTIVE-056: دمج RAG للـ Factuality
 
@@ -2017,4 +2009,4 @@ interface ScoredSuggestion {
 - `src/rag/factVerifier.ts`
 - `src/evaluator.ts` (تحديث)
 
-```
+```text
