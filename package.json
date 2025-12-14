@@ -7,16 +7,22 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@prisma/adapter-pg": "^7.1.0",
+        "@prisma/client": "^7.1.0",
         "lucide-react": "^0.460.0",
         "node-cache": "^5.1.2",
+        "pg": "^8.16.3",
+        "prisma": "^7.1.0",
         "react": "^19.2.1",
         "react-dom": "^19.2.1"
     },
     "devDependencies": {
         "@types/jest": "^30.0.0",
+        "@types/pg": "^8.16.0",
         "@types/react": "^19.0.0",
         "@types/react-dom": "^19.0.0",
         "@vitejs/plugin-react": "^4.2.1",
+        "dotenv": "^17.2.3",
         "jest": "^30.2.0",
         "ts-jest": "^29.4.6",
         "ts-node": "^10.9.2",
@@ -25,8 +31,14 @@
     },
     "scripts": {
         "dev": "vite",
-        "build": "tsc && vite build",
+        "build": "prisma generate && tsc && vite build",
         "preview": "vite preview",
-        "test": "jest"
+        "test": "jest",
+        "db:generate": "prisma generate",
+        "db:migrate": "prisma migrate dev",
+        "db:push": "prisma db push",
+        "db:studio": "prisma studio",
+        "db:reset": "prisma migrate reset",
+        "postinstall": "prisma generate"
     }
 }
