@@ -120,7 +120,7 @@
     }
   },
   {
-    "id": "content_010",
+    "id": "content_011",
     "prompt": "Write a comparison of three different meal kit delivery services",
     "expectedOutput": "Meal Kit Delivery Services: Which One Fits Your Lifestyle?\n\nWe've tested three popular services to help you decide which subscription is right for your cooking needs and budget.\n\n**HelloFresh** ($9.99/serving)\n\nBest for: Families and busy professionals\n\nHelloFresh offers the most variety with over 25 recipes weekly, including global cuisines and dietary accommodations. The portions are generous, making them perfect for families or leftovers for lunch the next day.\n\nThe ingredients arrive fresh and well-organized, with color-coded labels that make cooking foolproof even for beginners. The recipe cards are clear and concise, with step-by-step instructions that take 30-45 minutes from start to finish.\n\n**Blue Apron** ($11.99/serving)\n\nBest for: Food enthusiasts and wine lovers\n\nThese premium meal kits feature the most sophisticated recipes available, with chef-designed meals that introduce you to new ingredients and cooking techniques. The wine pairing suggestions are educational, and the optional wine subscription complements the meals perfectly.\n\nThe ingredients are sourced from small farms and artisanal producers, supporting local food systems. The recipe cards include wine pairing suggestions and cooking tips that help you develop culinary skills.\n\n**Sun Basket** ($12.99/serving)\n\nBest for: Health-conscious individuals and dietary restrictions\n\nThese organic meal kits accommodate the most dietary restrictions with paleo, vegan, gluten-free, and diabetic-friendly options. The nutritional information is comprehensive, and the ingredients are certified organic and sustainably sourced.\n\nThe portions are designed for optimal nutrition, with balanced macronutrients and anti-inflammatory ingredients. The recipe cards include nutritional information and wellness tips that help you make informed decisions about your health.\n\n**Bottom Line**\n\nChoose HelloFresh if you prioritize variety and family-friendly options. Select Blue Apron if you're a food enthusiast who wants to learn new cooking techniques. Opt for Sun Basket if you're health-conscious and have specific dietary requirements.\n\nAll three provide excellent convenience, so your decision should be based on your specific cooking goals, budget, and dietary preferences.",
     "category": "CONTENT_WRITING",
@@ -129,6 +129,114 @@
       "comparisons": "Clear pros and cons for each option",
       "recommendations": "Specific guidance based on user needs",
       "practical": "Focuses on real-world cooking scenarios"
+    }
+  },
+  {
+    "id": "content_012",
+    "prompt": "Write an FAQ section for a SaaS project management tool",
+    "expectedOutput": "Frequently Asked Questions\n\nQ: Who is this tool for?\nA: Teams who need a simple way to plan work, track progress, and collaborate.\n\nQ: Does it support templates?\nA: Yes—use project templates for repeated workflows.\n\nQ: Can I invite guests?\nA: You can invite external collaborators with limited permissions.\n\nQ: Is there a free plan?\nA: Yes, with core features and a small team limit.\n\nQ: How secure is my data?\nA: We use encrypted connections and role-based access controls.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "structure": "Clear Q/A formatting",
+      "clarity": "Direct, jargon-free answers",
+      "helpful": "Addresses common concerns",
+      "trust": "Mentions security and access controls"
+    }
+  },
+  {
+    "id": "content_013",
+    "prompt": "Write a short technical explainer on what an API rate limit is",
+    "expectedOutput": "An API rate limit is a rule that caps how many requests a client can make within a specific time window (for example, 100 requests per minute). Rate limits protect services from overload, reduce abuse, and help ensure fair usage across customers. When a client exceeds the limit, the API typically responds with an error (often HTTP 429) and may include guidance on when to retry.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "technical": "Accurate terms and HTTP example",
+      "simplicity": "Readable for non-experts",
+      "structure": "Explains what/why/what happens",
+      "helpful": "Mentions retry guidance"
+    }
+  },
+  {
+    "id": "content_014",
+    "prompt": "Write a press release for a startup launching a new AI writing assistant",
+    "expectedOutput": "FOR IMMEDIATE RELEASE\n\nFlowWrite Launches AI Writing Assistant to Help Teams Draft Faster, With Consistent Tone\n\n[City, Date] — FlowWrite today announced the launch of its AI writing assistant designed to help marketing and support teams draft high-quality content faster while maintaining a consistent brand voice. The product includes tone presets, reusable templates, and collaboration features for review and approval.\n\n“Teams shouldn’t have to choose between speed and quality,” said the CEO. “FlowWrite helps teams move from draft to publish with fewer revisions.”\n\nFlowWrite is available starting today with a free plan and paid tiers for growing teams.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Professional and news-like",
+      "structure": "Headline, lead, quote, availability",
+      "clarity": "Explains product and value",
+      "credibility": "Includes concrete features"
+    }
+  },
+  {
+    "id": "content_015",
+    "prompt": "Write a customer support reply to a user reporting a billing issue",
+    "expectedOutput": "Hi [Name],\n\nThanks for reaching out—happy to help. I can see how a billing mismatch would be frustrating.\n\nTo investigate, could you please confirm:\n1) The email on the account\n2) The last 4 digits of the card used (if applicable)\n3) The invoice number or date of the charge\n\nIn the meantime, I’ve paused any automated retries so there won’t be additional charges. Once we confirm the details, we can either correct the invoice or issue a refund if needed.\n\nBest regards,\n[Agent Name]\nSupport Team",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Empathetic and professional",
+      "actionable": "Asks for specific info",
+      "security": "Avoids requesting full card details",
+      "resolution": "Explains next steps"
+    }
+  },
+  {
+    "id": "content_016",
+    "prompt": "Write a product onboarding checklist for new users",
+    "expectedOutput": "Getting Started Checklist\n\n1) Create your first project\n2) Invite your teammates\n3) Set up roles and permissions\n4) Import tasks from CSV (optional)\n5) Connect your calendar\n6) Create a weekly status report template\n7) Enable notifications for mentions\n\nTip: Complete steps 1–3 first—everything else can be added later as your workflow grows.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "structure": "Clear numbered checklist",
+      "actionable": "Concrete steps",
+      "brevity": "Short and scannable",
+      "helpful": "Includes a prioritization tip"
+    }
+  },
+  {
+    "id": "content_017",
+    "prompt": "Write a short story opening (200-300 words) set on a desert train",
+    "expectedOutput": "The train cut a thin, dark line across the desert—an iron stitch pulling two distant cities together. Heat shimmered above the dunes like glass in a furnace, and the windows turned every passenger into a pale reflection of themselves.\n\nMara kept her ticket folded tight in her palm, ink sweating faintly under her thumb. Carriage Seven. Seat 14B. She read it again and again as if the letters could rearrange into something kinder.\n\nAcross the aisle, an old man polished a brass compass with slow devotion. It never pointed north. Mara had noticed that on the platform, when he checked it with a frown and boarded anyway.\n\nThe conductor’s boots thudded down the corridor. “Next stop: Nahl,” he called, voice swallowed by the engine’s steady growl.\n\nMara’s stomach tightened. Nahl wasn’t on the public schedule.\n\nShe leaned forward, lowering her voice. “Is your compass broken?”\n\nThe old man didn’t look up. “No,” he said. “It’s honest. That’s rarer.”\n\nOutside, the desert shifted—dunes rolling like waves—and something glinted between them: a line of stones laid in perfect circles, too precise to be natural.\n\nMara’s ticket felt heavier, as if it carried more than a seat number. As if it carried a destination she hadn’t chosen.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Atmospheric and intriguing",
+      "engagement": "Strong hook and tension",
+      "structure": "Clear scene and character focus",
+      "imagery": "Vivid sensory details"
+    }
+  },
+  {
+    "id": "content_018",
+    "prompt": "Write a formal announcement for scheduled maintenance of a web app",
+    "expectedOutput": "Subject: Scheduled Maintenance Notice\n\nWe will be performing scheduled maintenance on [Date] from [Start Time] to [End Time] (UTC). During this window, the application may be unavailable or experience intermittent disruptions.\n\nWhy this matters: the maintenance includes database upgrades and security patches that improve reliability and performance.\n\nNo action is required. If you experience issues after the maintenance window, please contact support and include any error messages or screenshots.\n\nThank you for your patience,\n[Company/Team Name]",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Formal and clear",
+      "structure": "Time window, impact, reason, support",
+      "clarity": "Easy to understand",
+      "helpful": "Requests diagnostic info if needed"
+    }
+  },
+  {
+    "id": "content_019",
+    "prompt": "Write a concise tutorial on how to write a good bug report",
+    "expectedOutput": "How to Write a Good Bug Report\n\n1) Title: describe the issue in one line.\n2) Environment: app version, browser/OS, device.\n3) Steps to reproduce: numbered and exact.\n4) Expected vs actual behavior.\n5) Evidence: screenshots, logs, or a short screen recording.\n6) Severity: how much it blocks work.\n\nA good report makes the bug reproducible. If it can’t be reproduced, it can’t be fixed reliably.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "structure": "Clear numbered sections",
+      "actionable": "Tells users what to include",
+      "brevity": "Concise but complete",
+      "helpful": "Explains why reproducibility matters"
+    }
+  },
+  {
+    "id": "content_020",
+    "prompt": "Write a friendly community guideline message for a forum",
+    "expectedOutput": "Welcome! We’re glad you’re here.\n\nTo keep this forum helpful and respectful:\n- Be kind and assume good intent.\n- Critique ideas, not people.\n- Share sources when making factual claims.\n- Avoid sharing personal or sensitive information.\n- Report spam or harassment instead of escalating.\n\nThanks for helping build a community where everyone can learn and participate.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Warm and welcoming",
+      "clarity": "Simple rules",
+      "inclusivity": "Encourages participation",
+      "safety": "Mentions sensitive information"
     }
   }
 ]
