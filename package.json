@@ -3,9 +3,6 @@
     "version": "1.0.0",
     "description": "Prompt Engineering Studio",
     "main": "prompt-engineer.tsx",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -17,6 +14,14 @@
     "devDependencies": {
         "@types/react": "^19.0.0",
         "@types/react-dom": "^19.0.0",
-        "typescript": "^5.4.5"
+        "@vitejs/plugin-react": "^4.2.1",
+        "typescript": "^5.4.5",
+        "vite": "^5.1.4"
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview",
+        "test": "echo \"Error: no test specified\" && exit 1"
     }
 }
