@@ -4,7 +4,10 @@
       "Bash(dir:*)",
       "Bash(findstr:*)",
       "Bash(find:*)",
-      "Bash(git -C \"e:\\Prompt-Architect\" log --oneline -15)"
+      "Bash(git -C \"e:\\Prompt-Architect\" log --oneline -15)",
+      "Bash(npm test:*)",
+      "Bash(npx ts-node:*)",
+      "Bash(git add:*)"
     ]
   }
 }

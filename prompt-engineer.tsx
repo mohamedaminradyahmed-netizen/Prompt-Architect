@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Sparkles, Copy, Check, Loader2 } from 'lucide-react';
 import { generateVariations } from './mutations';
 import { evaluateSuggestions, ScoredSuggestion } from './evaluator';
+import { FeedbackWidget } from './src/components/FeedbackWidget';
 
 const PromptEngineer: React.FC = () => {
   const [prompt, setPrompt] = useState('');
@@ -126,6 +127,11 @@ const PromptEngineer: React.FC = () => {
               {copiedId === String(idx) ? <Check size={14} /> : <Copy size={14} />}
               {copiedId === String(idx) ? 'Copied' : 'Copy'}
             </button>
+            <FeedbackWidget
+              promptId={prompt}
+              variationId={`${idx}_${s.mutation}`}
+              userId="demo-user"
+            />
           </div>
         ))}
       </div>
