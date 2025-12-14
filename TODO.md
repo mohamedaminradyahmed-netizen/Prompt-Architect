@@ -1,9 +1,9 @@
 # أوامر توجيهية لتطوير نظام Prompt Refiner
 
-# Directives for AI Coding Agent
+## Directives for AI Coding Agent
 
 > **السياق العام**: أنت تعمل على تطوير نظام **Prompt Refiner** متقدم يقوم بتحسين البرومبتات تلقائياً لتحقيق توازن بين الجودة والتكلفة والزمن والموثوقية. المشروع مبني بـ TypeScript + React وحالياً في مرحلة MVP الأساسية.
-
+>
 > **الملفات الرئيسية الحالية**:
 >
 > - `mutations.ts` - يحتوي على 3 mutation operators أساسية
@@ -18,7 +18,7 @@
 
 ### DIRECTIVE-001: تحديد معايير التوازن
 
-```
+```text
 المهمة: قم بإنشاء ملف `config/balanceMetrics.ts` يحدد معايير التوازن بين:
 - الدقة/الجودة (Accuracy/Quality): ما هو الحد الأدنى المقبول؟
 - التكلفة (Cost): ما هو سقف التكلفة المستهدف لكل طلب؟
@@ -36,7 +36,7 @@
 
 ### DIRECTIVE-002: تصنيف أنواع البرومبتات
 
-```
+```text
 المهمة: قم بإنشاء نظام تصنيف للبرومبتات في `src/types/promptTypes.ts`
 
 المخرجات المطلوبة:
@@ -70,7 +70,7 @@
 
 ### DIRECTIVE-003: تطوير Try/Catch Style Mutation
 
-```
+```text
 المهمة: أضف mutation operator جديد في `mutations.ts` يحول أسلوب التعليمات
 
 الوظيفة المطلوبة:
@@ -92,7 +92,7 @@ export function tryCatchStyleMutation(prompt: string): PromptVariation
 
 ### DIRECTIVE-004: تطوير Context Reduction Mutation
 
-```
+```text
 المهمة: أضف mutation operator يقلل السياق الزائد
 
 الوظيفة المطلوبة:
@@ -115,7 +115,7 @@ export function reduceContextMutation(prompt: string): PromptVariation
 
 ### DIRECTIVE-005: بناء نظام Parameterized Templates [DONE]
 
-```
+```text
 المهمة: أنشئ نظام قوالب مُهيكلة في `src/templates/`
 
 البنية المطلوبة:
@@ -145,7 +145,7 @@ interface PromptTemplate {
 
 ### DIRECTIVE-006: تطوير Expand Mutation
 
-```
+```text
 المهمة: أضف mutation operator يوسّع البرومبت بتفاصيل إضافية
 
 الوظيفة المطلوبة:
@@ -167,7 +167,7 @@ export function expandMutation(prompt: string): PromptVariation
 
 ### DIRECTIVE-007: تطوير Constrain Mutation
 
-```
+```text
 المهمة: أضف mutation operator يضيف قيوداً محددة
 
 الوظيفة المطلوبة:
@@ -190,7 +190,7 @@ export function constrainMutation(prompt: string, category: PromptCategory): Pro
 
 ### DIRECTIVE-008: تطوير Task Decomposition Strategy
 
-```
+```text
 المهمة: أنشئ نظام تقسيم المهام المعقدة لمهام فرعية
 
 الوظيفة المطلوبة:
@@ -215,7 +215,7 @@ Output:
 
 ### DIRECTIVE-009: تطوير Multi-Step Prompts System
 
-```
+```text
 المهمة: أنشئ نظام prompts متعددة الخطوات
 
 البنية المطلوبة:
@@ -246,7 +246,7 @@ interface PromptStep {
 
 ### DIRECTIVE-010: إضافة قياس Latency الفعلي
 
-```
+```text
 المهمة: أضف قياساً فعلياً لزمن الاستجابة
 
 المطلوب في `evaluator.ts`:
@@ -270,7 +270,7 @@ interface PromptStep {
 
 ### DIRECTIVE-011: قياس طول الإخراج الفعلي
 
-```
+```text
 المهمة: أضف قياساً فعلياً لطول المخرجات
 
 الوظيفة المطلوبة:
@@ -299,7 +299,7 @@ interface OutputMetrics {
 
 ### DIRECTIVE-012: دمج ROUGE/BLEU Metrics
 
-```
+```text
 المهمة: أضف دعماً لمقاييس ROUGE و BLEU للمخرجات المرجعية
 
 التثبيت المطلوب:
@@ -324,7 +324,7 @@ npm install rouge-score bleu-score
 
 ### DIRECTIVE-013: بناء نظام كشف الهلوسة
 
-```
+```text
 المهمة: أنشئ نظام للكشف عن الهلوسة في المخرجات
 
 الاستراتيجيات المطلوبة:
@@ -351,7 +351,7 @@ interface HallucinationScore {
 
 ### DIRECTIVE-014: بناء فحص Factuality عبر RAG
 
-```
+```text
 المهمة: أنشئ نظام RAG للتحقق من صحة الحقائق
 
 المكونات المطلوبة:
@@ -383,7 +383,7 @@ interface FactualityCheck {
 
 ### DIRECTIVE-015: بناء نظام Human Feedback Score
 
-```
+```text
 المهمة: أنشئ نظام لجمع وإدارة تقييمات البشر
 
 قاعدة البيانات المطلوبة:
@@ -417,7 +417,7 @@ CREATE TABLE human_feedback (
 
 ### DIRECTIVE-016: مقاييس مخصصة للكود
 
-```
+```text
 المهمة: طوّر مقاييس خاصة بتقييم جودة الكود المُولّد
 
 المقاييس المطلوبة:
@@ -454,7 +454,7 @@ interface CodeQualityMetrics {
 
 ### DIRECTIVE-017: مقاييس مخصصة للتسويق/المحتوى
 
-```
+```text
 المهمة: طوّر مقاييس خاصة بتقييم جودة المحتوى التسويقي
 
 المقاييس المطلوبة:
@@ -493,7 +493,7 @@ interface ContentQualityMetrics {
 
 ### DIRECTIVE-018: تحسين Similarity باستخدام Embeddings حقيقية
 
-```
+```text
 المهمة: استبدل word frequency similarity بـ embeddings حقيقية
 
 المطلوب:
@@ -533,7 +533,7 @@ await calculateSemanticSimilarity(text1, text2)
 
 ### DIRECTIVE-019: تنفيذ Hill-Climbing Optimizer [DONE]
 
-```
+```text
 المهمة: أنشئ optimizer بسيط يستخدم Hill-Climbing
 
 المبدأ:
@@ -564,7 +564,7 @@ interface OptimizationResult {
 
 ### DIRECTIVE-020: تنفيذ Genetic/Population-based Optimizer [DONE]
 
-```
+```text
 المهمة: أنشئ optimizer يستخدم Genetic Algorithm
 
 الخطوات:
@@ -600,7 +600,7 @@ interface PopulationResult {
 
 ### DIRECTIVE-021: تنفيذ Bayesian Optimization [DONE]
 
-```
+```text
 المهمة: أنشئ optimizer للمعلمات باستخدام Bayesian Optimization
 
 الاستخدام: تحسين معلمات Template (role, constraints, examples count)
@@ -634,7 +634,7 @@ interface OptimalParameters {
 
 ### DIRECTIVE-022: تنفيذ Bandits/MCTS للفضاءات الكبيرة [DONE]
 
-```
+```text
 المهمة: أنشئ optimizer يستخدم Multi-Armed Bandits أو MCTS
 
 الاستخدام: عندما يكون عدد الـ mutations المحتملة كبير جداً
@@ -670,7 +670,7 @@ interface BanditResult {
 
 ### DIRECTIVE-023: إعداد نظام RL (PPO-like)
 
-```
+```text
 المهمة: أنشئ نظام Reinforcement Learning لتحسين سياسة التوليد
 
 تحذير: هذه مهمة متقدمة جداً! تحتاج إلى:
@@ -706,7 +706,7 @@ interface BanditResult {
 
 ### DIRECTIVE-024: بناء Hybrid Optimizer [DONE]
 
-```
+```text
 المهمة: ادمج عدة optimizers في نظام هجين ذكي
 
 الاستراتيجية:
@@ -745,7 +745,7 @@ interface HybridConfig {
 
 ### DIRECTIVE-025: بناء Test Suite Executor [DONE]
 
-```
+```text
 المهمة: أنشئ نظام لتشغيل prompts على test cases متوازية
 
 المكونات المطلوبة:
@@ -784,7 +784,7 @@ interface TestResults {
 
 ### DIRECTIVE-026: إضافة Caching للنتائج [DONE]
 
-```
+```text
 المهمة: أضف نظام caching ذكي لتقليل API calls
 
 أنواع الـ Cache المطلوبة:
@@ -812,7 +812,7 @@ class PromptCache {
 
 ### DIRECTIVE-027: إعداد Reference Datasets
 
-```
+```text
 المهمة: أنشئ datasets مرجعية لأنواع مختلفة من البرومبتات
 
 المطلوب:
@@ -849,7 +849,7 @@ const datasets = {
 
 ### DIRECTIVE-028: بناء نظام Lineage Tracking
 
-```
+```text
 المهمة: تتبع سلسلة النسب لكل variation (من أين جاء، لماذا، النتائج)
 
 البنية المطلوبة:
@@ -896,7 +896,7 @@ CREATE TABLE variation_lineage (
 
 ### DIRECTIVE-029: بناء Sample Selection للمراجعة البشرية [DONE]
 
-```
+```text
 المهمة: أنشئ نظام ذكي لاختيار عينات للمراجعة البشرية
 
 استراتيجيات الاختيار:
@@ -929,7 +929,7 @@ enum SamplingStrategy {
 **Status**: ✅ **COMPLETED** (2025-12-14)
 **Documentation**: See [DIRECTIVE-030-COMPLETE.md](DIRECTIVE-030-COMPLETE.md) for full details
 
-```
+```text
 المهمة: أنشئ UI بسيطة للموافقة/الرفض والتعديل اليدوي
 
 المكونات المطلوبة:
@@ -967,7 +967,7 @@ enum SamplingStrategy {
 
 ### DIRECTIVE-031: تطوير قيود الأمان
 
-```
+```text
 المهمة: أنشئ نظام فحص أمان قبل تطبيق التعديلات
 
 الفحوصات المطلوبة:
@@ -999,7 +999,7 @@ interface SafetyViolation {
 
 ### DIRECTIVE-032: بناء نظام Rollback/Preview [DONE]
 
-```
+```text
 المهمة: أضف نظام معاينة وتراجع قبل تطبيق التغييرات
 
 الميزات المطلوبة:
@@ -1039,7 +1039,7 @@ interface SafetyViolation {
 **Status**: ✅ **COMPLETED** (2025-12-14)
 **Implementation**: `src/training/dataCollection.ts`, `src/training/dataPrep.ts`
 
-```
+```text
 المهمة: أنشئ pipeline لجمع وإعداد بيانات التدريب
 
 البنية المطلوبة:
@@ -1086,7 +1086,7 @@ interface TrainingExample {
 
 ### DIRECTIVE-034: بناء Reward Model
 
-```
+```text
 المهمة: درّب نموذج صغير للتنبؤ بجودة الـ variations
 
 الخطوات:
@@ -1123,7 +1123,7 @@ interface TrainingExample {
 
 ### DIRECTIVE-035: تنفيذ RLAIF (RL from AI Feedback) [DONE]
 
-```
+```text
 المهمة: قلل الاعتماد على البشر باستخدام AI للتقييم
 
 الاستراتيجية:
@@ -1159,7 +1159,7 @@ async function rlaifTraining(
 
 ### DIRECTIVE-036: تنفيذ Batching للطلبات
 
-```
+```text
 المهمة: أضف batching ذكي لتقليل تكلفة API calls
 
 الاستراتيجية:
@@ -1195,7 +1195,7 @@ interface BatchConfig {
 **Status**: ✅ **COMPLETED** (2025-12-14)
 **Documentation**: See [DIRECTIVE-037-COMPLETE.md](DIRECTIVE-037-COMPLETE.md) for full details
 
-```
+```text
 المهمة: استخدم نماذج صغيرة/سريعة للتقييم الأولي
 
 المفهوم:
@@ -1222,7 +1222,7 @@ class SurrogateOrchestrator {
 
 ### DIRECTIVE-038: معالجة Prompt Overfitting
 
-```
+```text
 المهمة: تأكد من أن الـ prompts المُحسّنة تعمل على مدخلات متنوعة
 
 الاستراتيجيات:
@@ -1259,7 +1259,7 @@ interface OverfittingReport {
 
 ### DIRECTIVE-039: نظام قياس تحسن Score على Benchmark [DONE]
 
-```
+```text
 المهمة: أنشئ نظام لقياس التحسن على benchmark suite
 
 المطلوب:
@@ -1287,7 +1287,7 @@ interface BenchmarkReport {
 
 ### DIRECTIVE-040: قياس انخفاض avg tokens/call
 
-```
+```text
 المهمة: تتبع متوسط استهلاك التوكنات وتكلفته
 
 المطلوب:
@@ -1317,7 +1317,7 @@ interface TokenReport {
 
 ### DIRECTIVE-041: قياس رضا المستخدم (NPS/Accept Rate)
 
-```
+```text
 المهمة: أنشئ نظام لقياس رضا المستخدمين
 
 المقاييس المطلوبة:
@@ -1349,7 +1349,7 @@ class UserSatisfactionTracker {
 
 ### DIRECTIVE-042: قياس Adoption Rate للاقتراحات
 
-```
+```text
 المهمة: تتبع معدل تبني الاقتراحات المختلفة
 
 المقاييس:
@@ -1386,7 +1386,7 @@ interface AdoptionReport {
 
 ### DIRECTIVE-043: إعداد LangChain Pipelines [DONE]
 
-```
+```text
 المهمة: أنشئ orchestration pipelines باستخدام LangChain
 
 التثبيت:
@@ -1440,7 +1440,7 @@ const result = await refinementPipeline.invoke({ prompt: "..." });
 
 الاختيار: Pinecone (سهل) أو Weaviate (open-source)
 
-**Option 1: Pinecone**
+#### Option 1: Pinecone
 
 ```typescript
 import { PineconeClient } from "@pinecone-database/pinecone";
@@ -1450,7 +1450,7 @@ import { PineconeClient } from "@pinecone-database/pinecone";
 3. إنشاء index للـ knowledge base (RAG)
 ```
 
-**Option 2: Weaviate**
+#### Option 2: Weaviate
 
 ```typescript
 import weaviate from 'weaviate-ts-client';
@@ -1473,7 +1473,7 @@ import weaviate from 'weaviate-ts-client';
 
 الملف: `src/vectorstore/client.ts`
 
-```
+```text
 
 ### DIRECTIVE-045: دمج GROQ Models
 ```
@@ -1504,7 +1504,7 @@ class GroqProvider implements LLMProvider {
 - Temperature: 0.7
 - Max tokens: حسب الحاجة
 
-```
+```text
 
 ### DIRECTIVE-046: إعداد Postgres + Prisma
 ```
@@ -1577,7 +1577,7 @@ model TestCase {
 - `prisma/schema.prisma`
 - `src/db/client.ts`
 
-```
+```text
 
 ### DIRECTIVE-047: إعداد Object Storage
 ```
@@ -1599,16 +1599,16 @@ model TestCase {
 
 الوظائف المطلوبة:
 class ObjectStore {
-  async upload(key: string, data: Buffer | Stream): Promise<string>
-  async download(key: string): Promise<Buffer>
-  async delete(key: string): Promise<void>
-  async list(prefix: string): Promise<string[]>
-  async getSignedUrl(key: string, expiresIn: number): Promise<string>
+  async upload(key: `string`, data: Buffer | Stream): Promise<`string`>
+  async download(key: `string`): Promise<`Buffer`>
+  async delete(key: `string`): Promise<`void`>
+  async list(prefix: `string`): Promise<`string[]`>
+  async getSignedUrl(key: `string`, expiresIn: number): Promise<`string`>
 }
 
 الملف: `src/storage/objectStore.ts`
 
-```
+```text
 
 ### DIRECTIVE-048: إعداد Kubernetes + Autoscaling
 ```
@@ -1684,10 +1684,11 @@ spec:
 
 الملفات: `k8s/deployment.yaml`, `k8s/service.yaml`, `k8s/hpa.yaml`
 
+```text
+k8s/deployment.yaml, k8s/service.yaml, k8s/hpa.yaml
 ```
 
 ### DIRECTIVE-049: إعداد عُقد GPU للـ RL/Fine-tune
-```
 
 المهمة: أضف GPU nodes لتدريب النماذج
 
@@ -1727,10 +1728,7 @@ spec:
       restartPolicy: Never
 ```
 
-```
-
 ### DIRECTIVE-050: إعداد Prometheus + Grafana
-```
 
 المهمة: أنشئ نظام monitoring شامل
 
@@ -1774,10 +1772,7 @@ const tokenHistogram = new client.Histogram({
 });
 ```
 
-```
-
 ### DIRECTIVE-051: إعداد Feature Flags لـ A/B Testing
-```
 
 المهمة: أضف نظام feature flags للتجارب
 
@@ -1794,11 +1789,14 @@ const tokenHistogram = new client.Histogram({
 3. **Emergency Kill Switch**: إيقاف ميزة بسرعة
 
 الوظائف المطلوبة:
+
+```typescript
 class FeatureFlags {
   async isEnabled(flagName: string, userId?: string): Promise<boolean>
   async getVariant(experiment: string, userId: string): Promise<string>
   async track(event: string, properties: any): Promise<void>
 }
+```
 
 الأعلام المطلوبة:
 
@@ -1809,6 +1807,8 @@ class FeatureFlags {
 
 الملف: `src/features/flags.ts`
 
+```text
+src/features/flags.ts
 ```
 
 ---
@@ -1816,7 +1816,6 @@ class FeatureFlags {
 ## 🚀 المرحلة 11: Population Search + Sandbox (المرحلة 2)
 
 ### DIRECTIVE-052: تنفيذ Population Search
-```
 
 المهمة: أنشئ نظام بحث قائم على السكان
 
@@ -1829,6 +1828,8 @@ class FeatureFlags {
 5. **Repeat**: كرر لعدة أجيال
 
 الوظيفة المطلوبة:
+
+```typescript
 async function populationSearch(
   initialPrompt: string,
   testSuite: TestCase[],
@@ -1842,14 +1843,17 @@ interface PopulationConfig {
   mutationProbability: number; // 0.3
   crossoverProbability: number;// 0.7
 }
+```
 
 الملف: `src/search/populationSearch.ts`
+
+```text
+src/search/populationSearch.ts
+```
+
 الهدف: إيجاد variations متنوعة وعالية الجودة
 
-```
-
 ### DIRECTIVE-053: تطوير Sandbox Run على Test Suite
-```
 
 المهمة: شغّل كل variation على مجموعة اختبار كاملة
 
@@ -1861,6 +1865,8 @@ interface PopulationConfig {
 4. **Result Aggregation**: اجمع النتائج وقارنها
 
 الوظيفة المطلوبة:
+
+```typescript
 async function sandboxRun(
   variation: string,
   testSuite: TestCase[],
@@ -1882,13 +1888,15 @@ interface SandboxResult {
   outputs: Map<string, string>;  // testId -> output
   errors: Map<string, Error>;
 }
+```
 
 الملف: `src/sandbox/sandboxRunner.ts`
 
+```text
+src/sandbox/sandboxRunner.ts
 ```
 
 ### DIRECTIVE-054: جمع Human Feedback وبناء Reward Dataset
-```
 
 المهمة: أنشئ pipeline لجمع feedback وتحويله لـ training data
 
@@ -1902,10 +1910,11 @@ interface SandboxResult {
 
 الوظائف المطلوبة:
 
-1. `collectFeedback(variationId: string, feedback: Feedback): Promise<void>`
-2. `validateFeedback(feedback: Feedback): boolean`
-3. `buildRewardDataset(filters?: DatasetFilters): Promise<RewardDataset>`
-4. `exportDataset(dataset: RewardDataset, format: ExportFormat): Promise<string>`
+```typescript
+1. collectFeedback(variationId: string, feedback: Feedback): Promise<void>
+2. validateFeedback(feedback: Feedback): boolean
+3. buildRewardDataset(filters?: DatasetFilters): Promise<RewardDataset>
+4. exportDataset(dataset: RewardDataset, format: ExportFormat): Promise<string>
 
 interface RewardDataset {
   examples: RewardExample[];
@@ -1924,13 +1933,15 @@ interface RewardExample {
   label: number;       // normalized human score
   weight: number;      // confidence/importance
 }
+```
 
 الملف: `src/training/rewardDatasetBuilder.ts`
 
+```text
+src/training/rewardDatasetBuilder.ts
 ```
 
 ### DIRECTIVE-055: إضافة Hallucination Checker
-```
 
 المهمة: دمج hallucination detection في pipeline الرئيسي
 
@@ -1947,6 +1958,8 @@ interface RewardExample {
 - رفض variations مع hallucination عالية تلقائياً
 
 الوظيفة المحدّثة:
+
+```typescript
 async function evaluateSuggestions(
   originalPrompt: string,
   variations: PromptVariation[],
@@ -1959,13 +1972,15 @@ interface ScoredSuggestion {
   hallucinationScore?: number;
   hallucinationWarning?: string;
 }
+```
 
 الملف: `src/evaluator.ts` (تحديث)
 
+```text
+src/evaluator.ts
 ```
 
 ### DIRECTIVE-056: دمج RAG للـ Factuality
-```
 
 المهمة: استخدم RAG للتحقق من صحة الحقائق في المخرجات
 
@@ -1977,13 +1992,19 @@ interface ScoredSuggestion {
    - خزّنها في vector DB
 
 2. **Retrieval Function**:
+
+   ```typescript
    async function retrieveRelevantFacts(claim: string): Promise<Fact[]>
+   ```
 
 3. **Verification Function**:
+
+   ```typescript
    async function verifyAgainstFacts(
      claim: string,
      facts: Fact[]
    ): Promise<VerificationResult>
+   ```
 
 4. **Integration**:
    - أضف factuality score في التقييم
