@@ -1596,7 +1596,12 @@ model TestCase {
 
 ```text
 
-### DIRECTIVE-047: إعداد Object Storage
+### DIRECTIVE-047: إعداد Object Storage ✅ COMPLETE
+
+**Status**: ✅ **COMPLETED** (2025-12-14)
+**Implementation**: `src/storage/objectStore.ts`
+**Tests**: `src/__tests__/storage/objectStore.test.ts` (33 tests passing)
+
 ```
 
 المهمة: أضف تخزين للملفات الكبيرة (datasets, models, logs)
