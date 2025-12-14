@@ -119,8 +119,6 @@ Reduction: ~65% (preserves core instruction, removes redundancy)
 
 ---
 
----
-
 ### DIRECTIVE-020: Genetic/Population-based Optimizer ✅
 
 **Status:** Fully Implemented
@@ -617,7 +615,27 @@ const needsReview = predictions.filter(p => p.prediction.confidence <= 0.85);
 
 ---
 
-### Completed (7/66 Directives)
+### DIRECTIVE-041: User Satisfaction Analytics ✅
+
+**Status:** Fully Implemented
+
+**Files Created:**
+- [`src/analytics/userSatisfaction.ts`](src/analytics/userSatisfaction.ts)
+
+**Implementation Details:**
+
+Implemented a comprehensive tracking system for user satisfaction metrics including NPS, Acceptance Rate, and Star Ratings. The system is designed to be extensible and currently uses in-memory storage with robust logging.
+
+**Features:**
+- ✅ **Acceptance Tracking**: Log accept/reject decisions for suggestions
+- ✅ **NPS Scoring**: Track Net Promoter Score (0-10)
+- ✅ **Satisfaction Ratings**: Track 1-5 star ratings
+- ✅ **Reporting**: Generate aggregated reports with key metrics
+- ✅ **Feature Usage**: Track which mutation types are most accepted
+
+---
+
+### Completed (8/66 Directives)
 - ✅ DIRECTIVE-001: Balance Metrics (Pre-implemented)
 - ✅ DIRECTIVE-003: Try/Catch Style Mutation
 - ✅ DIRECTIVE-004: Context Reduction Mutation
@@ -625,6 +643,7 @@ const needsReview = predictions.filter(p => p.prediction.confidence <= 0.85);
 - ✅ DIRECTIVE-022: Bandits/MCTS for Large Spaces
 - ✅ DIRECTIVE-028: Lineage Tracking System
 - ✅ DIRECTIVE-034: Reward Model
+- ✅ DIRECTIVE-041: User Satisfaction Analytics
 
 ### In Progress (0)
 - None currently
@@ -700,6 +719,8 @@ if (validation.isValid) {
 ```
 Prompt-Architect/
 ├── src/
+│   ├── analytics/
+│   │   └── userSatisfaction.ts       ✅ DIRECTIVE-041 (completed)
 │   ├── config/
 │   │   ├── balanceMetrics.ts         ✅ DIRECTIVE-001 (completed)
 │   │   └── balanceMetrics.example.ts
