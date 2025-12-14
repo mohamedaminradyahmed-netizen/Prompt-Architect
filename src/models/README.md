@@ -635,3 +635,491 @@ const samplesForReview = selectSamplesForReview(needsReview, 'UNCERTAINTY', 5);
 - ⚡ Speed up optimization loops
 
 **Status:** ✅ Fully Implemented (DIRECTIVE-034)
+
+---
+
+# Surrogate Orchestrator - DIRECTIVE-037
+
+## Overview
+
+A smart model orchestration system that uses lightweight/fast models for initial evaluation and reserves premium models only for final decisions. This approach provides **60-80% cost savings** while maintaining high-quality outputs.
+
+**Key Insight:** Most evaluations don't need GPT-4! Use cheap models for exploration, upgrade only when necessary.
+
+## 🎯 Features
+
+✅ **Multi-Model Support**: Groq (Llama), OpenAI (GPT-3.5/4), Anthropic (Claude) + Local
+✅ **Three Evaluation Modes**: exploration (cheap), exploitation (mid), final (premium)
+✅ **Progressive Evaluation**: Start cheap, upgrade only if quality threshold isn't met
+✅ **Intelligent Caching**: LRU cache with TTL to avoid repeated API calls
+✅ **Cost Tracking**: Real-time statistics on costs, savings, and usage
+✅ **Batch Processing**: Evaluate multiple prompts efficiently
+✅ **Factory Presets**: Cost-optimized, quality-focused, and balanced configurations
+
+## 🚀 Quick Start
+
+### Basic Evaluation
+
+```typescript
+import { SurrogateOrchestrator } from './models/surrogateOrchestrator';
+
+// Create orchestrator
+const orchestrator = new SurrogateOrchestrator();
+
+// Evaluate with exploration mode (cheapest)
+const result = await orchestrator.evaluate(
+  { prompt: 'Write a TypeScript function for sorting' },
+  'exploration'
+);
+
+console.log('Model:', result.model.model);        // "llama-3.1-8b-instant"
+console.log('Cost:', result.cost);                // $0.000004
+console.log('Score:', result.score);              // 0.72
+console.log('Latency:', result.latency);          // 245ms
+```
+
+### Progressive Evaluation (Smart Cost Optimization)
+
+```typescript
+// Starts cheap, upgrades only if needed
+const result = await orchestrator.progressiveEvaluate(
+  { prompt: 'Explain quantum computing' },
+  0.85  // quality threshold
+);
+
+// Uses cheapest model that meets threshold
+console.log('Mode used:', result.metadata.mode);  // "exploration" or "exploitation" or "final"
+console.log('Cost:', result.cost);
+```
+
+### Batch Evaluation
+
+```typescript
+const prompts = [
+  { prompt: 'Write code for sorting', category: PromptCategory.CODE_GENERATION },
+  { prompt: 'Marketing copy for app', category: PromptCategory.MARKETING_COPY },
+  { prompt: 'Explain machine learning', category: PromptCategory.GENERAL_QA },
+];
+
+const batchResult = await orchestrator.evaluateBatch(prompts, 'exploration');
+
+console.log('Total Cost:', batchResult.totalCost);     // $0.00015
+console.log('Cost Savings:', batchResult.costSavings); // $0.42
+console.log('Success Rate:', batchResult.successRate); // 1.0
+```
+
+## 📊 Evaluation Modes
+
+| Mode | Tier | Model Example | Cost/1K Tokens | Use Case |
+|------|------|---------------|----------------|----------|
+| `exploration` | cheap | Llama 3.1 8B | $0.0001 | Initial screening, diverse search |
+| `exploitation` | mid | GPT-3.5 Turbo | $0.002 | Refinement, balancing cost/quality |
+| `final` | premium | GPT-4 Turbo | $0.02 | Final evaluation, production output |
+
+### When to Use Each Mode
+
+```typescript
+// EXPLORATION: Generating many candidates, testing ideas
+for (const candidate of candidates) {
+  const score = await orchestrator.evaluate(candidate, 'exploration');
+  if (score.score > 0.5) potentialWinners.push(candidate);
+}
+
+// EXPLOITATION: Refining top candidates
+for (const winner of potentialWinners) {
+  const refined = await orchestrator.evaluate(winner, 'exploitation');
+  if (refined.score > 0.75) finalists.push(winner);
+}
+
+// FINAL: Producing actual output
+const best = await orchestrator.evaluate(finalists[0], 'final');
+```
+
+## 🏭 Factory Presets
+
+### Cost-Optimized (Maximum Savings)
+
+```typescript
+import { createCostOptimizedOrchestrator } from './models/surrogateOrchestrator';
+
+const orchestrator = createCostOptimizedOrchestrator();
+// exploration: groq-llama-8b
+// exploitation: groq-llama-70b  
+// final: openai-gpt35
+
+// Expected savings: 80-90% vs always using GPT-4
+```
+
+### Quality-Focused (Maximum Quality)
+
+```typescript
+import { createQualityFocusedOrchestrator } from './models/surrogateOrchestrator';
+
+const orchestrator = createQualityFocusedOrchestrator();
+// exploration: anthropic-haiku
+// exploitation: anthropic-sonnet
+// final: anthropic-opus
+
+// Expected savings: 40-60% vs always using Opus
+```
+
+### Balanced (Default)
+
+```typescript
+import { createBalancedOrchestrator } from './models/surrogateOrchestrator';
+
+const orchestrator = createBalancedOrchestrator();
+// exploration: groq-llama-8b
+// exploitation: openai-gpt35
+// final: openai-gpt4-turbo
+
+// Expected savings: 60-80%
+```
+
+## 💾 Caching
+
+The orchestrator includes intelligent LRU caching:
+
+```typescript
+// First request - calls API
+const result1 = await orchestrator.evaluate(prompt, 'exploration');
+console.log(result1.metadata.cached);  // false
+
+// Second request - uses cache
+const result2 = await orchestrator.evaluate(prompt, 'exploration');
+console.log(result2.metadata.cached);  // true
+console.log(result2.latency);          // ~1ms (vs 200ms)
+
+// Check cache stats
+const stats = orchestrator.getStats();
+console.log('Cache hit rate:', stats.cacheHitRate);  // 0.5 (50%)
+
+// Clear cache if needed
+orchestrator.clearCache();
+```
+
+## 📈 Statistics & Analytics
+
+### Real-time Statistics
+
+```typescript
+const stats = orchestrator.getStats();
+
+console.log('Total Requests:', stats.totalRequests);
+console.log('Cache Hits:', stats.cacheHits);
+console.log('Cache Hit Rate:', stats.cacheHitRate);
+console.log('Total Cost:', stats.totalCost);
+console.log('Total Savings:', stats.totalSavings);
+console.log('Avg Latency:', stats.avgLatency);
+console.log('By Mode:', stats.requestsByMode);
+// { exploration: 35, exploitation: 10, final: 5 }
+console.log('By Provider:', stats.requestsByProvider);
+// { groq: 35, openai: 15, anthropic: 0, local: 0 }
+```
+
+### Cost Savings Summary
+
+```typescript
+const savings = orchestrator.getCostSavingsSummary();
+
+console.log('Actual Cost:', savings.totalCost);           // $0.15
+console.log('If Premium Only:', savings.estimatedPremiumCost);  // $0.75
+console.log('Savings:', savings.savings);                 // $0.60
+console.log('Savings %:', savings.savingsPercentage);     // 80%
+```
+
+### Usage Breakdown
+
+```typescript
+const usage = orchestrator.getModelUsageBreakdown();
+
+console.log('Most Used Provider:', usage.mostUsedProvider);  // 'groq'
+console.log('Most Used Mode:', usage.mostUsedMode);          // 'exploration'
+```
+
+## ⚙️ Configuration
+
+### Custom Model Selection
+
+```typescript
+const orchestrator = new SurrogateOrchestrator({
+  modeModelMap: {
+    exploration: 'anthropic-haiku',    // Use Claude Haiku for exploration
+    exploitation: 'openai-gpt35',      // Use GPT-3.5 for exploitation
+    final: 'anthropic-opus',           // Use Opus for final
+  },
+});
+```
+
+### Runtime Mode Changes
+
+```typescript
+// Change model for a specific mode
+orchestrator.setModeModel('final', 'anthropic-sonnet');
+```
+
+### Add Custom Model
+
+```typescript
+// Add a new model to the registry
+orchestrator.addCustomModel('my-local-llama', {
+  provider: 'local',
+  model: 'llama-3.1-8b-local',
+  tier: 'cheap',
+  costPer1kTokens: 0,
+  avgLatencyMs: 500,
+  qualityScore: 0.70,
+  maxTokens: 4096,
+});
+
+// Now use it
+orchestrator.setModeModel('exploration', 'my-local-llama');
+```
+
+### Cache Configuration
+
+```typescript
+const orchestrator = new SurrogateOrchestrator({
+  cacheTTL: 12 * 60 * 60 * 1000,  // 12 hours
+  maxCacheSize: 500,              // Max 500 entries
+});
+```
+
+## 📚 Available Models
+
+### Cheap Tier (Exploration)
+
+| Key | Model | Cost | Latency | Quality |
+|-----|-------|------|---------|---------|
+| `groq-llama-8b` | Llama 3.1 8B Instant | $0.0001 | 200ms | 70% |
+| `anthropic-haiku` | Claude 3 Haiku | $0.00025 | 300ms | 75% |
+| `local-llama` | Local Llama | $0 | 1000ms | 65% |
+
+### Mid Tier (Exploitation)
+
+| Key | Model | Cost | Latency | Quality |
+|-----|-------|------|---------|---------|
+| `groq-llama-70b` | Llama 3.1 70B | $0.0008 | 500ms | 85% |
+| `openai-gpt35` | GPT-3.5 Turbo | $0.002 | 800ms | 82% |
+| `anthropic-sonnet` | Claude 3.5 Sonnet | $0.003 | 1000ms | 90% |
+
+### Premium Tier (Final)
+
+| Key | Model | Cost | Latency | Quality |
+|-----|-------|------|---------|---------|
+| `openai-gpt4` | GPT-4 | $0.03 | 2000ms | 95% |
+| `openai-gpt4-turbo` | GPT-4 Turbo | $0.02 | 1500ms | 94% |
+| `anthropic-opus` | Claude 3 Opus | $0.015 | 2500ms | 96% |
+
+## 🎯 Usage Patterns
+
+### Pattern 1: Genetic Optimization with Surrogate
+
+```typescript
+import { geneticOptimize } from '../optimizer/genetic';
+
+// Use cheap model for population evaluation
+const fitnessFunction = async (prompt: string): Promise<number> => {
+  const result = await orchestrator.evaluate({ prompt }, 'exploration');
+  return result.score * 100;
+};
+
+// Run genetic optimization
+const result = await geneticOptimize(originalPrompt, fitnessFunction);
+
+// Final evaluation with premium model
+const finalScore = await orchestrator.evaluate(
+  { prompt: result.bestPrompt },
+  'final'
+);
+```
+
+### Pattern 2: Multi-Stage Pipeline
+
+```typescript
+async function multiStagePipeline(prompt: string): Promise<EvaluationResult> {
+  // Stage 1: Quick screening (cheap)
+  const screening = await orchestrator.evaluate({ prompt }, 'exploration');
+  if (screening.score < 0.3) {
+    return screening;  // Reject early
+  }
+
+  // Stage 2: Refinement check (mid)
+  const refinement = await orchestrator.evaluate({ prompt }, 'exploitation');
+  if (refinement.score < 0.6) {
+    return refinement;  // Not good enough
+  }
+
+  // Stage 3: Final verification (premium)
+  return orchestrator.evaluate({ prompt }, 'final');
+}
+```
+
+### Pattern 3: A/B Testing with Cost Control
+
+```typescript
+async function abTest(variantA: string, variantB: string) {
+  // Quick comparison with cheap models
+  const [scoreA, scoreB] = await Promise.all([
+    orchestrator.evaluate({ prompt: variantA }, 'exploration'),
+    orchestrator.evaluate({ prompt: variantB }, 'exploration'),
+  ]);
+
+  // Only deep-test the winner
+  const winner = scoreA.score > scoreB.score ? variantA : variantB;
+  return orchestrator.evaluate({ prompt: winner }, 'final');
+}
+```
+
+### Pattern 4: Budget-Constrained Optimization
+
+```typescript
+async function optimizeWithBudget(
+  prompts: string[],
+  budgetUSD: number
+): Promise<EvaluationResult[]> {
+  const results: EvaluationResult[] = [];
+  let spent = 0;
+
+  for (const prompt of prompts) {
+    // Check budget
+    if (spent >= budgetUSD) break;
+
+    // Use appropriate mode based on remaining budget
+    const mode = spent < budgetUSD * 0.7 ? 'exploration' :
+                 spent < budgetUSD * 0.9 ? 'exploitation' : 'final';
+
+    const result = await orchestrator.evaluate({ prompt }, mode);
+    results.push(result);
+    spent += result.cost;
+  }
+
+  return results;
+}
+```
+
+## 🐛 Troubleshooting
+
+### Problem: Cache not being used
+
+**Cause:** Request parameters differ slightly (whitespace, context)
+
+**Solution:**
+```typescript
+// Normalize prompts before evaluation
+const normalizedPrompt = prompt.trim().replace(/\s+/g, ' ');
+```
+
+### Problem: Model quality too low
+
+**Cause:** Using cheap model for complex tasks
+
+**Solution:**
+- Increase quality threshold in progressive evaluation
+- Use exploitation or final mode for important evaluations
+- Switch to quality-focused preset
+
+### Problem: Costs higher than expected
+
+**Cause:** Too many final evaluations or large outputs
+
+**Solution:**
+- Use progressive evaluation
+- Reduce expectedOutputLength
+- Increase cache TTL
+- Check stats to identify expensive operations
+
+## 🚀 Running the Demo
+
+```bash
+npx tsx src/models/surrogateOrchestrator.demo.ts
+```
+
+Demonstrates:
+1. ✅ Basic evaluation with all modes
+2. ✅ Progressive evaluation
+3. ✅ Batch evaluation
+4. ✅ Cache effectiveness
+5. ✅ Orchestrator presets
+6. ✅ Cost savings analysis
+
+## 🔗 Integration
+
+### With Reward Model
+
+```typescript
+import { RewardModel } from './models/rewardModel';
+import { SurrogateOrchestrator } from './models/surrogateOrchestrator';
+
+// Use surrogate for execution, reward model for scoring
+const orchestrator = new SurrogateOrchestrator();
+const rewardModel = new RewardModel();
+
+async function evaluateVariation(original: string, variation: string) {
+  // Get output from cheap model
+  const execution = await orchestrator.evaluate(
+    { prompt: variation },
+    'exploration'
+  );
+
+  // Score with reward model (no API cost)
+  const score = rewardModel.predict(
+    original, 
+    variation,
+    'expansion',
+    PromptCategory.CODE_GENERATION
+  );
+
+  return {
+    output: execution.output,
+    apiScore: execution.score,
+    rewardScore: score.score,
+    cost: execution.cost,
+  };
+}
+```
+
+### With Hybrid Optimizer
+
+```typescript
+import { hybridOptimize } from '../optimizer/hybrid';
+
+// Use surrogate as evaluation function
+async function surrogateEvaluator(prompt: string): Promise<number> {
+  const result = await orchestrator.evaluate(
+    { prompt },
+    'exploration'  // Cheap for optimization loop
+  );
+  return result.score * 100;
+}
+
+const result = await hybridOptimize(
+  originalPrompt,
+  { evaluator: surrogateEvaluator }
+);
+```
+
+## 📚 Related Directives
+
+- **DIRECTIVE-034**: Reward Model (local quality scoring)
+- **DIRECTIVE-036**: Batching (batch API calls)
+- **DIRECTIVE-045**: Groq Integration (fast inference)
+- **DIRECTIVE-038**: Overfitting Detection (validation)
+
+## Summary
+
+**Surrogate Orchestrator provides:**
+- ✅ 60-80% cost reduction
+- ✅ Multi-provider model orchestration
+- ✅ Progressive quality escalation
+- ✅ Intelligent caching
+- ✅ Real-time cost analytics
+
+**Use it to:**
+- 💰 Dramatically reduce API costs
+- ⚡ Speed up optimization loops
+- 🎯 Balance cost vs quality
+- 📊 Track spending and savings
+- 🔄 Implement multi-stage pipelines
+
+**Status:** ✅ Fully Implemented (DIRECTIVE-037)
