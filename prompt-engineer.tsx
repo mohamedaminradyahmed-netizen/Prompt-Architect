@@ -1,33 +1,94 @@
+/**
+ * @file prompt-engineer.tsx
+ * @description
+ * المكون الرئيسي لتطبيق "مهندس الأوامر" (Prompt Architect).
+ *
+ * هذا الملف يحتوي على منطق الواجهة الأمامية (Frontend) والتفاعل مع API.
+ * يهدف التطبيق إلى مساعدة المستخدمين في تحسين استعلاماتهم (Queries) للحصول على أفضل
+ * النتائج من نماذج اللغة الكبيرة (LLMs).
+ *
+ * الميزات الرئيسية:
+ * - واجهة مستخدم تفاعلية وجذابة بصرياً.
+ * - اتصال مباشر مع Anthropic API.
+ * - تحليل ذكي للاستعلامات وإعادة صياغتها.
+ * - إمكانية نسخ النتائج بلمسة واحدة.
+ */
+
 import React, { useState, useCallback } from 'react';
 import { Sparkles, Copy, Check, Loader2, Zap, Target, Layers, ArrowRight } from 'lucide-react';
 
+/**
+ * @interface AnalysisResult
+ * @description
+ * واجهة تحدد بنية البيانات المستلمة بعد معالجة الاستعلام.
+ * تم تصميمها لفصل عملية التفكير (scratchpad) عن النتيجة النهائية (engineeredPrompt).
+ *
+ * @property {string} scratchpad - تحليل النموذج للاستعلام، يتضمن تحديد النواقص والافتراضات.
+ * @property {string} engineeredPrompt - الأمر (Prompt) النهائي المحسن والجاهز للاستخدام.
+ */
 interface AnalysisResult {
   scratchpad: string;
   engineeredPrompt: string;
 }
 
+/**
+ * @component PromptEngineer
+ * @description
+ * مكون React الوظيفي (Functional Component) الذي يمثل التطبيق بأكمله.
+ * يحتوي على جميع خطافات الحالة (Hooks) ومنطق العرض.
+ *
+ * @returns {JSX.Element} عنصر JSX يمثل واجهة المستخدم الكاملة.
+ */
 export default function PromptEngineer() {
+  // @state userQuery: نص الاستعلام الذي يدخله المستخدم في حقل الإدخال.
   const [userQuery, setUserQuery] = useState('');
+
+  // @state isProcessing: مؤشر بولياني لحالة تحميل الطلب (True أثناء انتظار الرد).
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // @state result: يخزن نتيجة التحليل عند نجاح الطلب، أو null في الحالة الابتدائية.
   const [result, setResult] = useState<AnalysisResult | null>(null);
+
+  // @state copied: مؤشر بولياني قصير المدى لإظهار ملاحظة "تم النسخ" للمستخدم.
   const [copied, setCopied] = useState(false);
+
+  // @state error: يخزن رسالة الخطأ في حال فشل العملية لعرضها للمستخدم.
   const [error, setError] = useState<string | null>(null);
 
+  /**
+   * @function engineerPrompt
+   * @description
+   * الدالة الأساسية لمعالجة طلب المستخدم. تقوم بإرسال الاستعلام إلى API وتحليل الرد.
+   *
+   * الخطوات:
+   * 1. التحقق من أن الاستعلام ليس فارغاً.
+   * 2. إعداد الحالة (بدء التحميل، تصفير الأخطاء).
+   * 3. بناء طلب API مع Prompt هندسي محدد (System Prompt) يوجه النموذج للعمل كخبير.
+   * 4. إرسال الطلب واستقبال الرد بصيغة JSON.
+   * 5. استخراج البيانات (XML Parsing) باستخدام Regex للحصول على التحليل والأمر النهائي.
+   * 6. تحديث الحالة بالنتيجة أو الخطأ.
+   *
+   * @async
+   */
   const engineerPrompt = useCallback(async () => {
-    if (!userQuery.trim()) return;
+    if (!userQuery.trim()) return; // التحقق من وجود مدخلات
     
     setIsProcessing(true);
     setError(null);
     setResult(null);
 
     try {
+      // إرسال الطلب إلى Anthropic API
       const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          // ملاحظة: في بيئة الإنتاج الحقيقية، يجب عدم تخزين المفاتيح في الكود مباشرة
+          // بل يجب استخدام خادم وسيط (Proxy) لحماية مفاتيح API.
+          // هنا نفترض وجود بيئة تجريبية أو تكوين آمن عبر المتصفح إذا كان مسموحاً.
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'claude-sonnet-4-20250514', // نموذج حديث لضمان جودة التحليل
           max_tokens: 4000,
           messages: [
             {
@@ -78,7 +139,7 @@ Respond in this exact format:
 
       const content = data.content?.[0]?.text || '';
       
-      // Parse the response
+      // تحليل الاستجابة: استخراج المحتوى الموجود داخل وسوم XML
       const scratchpadMatch = content.match(/<scratchpad>([\s\S]*?)<\/scratchpad>/);
       const promptMatch = content.match(/<engineered_prompt>([\s\S]*?)<\/engineered_prompt>/);
       
@@ -91,20 +152,35 @@ Respond in this exact format:
         throw new Error('Could not parse the response');
       }
     } catch (err) {
+      // التعامل مع الأخطاء وعرض رسالة مناسبة
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
-      setIsProcessing(false);
+      setIsProcessing(false); // إيقاف مؤشر التحميل دائماً
     }
   }, [userQuery]);
 
+  /**
+   * @function copyToClipboard
+   * @description
+   * وظيفة مساعدة لنسخ النص المولد إلى حافظة المستخدم.
+   * تستخدم API المتصفح (navigator.clipboard).
+   *
+   * @async
+   */
   const copyToClipboard = useCallback(async () => {
     if (result?.engineeredPrompt) {
       await navigator.clipboard.writeText(result.engineeredPrompt);
       setCopied(true);
+      // إعادة تعيين حالة النسخ بعد ثانيتين لإخفاء رسالة "تم النسخ"
       setTimeout(() => setCopied(false), 2000);
     }
   }, [result]);
 
+  /**
+   * @constant exampleQueries
+   * @description
+   * مصفوفة من الاستعلامات الجاهزة للاستخدام السريع ولتوجيه المستخدم حول كيفية استخدام الأداة.
+   */
   const exampleQueries = [
     "Write a blog post about AI",
     "Help me debug my code",
@@ -114,14 +190,20 @@ Respond in this exact format:
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-[#e8e6e3] font-sans overflow-x-hidden">
-      {/* Animated gradient background */}
+      {/*
+        خلفية متدرجة متحركة
+        تستخدم CSS positioning و blur creating لإعطاء تأثير جمالي وعمق بصري
+      */}
       <div className="fixed inset-0 opacity-30">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-600/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
-      {/* Grid overlay */}
+      {/*
+        طبقة الشبكة (Grid Overlay)
+        تضيف نمطاً هندسياً خفيفاً للخلفية باستخدام CSS gradients
+      */}
       <div 
         className="fixed inset-0 opacity-[0.02]" 
         style={{
@@ -134,7 +216,7 @@ Respond in this exact format:
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-12">
-        {/* Header */}
+        {/* رأس الصفحة (Header): يحتوي على الشعار والعنوان الوصفي */}
         <header className="mb-16 text-center">
           <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 rounded-full">
             <Sparkles className="w-4 h-4 text-amber-400" />
@@ -153,7 +235,7 @@ Respond in this exact format:
           </p>
         </header>
 
-        {/* Features bar */}
+        {/* شريط الميزات (Features bar): يعرض القدرات الرئيسية للأداة */}
         <div className="flex flex-wrap justify-center gap-8 mb-12">
           {[
             { icon: Target, label: 'Clarity Enhancement' },
@@ -167,24 +249,28 @@ Respond in this exact format:
           ))}
         </div>
 
-        {/* Main input section */}
+        {/*
+          قسم الإدخال الرئيسي (Main Input Section)
+          يحتوي على مربع النص وأزرار الأمثلة وزر التحويل
+        */}
         <div className="mb-8">
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500/50 via-orange-500/50 to-amber-500/50 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity" />
             
-            <div className="relative bg-[#12121a] border border-[#2a2a35] rounded-2xl p-6">
-              <label className="block text-xs uppercase tracking-[0.15em] text-[#e8e6e3]/40 mb-3">
+            <div className="relative bg-[#12121a] border border-[#2a2a35] rounded-2xl p-6 transition-all focus-within:border-amber-500/50 focus-within:ring-1 focus-within:ring-amber-500/50">
+              <label htmlFor="query-input" className="block text-xs uppercase tracking-[0.15em] text-[#e8e6e3]/70 mb-3">
                 Your Query
               </label>
               
               <textarea
+                id="query-input"
                 value={userQuery}
                 onChange={(e) => setUserQuery(e.target.value)}
                 placeholder="Enter your prompt to be optimized..."
-                className="w-full h-40 bg-transparent text-[#e8e6e3] text-lg placeholder:text-[#e8e6e3]/20 resize-none focus:outline-none font-light leading-relaxed"
+                className="w-full h-40 bg-transparent text-[#e8e6e3] text-lg placeholder:text-[#e8e6e3]/50 resize-y focus:outline-none font-light leading-relaxed"
               />
 
-              {/* Example chips */}
+              {/* أزرار الأمثلة السريعة (Chips) */}
               <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-[#2a2a35]">
                 <span className="text-xs text-[#e8e6e3]/30 mr-2">Try:</span>
                 {exampleQueries.map((example) => (
@@ -200,7 +286,7 @@ Respond in this exact format:
             </div>
           </div>
 
-          {/* Transform button */}
+          {/* زر التحويل (Transform Button) */}
           <div className="flex justify-center mt-8">
             <button
               onClick={engineerPrompt}
@@ -225,17 +311,20 @@ Respond in this exact format:
           </div>
         </div>
 
-        {/* Error display */}
+        {/* عرض رسائل الخطأ إن وجدت */}
         {error && (
           <div className="mb-8 p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-300 text-sm">
             {error}
           </div>
         )}
 
-        {/* Results section */}
+        {/*
+          قسم النتائج (Results Section)
+          يظهر فقط عند توفر نتيجة (result != null)
+        */}
         {result && (
           <div className="space-y-8 animate-fadeIn">
-            {/* Analysis section */}
+            {/* قسم التحليل (Analysis Section) - يعرض الـ Scratchpad */}
             <div className="relative">
               <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-amber-500/50 to-transparent" />
               
@@ -253,7 +342,7 @@ Respond in this exact format:
               </div>
             </div>
 
-            {/* Engineered prompt section */}
+            {/* قسم الأمر المهندس (Engineered Prompt Section) */}
             <div className="relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500/30 to-orange-500/30 rounded-2xl blur opacity-30" />
               
@@ -292,7 +381,7 @@ Respond in this exact format:
           </div>
         )}
 
-        {/* Footer */}
+        {/* تذييل الصفحة (Footer) */}
         <footer className="mt-20 text-center">
           <p className="text-xs text-[#e8e6e3]/20 tracking-wider">
             Powered by Claude • Transform queries into precision-engineered prompts
