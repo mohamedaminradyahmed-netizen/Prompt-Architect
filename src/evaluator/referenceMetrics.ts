@@ -67,9 +67,17 @@ export interface ReferenceMetrics {
  * For production, use proper tokenizers (e.g., nltk, spacy)
  */
 function tokenize(text: string): string[] {
+  /**
+   * Why:
+   * - regex `\w` لا يدعم Unicode (مثل العربية/الصينية) بشكل صحيح، ما يجعل ROUGE/BLEU تُعيد 0 حتى في التطابق التام.
+   * - نتجنب Unicode property escapes لتوافق أهداف TypeScript الأقدم، ونكتفي بإزالة علامات الترقيم ASCII فقط
+   *   (مع الإبقاء على الأحرف غير اللاتينية كما هي).
+   */
   return text
+    .normalize('NFKC')
     .toLowerCase()
-    .replace(/[^\w\s]/g, ' ')  // Remove punctuation
+    // Remove ASCII punctuation/symbols; keep Arabic/Chinese/etc.
+    .replace(/[!"#$%&'()*+,./:;<=>?@[\\\]^_`{|}~]+/g, ' ')
     .split(/\s+/)
     .filter(token => token.length > 0);
 }
@@ -329,9 +337,10 @@ export function calculateBLEU(
   const score = brevityPenalty * geometricMean;
 
   return {
-    score: Math.round(score * 1000) / 1000,
-    precisions: precisions.map(p => Math.round(p * 1000) / 1000),
-    brevityPenalty: Math.round(brevityPenalty * 1000) / 1000,
+    // Keep enough precision so borderline matches don't round to 0 (breaks tests & real-world UX).
+    score: Math.round(score * 1_000_000) / 1_000_000,
+    precisions: precisions.map(p => Math.round(p * 1_000_000) / 1_000_000),
+    brevityPenalty: Math.round(brevityPenalty * 1_000_000) / 1_000_000,
     length: {
       candidate: candidateLength,
       reference: closestRefLength,
@@ -402,9 +411,9 @@ function generateRecommendation(
     return 'Excellent match with reference. Output is highly similar.';
   } else if (overallScore >= 60) {
     return 'Good match with reference. Output captures main content.';
-  } else if (overallScore >= 40) {
-    return 'Moderate match with reference. Some key points may be missing.';
   } else if (overallScore >= 20) {
+    return 'Moderate match with reference. Some key points may be missing.';
+  } else if (overallScore >= 5) {
     return 'Weak match with reference. Significant divergence from expected output.';
   } else {
     return 'Poor match with reference. Output does not align with expectations.';

@@ -4,6 +4,8 @@
  */
 
 import { PromptVariation } from './mutations';
+import { globalCache } from './cache/smartCache';
+import * as crypto from 'crypto';
 
 export interface ScoredSuggestion {
     prompt: string;
@@ -115,28 +117,48 @@ export async function measureLatency(
     prompt: string,
     provider: 'openai' | 'anthropic' | 'groq' = 'openai'
 ): Promise<number> {
-    // Determine base latency based on provider
-    const baseLatencyMap = {
-        'openai': 500,
-        'anthropic': 800,
-        'groq': 200
-    };
+    /**
+     * DIRECTIVE-010 requirements:
+     * - Measure: TTFT, total response time, network latency
+     * - Cache measurements for future use
+     *
+     * Why:
+     * في بيئة بدون مفاتيح/API streaming، نستخدم نموذج قياس "best-effort" حتمي (deterministic)
+     * بحيث يبقى قابلاً للاختبار وإعادة التشغيل، مع حفظ النتائج في cache.
+     */
 
-    const baseLatency = baseLatencyMap[provider];
+    const cacheMetric = `latency:${provider}`;
+    const cachedTotal = globalCache.getEvaluationScore(prompt, cacheMetric);
+    if (typeof cachedTotal === 'number') {
+        return cachedTotal;
+    }
 
-    // Simulate processing time based on prompt length
+    // Deterministic jitter based on prompt+provider (no Math.random)
+    const seed = crypto.createHash('sha256').update(`${provider}:${prompt}`).digest('hex').slice(0, 8);
+    const seedInt = parseInt(seed, 16);
+    const jitter = seedInt % 120; // 0..119ms
+
+    // Provider baseline characteristics (approximate)
+    const baseNetworkMs = provider === 'groq' ? 60 : provider === 'openai' ? 120 : 180;
+    const baseServerQueueMs = provider === 'groq' ? 40 : provider === 'openai' ? 80 : 120;
+    const perTokenGenMs = provider === 'groq' ? 2 : provider === 'openai' ? 6 : 8;
+
     const tokenCount = calculateTokenCount(prompt);
-    const processingTime = tokenCount * 5; // ~5ms per token simulated
 
-    // Add some random jitter
-    const jitter = Math.random() * 200;
+    const networkLatencyMs = baseNetworkMs + (jitter * 0.4);
+    const ttftMs = Math.round(networkLatencyMs + baseServerQueueMs + Math.min(400, tokenCount * 0.6));
+    const generationMs = Math.round(Math.min(8000, tokenCount * perTokenGenMs + (jitter * 0.8)));
+    const totalMs = Math.max(ttftMs, ttftMs + generationMs);
 
-    // In a real implementation:
-    // const start = Date.now();
-    // await client.chat.completions.create({...});
-    // return Date.now() - start;
+    // Cache: store total as number (fast path) and breakdown as JSON (optional inspection)
+    globalCache.setEvaluationScore(prompt, cacheMetric, totalMs);
+    globalCache.setPromptResponse(
+        prompt,
+        cacheMetric,
+        JSON.stringify({ ttftMs, totalMs, networkLatencyMs: Math.round(networkLatencyMs) })
+    );
 
-    return Math.round(baseLatency + processingTime + jitter);
+    return totalMs;
 }
 
 /**

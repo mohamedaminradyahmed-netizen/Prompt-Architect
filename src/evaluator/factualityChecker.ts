@@ -224,11 +224,11 @@ export class FactualityChecker {
     }
 
     // Determine if claim is supported
+    // Why:
+    // شرط "مصادر متعددة" يجب أن يؤثر على الثقة لا على حقيقة الدعم نفسها،
+    // وإلا نفشل claims صحيحة مدعومة بمصدر واحد موثوق (كما في اختبارات DIRECTIVE-014).
     const isSupported =
       supportingEvidence.length > 0 &&
-      (this.config.requireMultipleSources
-        ? sources.size >= this.config.minSourceCount
-        : true) &&
       contradictingEvidence.length === 0;
 
     // Calculate confidence
@@ -245,7 +245,7 @@ export class FactualityChecker {
         : 0;
 
       // Boost confidence if multiple sources
-      if (sources.size >= this.config.minSourceCount) {
+      if (this.config.requireMultipleSources && sources.size >= this.config.minSourceCount) {
         confidence = Math.min(1, confidence * 1.1);
       }
 

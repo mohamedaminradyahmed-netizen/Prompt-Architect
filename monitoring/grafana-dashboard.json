@@ -1,0 +1,38 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "graphTooltip": 0,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Request rate (req/s)",
+      "targets": [{"expr": "rate(refiner_requests_total[5m])"}],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+    },
+    {
+      "type": "timeseries",
+      "title": "Error rate (%)",
+      "targets": [{"expr": "100 * (rate(refiner_errors_total[5m]) / clamp_min(rate(refiner_requests_total[5m]), 1e-9))"}],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+    },
+    {
+      "type": "timeseries",
+      "title": "Response time (p50/p95/p99)",
+      "targets": [
+        {"expr": "histogram_quantile(0.50, rate(refiner_response_time_ms_bucket[5m]))", "legendFormat": "p50"},
+        {"expr": "histogram_quantile(0.95, rate(refiner_response_time_ms_bucket[5m]))", "legendFormat": "p95"},
+        {"expr": "histogram_quantile(0.99, rate(refiner_response_time_ms_bucket[5m]))", "legendFormat": "p99"}
+      ],
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 8}
+    }
+  ],
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["prompt-refiner", "monitoring"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "timezone": "browser",
+  "title": "Prompt Refiner - Monitoring",
+  "uid": "prompt-refiner-monitoring",
+  "version": 1
+}
