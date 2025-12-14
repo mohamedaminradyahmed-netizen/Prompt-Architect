@@ -1,6 +1,53 @@
-# Genetic Algorithm Optimizer - DIRECTIVE-020
+# Prompt Optimizer Suite
 
 ## Overview
+
+This directory contains a comprehensive suite of optimization algorithms for prompt engineering. The **Hybrid Optimizer** (DIRECTIVE-024) combines multiple optimization strategies to provide superior performance.
+
+---
+
+## 🎯 Quick Start: Hybrid Optimizer (Recommended)
+
+The Hybrid Optimizer is the **most advanced system** that combines:
+
+1. **Genetic Algorithm** (Global Exploration)
+2. **Hill-Climbing** (Local Refinement)  
+3. **Bayesian Optimization** (Parameter Tuning)
+
+```typescript
+import { hybridOptimize, HybridConfig } from './optimizer/hybrid';
+
+const result = await hybridOptimize(
+    "Your initial prompt",
+    scoringFunction,
+    {
+        explorationBudget: 3,
+        refinementBudget: 5,
+        finetuningBudget: 10
+    }
+);
+```
+
+**📖 See**: `DIRECTIVE-024-COMPLETE.md` for full documentation
+
+---
+
+## 📚 Available Optimizers
+
+| Optimizer | Directive | Status | Best For |
+|-----------|-----------|--------|----------|
+| **Hybrid** | DIRECTIVE-024 | ✅ Complete | Production use, best quality |
+| **Genetic** | DIRECTIVE-020 | ✅ Complete | Exploring diverse solutions |
+| **Hill-Climbing** | DIRECTIVE-019 | ✅ Complete | Quick local refinement |
+| **Bayesian** | DIRECTIVE-021 | ✅ Complete | Parameter optimization |
+| **Bandits** | DIRECTIVE-022 | ✅ Complete | Large mutation spaces |
+| **MCTS** | DIRECTIVE-022 | ✅ Complete | Tree-based exploration |
+
+---
+
+## Genetic Algorithm Optimizer - DIRECTIVE-020
+
+### Overview
 
 A population-based optimization system using evolutionary principles to automatically discover high-quality prompt variations. This implementation uses genetic algorithms to explore the solution space efficiently.
 
@@ -17,13 +64,16 @@ A population-based optimization system using evolutionary principles to automati
 ## How It Works
 
 ### 1. Initialize Population (Generation 0)
+
 ```
 Original Prompt → [Variation 1, Variation 2, ..., Variation N]
 ```
+
 - Creates N diverse variations using different mutation combinations
 - Each variation is evaluated for fitness
 
 ### 2. Evolution Loop (Generations 1-N)
+
 ```
 For each generation:
   1. SELECT: Choose best performers (parents)
@@ -34,6 +84,7 @@ For each generation:
 ```
 
 ### 3. Termination
+
 - Stops after N generations OR
 - When population converges (minimal improvement over 4 generations)
 
@@ -127,6 +178,7 @@ interface GeneticConfig {
 ## Selection Strategies
 
 ### Tournament Selection (Default)
+
 - **How**: Pick K random individuals, select best
 - **Pros**: Fast, good selection pressure
 - **Cons**: May lose diversity with large tournament size
@@ -137,6 +189,7 @@ interface GeneticConfig {
 ```
 
 ### Roulette Wheel Selection
+
 - **How**: Probability proportional to fitness
 - **Pros**: Maintains diversity, all individuals have chance
 - **Cons**: Weak selection pressure
@@ -147,6 +200,7 @@ interface GeneticConfig {
 ```
 
 ### Rank Selection
+
 - **How**: Probability based on rank, not absolute fitness
 - **Pros**: Consistent selection pressure
 - **Cons**: Slower than tournament
@@ -189,6 +243,7 @@ interface PopulationResult {
 ## Performance Characteristics
 
 ### Time Complexity
+
 - **Per Generation**: O(P² × M)
   - P = population size
   - M = mutation complexity
@@ -196,6 +251,7 @@ interface PopulationResult {
   - G = number of generations
 
 ### Space Complexity
+
 - O(P × L)
   - L = average prompt length
 
@@ -221,6 +277,7 @@ Preserves top N individuals across generations:
 ```
 
 Benefits:
+
 - ✅ Never lose best solution
 - ✅ Faster convergence
 - ❌ May reduce diversity
@@ -307,6 +364,7 @@ const result = await geneticOptimize(initialPrompt, contentFitness);
 ## Best Practices
 
 ### 1. Choose Appropriate Population Size
+
 ```typescript
 // Small problem space
 { populationSize: 10-15 }
@@ -321,6 +379,7 @@ const result = await geneticOptimize(initialPrompt, contentFitness);
 ### 2. Balance Exploration vs Exploitation
 
 **More Exploration** (diverse solutions):
+
 ```typescript
 {
   crossoverRate: 0.6,  // Lower
@@ -330,6 +389,7 @@ const result = await geneticOptimize(initialPrompt, contentFitness);
 ```
 
 **More Exploitation** (refine best):
+
 ```typescript
 {
   crossoverRate: 0.8,  // Higher
@@ -375,6 +435,7 @@ const goodFitness = (prompt: string) => {
 ### Problem: Slow Convergence
 
 **Solutions:**
+
 - Increase population size
 - Increase crossover rate
 - Decrease mutation rate
@@ -383,6 +444,7 @@ const goodFitness = (prompt: string) => {
 ### Problem: Premature Convergence
 
 **Solutions:**
+
 - Increase mutation rate
 - Decrease elitism count
 - Use roulette or rank selection
@@ -391,6 +453,7 @@ const goodFitness = (prompt: string) => {
 ### Problem: No Improvement
 
 **Solutions:**
+
 - Check fitness function (is it meaningful?)
 - Increase generations
 - Increase population size
@@ -403,6 +466,7 @@ npx tsx src/optimizer/genetic.demo.ts
 ```
 
 This will run 5 comprehensive demos showing:
+
 1. Basic optimization
 2. Advanced fitness with balance metrics
 3. Comparison of selection strategies
@@ -434,12 +498,14 @@ See [genetic.ts](./genetic.ts) for full type definitions.
 ## Summary
 
 The Genetic Algorithm Optimizer excels at:
+
 - ✅ Exploring diverse solution spaces
 - ✅ Finding multiple good solutions
 - ✅ Avoiding local optima
 - ✅ Handling complex fitness landscapes
 
 Use it when:
+
 - You want diverse variations
 - Global optimum is important
 - You have computational budget

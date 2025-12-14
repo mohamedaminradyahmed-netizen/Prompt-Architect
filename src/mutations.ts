@@ -47,6 +47,14 @@ export type MutationType =
   | 'constraint-addition'
   | 'task-decomposition';
 
+export const mutationTypes: MutationType[] = [
+  'try-catch-style',
+  'context-reduction',
+  'expansion',
+  'constraint-addition',
+  'task-decomposition'
+];
+
 // ============================================================================
 // TRY/CATCH STYLE MUTATION (DIRECTIVE-003)
 // ============================================================================
@@ -97,7 +105,9 @@ export function tryCatchStyleMutation(prompt: string): PromptVariation {
   for (const { pattern, verb } of imperativePatterns) {
     if (pattern.test(trimmedPrompt)) {
       // Transform to "Try to..." format
-      transformedPrompt = trimmedPrompt.replace(pattern, `Try to ${verb.toLowerCase()} `);
+      // Why: الاختبارات تتوقع أن الفعل بعد "Try to" يكون lowercase دائماً حتى لو كانت الجملة الأصلية تبدأ بحرف كبير.
+      // استخدام replace callback يضمن أخذ النص المطابق فعلياً (وليس "$1") ثم تحويله لـ lowercase.
+      transformedPrompt = trimmedPrompt.replace(pattern, (_m, v) => `Try to ${String(v).toLowerCase()} `);
 
       // Determine the category for appropriate fallback
       if (/^(fix|repair|solve|debug|correct)/i.test(trimmedPrompt)) {

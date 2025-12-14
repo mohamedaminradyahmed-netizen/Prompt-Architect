@@ -171,6 +171,37 @@ export async function retrieveForClaims(
 }
 
 // ============================================================================
+// INGESTION (TEST/BOOTSTRAP HELPERS)
+// ============================================================================
+
+/**
+ * Add documents to a vector store, generating embeddings when missing.
+ *
+ * Why: اختبارات factuality تعتمد على helper موحد لتغذية الـ store دون تكرار المنطق في كل مكان.
+ */
+export async function addDocuments(
+  documents: Document[],
+  vectorStore: InMemoryVectorStore,
+  embeddingProvider: EmbeddingProvider
+): Promise<void> {
+  const withEmbeddings: Document[] = [];
+
+  for (const doc of documents) {
+    try {
+      withEmbeddings.push({
+        ...doc,
+        embedding: doc.embedding ?? (await generateEmbedding(doc.content, embeddingProvider)),
+      });
+    } catch {
+      // Fail-safe: تجاهل وثيقة واحدة لا يجب أن يوقف ingestion كله.
+      continue;
+    }
+  }
+
+  await vectorStore.addDocuments(withEmbeddings);
+}
+
+// ============================================================================
 // DIVERSIFICATION
 // ============================================================================
 
@@ -429,6 +460,7 @@ Documents Found: ${context.results.length}
 export default {
   retrieveRelevantDocs,
   retrieveForClaims,
+  addDocuments,
   extractClaims,
   expandContext,
   formatRetrievedContext,

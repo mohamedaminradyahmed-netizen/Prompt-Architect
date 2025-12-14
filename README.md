@@ -34,6 +34,7 @@
 ### المشكلة التي نحلها
 
 كتابة البرومبتات الفعّالة صعبة:
+
 - ❌ قد تكون طويلة جداً (تكلفة عالية)
 - ❌ قد تكون غامضة (نتائج سيئة)
 - ❌ قد تسبب hallucinations
@@ -42,6 +43,7 @@
 ### الحل
 
 Prompt Architect يقوم بـ:
+
 - ✅ إنشاء variations تلقائياً
 - ✅ تقييم كل variation بدقة
 - ✅ اختيار الأفضل حسب أولوياتك
@@ -63,6 +65,7 @@ Prompt Architect يقوم بـ:
 ### 📊 نظام التقييم الشامل
 
 #### 1. Balance Metrics
+
 ```typescript
 COST_OPTIMIZED    // للتطبيقات عالية الحجم
 QUALITY_FIRST     // للعمليات الحرجة
@@ -71,27 +74,32 @@ SPEED_OPTIMIZED   // للتطبيقات real-time
 ```
 
 #### 2. Output Metrics
+
 - قياس الطول الفعلي
 - حساب التباين
 - تقدير الجودة
 - نظام caching
 
 #### 3. ROUGE/BLEU Scores
+
 - ROUGE-1, ROUGE-2, ROUGE-L
 - BLEU score مع brevity penalty
 - مقارنة مع مخرجات مرجعية
 
 #### 4. Hallucination Detection
+
 - **Consistency Check**: مقارنة مخرجات متعددة
 - **Fact Verification**: التحقق من الحقائق
 - **Confidence Scoring**: تحليل logprobs
 
 #### 5. RAG-based Factuality Check
+
 - Vector store للمعرفة الموثوقة
 - Retrieval مع MMR
 - Claim-by-claim verification
 
 #### 6. Semantic Similarity
+
 - دعم OpenAI Embeddings
 - Local transformers (offline)
 - نظام caching متقدم
@@ -205,6 +213,7 @@ Prompt Architect
 ### 1. Mutations
 
 #### Try/Catch Style
+
 ```typescript
 import { tryCatchStyleMutation } from './src/mutations';
 
@@ -215,6 +224,7 @@ console.log(result.text);
 ```
 
 #### Expand
+
 ```typescript
 import { expandMutation } from './src/mutations';
 
@@ -228,6 +238,7 @@ console.log(result.text);
 ```
 
 #### Context Reduction
+
 ```typescript
 import { reduceContextMutation } from './src/mutations';
 
@@ -351,6 +362,7 @@ console.log('Similarity:', similarity); // 0.95+
 ### API Reference
 
 #### Mutations
+
 ```typescript
 tryCatchStyleMutation(prompt: string): PromptVariation
 reduceContextMutation(prompt: string): PromptVariation
@@ -359,6 +371,7 @@ constrainMutation(prompt: string, category: PromptCategory): PromptVariation
 ```
 
 #### Evaluation
+
 ```typescript
 evaluateSuggestions(
   originalPrompt: string,
@@ -373,6 +386,7 @@ calculateSemanticSimilarity(
 ```
 
 #### RAG
+
 ```typescript
 class FactualityChecker {
   verifyFactuality(text: string, context?: string): Promise<FactualityCheck>
@@ -476,6 +490,7 @@ export const CUSTOM_PRESET: BalanceMetrics = {
 ## 🔮 المراحل القادمة
 
 ### الآن (Directives 1-18) ✅
+
 - ✅ Mutation operators
 - ✅ Evaluation system
 - ✅ RAG + Factuality
@@ -483,13 +498,18 @@ export const CUSTOM_PRESET: BalanceMetrics = {
 - ✅ Semantic similarity
 
 ### القريب (Directives 19-30)
-- [ ] Hill-Climbing optimizer
-- [ ] Genetic algorithm
+
+- ✅ Hill-Climbing optimizer (DIRECTIVE-019)
+- ✅ Genetic algorithm (DIRECTIVE-020)
+- ✅ Bayesian optimization (DIRECTIVE-021)
+- ✅ Bandits/MCTS (DIRECTIVE-022)
+- ✅ **Hybrid Optimizer (DIRECTIVE-024)** 🎯
 - [ ] A/B testing framework
 - [ ] Human-in-the-loop
 - [ ] Safety filters
 
 ### المستقبل (Directives 31+)
+
 - [ ] Fine-tuning pipelines
 - [ ] Reinforcement learning
 - [ ] LangChain integration
@@ -545,7 +565,7 @@ MIT License - راجع [LICENSE](LICENSE) للتفاصيل
 
 ## 📞 التواصل والدعم
 
-- 📧 Email: support@prompt-architect.dev
+- 📧 Email: <support@prompt-architect.dev>
 - 💬 Discord: [Join our community](https://discord.gg/prompt-architect)
 - 🐛 Issues: [GitHub Issues](https://github.com/your-username/Prompt-Architect/issues)
 - 📖 Docs: [Full Documentation](https://docs.prompt-architect.dev)

@@ -1,4 +1,5 @@
-import { hillClimbingOptimize, ScoringFunction } from './src/optimizer/hillClimbing';
+import { hillClimbingOptimize } from './src/optimizer/hillClimbing';
+import { ScoringFunction } from './src/optimizer/types';
 import { PromptCategory } from './src/types/promptTypes';
 import * as mutations from './src/mutations';
 

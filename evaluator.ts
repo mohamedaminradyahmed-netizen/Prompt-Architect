@@ -211,8 +211,10 @@ function getFromCache(key: string): any {
 function setCache(key: string, value: any): void {
   // Simple LRU: remove oldest if cache gets too large
   if (embeddingCache.size > 1000) {
-    const firstKey = embeddingCache.keys().next().value;
-    embeddingCache.delete(firstKey);
+    const first = embeddingCache.keys().next();
+    if (!first.done) {
+      embeddingCache.delete(first.value);
+    }
   }
   embeddingCache.set(key, value);
 }

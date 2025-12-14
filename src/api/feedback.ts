@@ -82,7 +82,10 @@ export async function getFeedbackStats(variationId?: string): Promise<FeedbackSt
 }
 
 // Helper functions
-function getFeedbackFromStorage(): HumanFeedback[] {
+export function getFeedbackFromStorage(): HumanFeedback[] {
+  if (typeof window === 'undefined' || !window.localStorage) {
+    return [];
+  }
   const stored = localStorage.getItem('human_feedback');
   return stored ? JSON.parse(stored) : [];
 }

@@ -43,7 +43,7 @@ function demo1_BasicTracking() {
   console.log(`   Generation: ${original.generation}`);
 
   // Apply mutations
-  const tryC atchResult = tryCatchStyleMutation(original.currentPrompt);
+  const tryCatchResult = tryCatchStyleMutation(original.currentPrompt);
   const variation1 = createChildVariation(
     original,
     tryCatchResult.text,

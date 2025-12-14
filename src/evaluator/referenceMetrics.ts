@@ -111,15 +111,16 @@ function calculateRougeN(
     return { precision: 0, recall: 0, f1: 0 };
   }
 
-  // Count overlapping n-grams
-  const candidateSet = new Set(candidateNGrams);
-  const referenceSet = new Set(referenceNGrams);
+  // Count overlapping n-grams (with multiplicity).
+  // Why: استخدام Set يحذف التكرارات ويكسر حالات مثل تكرار "the" (يؤدي لـ 0.833 بدلاً من 1.0 في التطابق التام).
+  const candCounts = new Map<string, number>();
+  const refCounts = new Map<string, number>();
+  for (const ng of candidateNGrams) candCounts.set(ng, (candCounts.get(ng) || 0) + 1);
+  for (const ng of referenceNGrams) refCounts.set(ng, (refCounts.get(ng) || 0) + 1);
 
   let overlap = 0;
-  for (const ngram of candidateSet) {
-    if (referenceSet.has(ngram)) {
-      overlap++;
-    }
+  for (const [ng, c] of candCounts) {
+    overlap += Math.min(c, refCounts.get(ng) || 0);
   }
 
   // Calculate precision and recall
@@ -302,6 +303,10 @@ export function calculateBLEU(
     precisions.push(maxPrecision);
   }
 
+  // Effective N: لا نعاقب المرشّح القصير على n-grams التي لا يمكن تكوينها أصلاً.
+  // Why: عند candidate قصير، إدخال 0 في 3-gram/4-gram يجعل BLEU ينهار إلى ~0 ويكسر اختبارات "multiple references" و "long texts".
+  const effectiveN = Math.max(1, Math.min(maxN, candidateLength));
+
   // Calculate brevity penalty
   // Find closest reference length
   const referenceLengths = references.map(ref => tokenize(ref).length);
@@ -315,10 +320,10 @@ export function calculateBLEU(
     ? 1.0
     : Math.exp(1 - closestRefLength / candidateLength);
 
-  // Calculate geometric mean of precisions
-  const geometricMean = precisions.reduce((product, p) => {
+  // Calculate geometric mean of precisions (up to effectiveN)
+  const geometricMean = precisions.slice(0, effectiveN).reduce((product, p) => {
     // Avoid log(0) by using a small epsilon
-    return product * Math.pow(Math.max(p, 1e-10), 1 / maxN);
+    return product * Math.pow(Math.max(p, 1e-10), 1 / effectiveN);
   }, 1);
 
   const score = brevityPenalty * geometricMean;

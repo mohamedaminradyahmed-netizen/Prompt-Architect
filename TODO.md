@@ -894,7 +894,7 @@ CREATE TABLE variation_lineage (
 
 ## 👥 المرحلة 5: Human-in-the-Loop System
 
-### DIRECTIVE-029: بناء Sample Selection للمراجعة البشرية
+### DIRECTIVE-029: بناء Sample Selection للمراجعة البشرية [DONE]
 
 ```
 المهمة: أنشئ نظام ذكي لاختيار عينات للمراجعة البشرية
@@ -924,7 +924,10 @@ enum SamplingStrategy {
 الهدف: 5-10% من الـ variations للمراجعة البشرية
 ```
 
-### DIRECTIVE-030: تطوير واجهة المراجعة البشرية
+### DIRECTIVE-030: تطوير واجهة المراجعة البشرية ✅ COMPLETE
+
+**Status**: ✅ **COMPLETED** (2025-12-14)
+**Documentation**: See [DIRECTIVE-030-COMPLETE.md](DIRECTIVE-030-COMPLETE.md) for full details
 
 ```
 المهمة: أنشئ UI بسيطة للموافقة/الرفض والتعديل اليدوي
@@ -994,7 +997,7 @@ interface SafetyViolation {
 الأدوات: استخدم OpenAI Moderation API + custom rules
 ```
 
-### DIRECTIVE-032: بناء نظام Rollback/Preview
+### DIRECTIVE-032: بناء نظام Rollback/Preview [DONE]
 
 ```
 المهمة: أضف نظام معاينة وتراجع قبل تطبيق التغييرات
@@ -1031,7 +1034,10 @@ interface SafetyViolation {
 
 ## 📚 المرحلة 7: البيانات والتعلّم (Training Infrastructure)
 
-### DIRECTIVE-033: إعداد بيانات التدريب
+### DIRECTIVE-033: إعداد بيانات التدريب ✅ COMPLETE
+
+**Status**: ✅ **COMPLETED** (2025-12-14)
+**Implementation**: `src/training/dataCollection.ts`, `src/training/dataPrep.ts`
 
 ```
 المهمة: أنشئ pipeline لجمع وإعداد بيانات التدريب
@@ -1115,7 +1121,7 @@ interface TrainingExample {
 الموارد: GPU مستحسن للتدريب
 ```
 
-### DIRECTIVE-035: تنفيذ RLAIF (RL from AI Feedback)
+### DIRECTIVE-035: تنفيذ RLAIF (RL from AI Feedback) [DONE]
 
 ```
 المهمة: قلل الاعتماد على البشر باستخدام AI للتقييم

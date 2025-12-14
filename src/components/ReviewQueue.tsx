@@ -9,6 +9,12 @@
 import React, { useState, useEffect } from 'react';
 import { ReviewCard } from './ReviewCard';
 import { PromptCategory } from '../types/promptTypes';
+import {
+  getReviewQueue,
+  approveReview,
+  rejectReview,
+  editReview,
+} from '../api/review';
 
 export interface ReviewItem {
   id: string;
@@ -55,12 +61,7 @@ export const ReviewQueue: React.FC<ReviewQueueProps> = ({
       setLoading(true);
       setError(null);
 
-      const response = await fetch('/api/review/queue');
-      if (!response.ok) {
-        throw new Error('Failed to fetch review queue');
-      }
-
-      const data = await response.json();
+      const data = await getReviewQueue();
       setItems(data.items || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
@@ -77,40 +78,58 @@ export const ReviewQueue: React.FC<ReviewQueueProps> = ({
   });
 
   const handleApprove = async (itemId: string) => {
-    if (onApprove) {
-      onApprove(itemId);
-    }
+    try {
+      await approveReview({ itemId });
 
-    // Remove item from queue and move to next
-    setItems(prev => prev.filter(item => item.id !== itemId));
-    if (currentIndex >= filteredItems.length - 1) {
-      setCurrentIndex(Math.max(0, currentIndex - 1));
+      if (onApprove) {
+        onApprove(itemId);
+      }
+
+      // Remove item from queue and move to next
+      setItems(prev => prev.filter(item => item.id !== itemId));
+      if (currentIndex >= filteredItems.length - 1) {
+        setCurrentIndex(Math.max(0, currentIndex - 1));
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to approve item');
     }
   };
 
   const handleReject = async (itemId: string, reason?: string) => {
-    if (onReject) {
-      onReject(itemId, reason);
-    }
+    try {
+      await rejectReview({ itemId, reason });
 
-    // Remove item from queue and move to next
-    setItems(prev => prev.filter(item => item.id !== itemId));
-    if (currentIndex >= filteredItems.length - 1) {
-      setCurrentIndex(Math.max(0, currentIndex - 1));
+      if (onReject) {
+        onReject(itemId, reason);
+      }
+
+      // Remove item from queue and move to next
+      setItems(prev => prev.filter(item => item.id !== itemId));
+      if (currentIndex >= filteredItems.length - 1) {
+        setCurrentIndex(Math.max(0, currentIndex - 1));
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to reject item');
     }
   };
 
   const handleEdit = async (itemId: string, editedVariation: string) => {
-    if (onEdit) {
-      onEdit(itemId, editedVariation);
-    }
+    try {
+      await editReview({ itemId, editedVariation });
 
-    // Update item in queue
-    setItems(prev => prev.map(item =>
-      item.id === itemId
-        ? { ...item, suggestedVariation: editedVariation }
-        : item
-    ));
+      if (onEdit) {
+        onEdit(itemId, editedVariation);
+      }
+
+      // Update item in queue
+      setItems(prev => prev.map(item =>
+        item.id === itemId
+          ? { ...item, suggestedVariation: editedVariation }
+          : item
+      ));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to edit item');
+    }
   };
 
   const handleNext = () => {

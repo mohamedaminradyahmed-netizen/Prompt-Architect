@@ -19,10 +19,10 @@ export class RLInterface {
     private scriptPath: string;
 
     constructor(pythonPath: string = 'python') {
-        self.pythonPath = pythonPath;
+        this.pythonPath = pythonPath;
         // Assuming the python scripts are in the same directory as this file (when compiled or run)
         // Adjust path logic as necessary for the project structure
-        self.scriptPath = path.join(__dirname, 'ppo_trainer.py');
+        this.scriptPath = path.join(__dirname, 'ppo_trainer.py');
     }
 
     /**
