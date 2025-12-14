@@ -1611,7 +1611,8 @@ class ObjectStore {
 ```text
 
 ### DIRECTIVE-048: إعداد Kubernetes + Autoscaling
-```
+
+```text
 
 المهمة: أنشئ deployment على Kubernetes مع autoscaling
 
@@ -1684,11 +1685,11 @@ spec:
 
 الملفات: `k8s/deployment.yaml`, `k8s/service.yaml`, `k8s/hpa.yaml`
 
-```text
-k8s/deployment.yaml, k8s/service.yaml, k8s/hpa.yaml
 ```
 
 ### DIRECTIVE-049: إعداد عُقد GPU للـ RL/Fine-tune
+
+```text
 
 المهمة: أضف GPU nodes لتدريب النماذج
 
@@ -1729,6 +1730,8 @@ spec:
 ```
 
 ### DIRECTIVE-050: إعداد Prometheus + Grafana
+
+```text
 
 المهمة: أنشئ نظام monitoring شامل
 
@@ -1774,6 +1777,8 @@ const tokenHistogram = new client.Histogram({
 
 ### DIRECTIVE-051: إعداد Feature Flags لـ A/B Testing
 
+```text
+
 المهمة: أضف نظام feature flags للتجارب
 
 الخيارات:
@@ -1807,8 +1812,6 @@ class FeatureFlags {
 
 الملف: `src/features/flags.ts`
 
-```text
-src/features/flags.ts
 ```
 
 ---
@@ -1816,6 +1819,8 @@ src/features/flags.ts
 ## 🚀 المرحلة 11: Population Search + Sandbox (المرحلة 2)
 
 ### DIRECTIVE-052: تنفيذ Population Search
+
+```text
 
 المهمة: أنشئ نظام بحث قائم على السكان
 
@@ -1847,14 +1852,13 @@ interface PopulationConfig {
 
 الملف: `src/search/populationSearch.ts`
 
-```text
-src/search/populationSearch.ts
-```
-
 الهدف: إيجاد variations متنوعة وعالية الجودة
+
+```
 
 ### DIRECTIVE-053: تطوير Sandbox Run على Test Suite
 
+```text
 المهمة: شغّل كل variation على مجموعة اختبار كاملة
 
 الميزات:
@@ -1892,12 +1896,11 @@ interface SandboxResult {
 
 الملف: `src/sandbox/sandboxRunner.ts`
 
-```text
-src/sandbox/sandboxRunner.ts
 ```
 
 ### DIRECTIVE-054: جمع Human Feedback وبناء Reward Dataset
 
+```text
 المهمة: أنشئ pipeline لجمع feedback وتحويله لـ training data
 
 الخطوات:
@@ -1937,12 +1940,11 @@ interface RewardExample {
 
 الملف: `src/training/rewardDatasetBuilder.ts`
 
-```text
-src/training/rewardDatasetBuilder.ts
 ```
 
 ### DIRECTIVE-055: إضافة Hallucination Checker
 
+```text
 المهمة: دمج hallucination detection في pipeline الرئيسي
 
 الطرق المستخدمة:
@@ -1976,12 +1978,11 @@ interface ScoredSuggestion {
 
 الملف: `src/evaluator.ts` (تحديث)
 
-```text
-src/evaluator.ts
 ```
 
 ### DIRECTIVE-056: دمج RAG للـ Factuality
 
+```text
 المهمة: استخدم RAG للتحقق من صحة الحقائق في المخرجات
 
 الخطوات:
