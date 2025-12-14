@@ -68,10 +68,18 @@ export interface VectorStoreConfig {
  * Embedding provider for generating vectors
  */
 export interface EmbeddingProvider {
-  name: 'openai' | 'cohere' | 'huggingface' | 'custom';
+  /**
+   * Provider identifier (optional for test doubles).
+   */
+  name?: 'openai' | 'cohere' | 'huggingface' | 'custom';
   apiKey?: string;
   model?: string;
   dimension: number;
+  /**
+   * Optional deterministic embedding function.
+   * Why: اختبارات DIRECTIVE-014 تستخدم مزود mock لتوليد embeddings ثابتة بدل العشوائية.
+   */
+  generateEmbedding?: (text: string) => Promise<Embedding>;
 }
 
 // ============================================================================
@@ -166,6 +174,16 @@ class InMemoryVectorStore {
   }
 
   /**
+   * Get all documents in the store
+   *
+   * Why:
+   * اختبارات DIRECTIVE-014 تحتاج نسخ/مزامنة محتوى الـ store بين instances (مثلاً: store خارجي → checker store).
+   */
+  async getAllDocuments(): Promise<Document[]> {
+    return Array.from(this.documents.values());
+  }
+
+  /**
    * Delete a document
    */
   async deleteDocument(id: string): Promise<boolean> {
@@ -238,6 +256,15 @@ class InMemoryVectorStore {
 
 /**
  * Create a vector store instance
+ *
+ * For real vector database support (Pinecone, Weaviate), use:
+ * ```typescript
+ * import { createVectorStoreClient } from '../vectorstore/client';
+ * const store = await createVectorStoreClient(config);
+ * ```
+ *
+ * This function returns InMemoryVectorStore for backward compatibility.
+ * Use createVectorStoreClient for production with external vector DBs.
  */
 export function createVectorStore(
   config: VectorStoreConfig
@@ -247,20 +274,31 @@ export function createVectorStore(
       return new InMemoryVectorStore(config);
 
     case 'pinecone':
-      // In production, initialize Pinecone client
-      // const pinecone = new Pinecone({ apiKey: config.apiKey });
-      // const index = pinecone.index(config.indexName);
-      throw new Error('Pinecone integration not implemented. Use in-memory store.');
+      // For Pinecone support, use the new vectorstore client:
+      // import { createVectorStoreClient, PineconeConfig } from '../vectorstore/client';
+      // const store = await createVectorStoreClient(config as PineconeConfig);
+      console.warn(
+        '[VectorStore] For Pinecone, use createVectorStoreClient from ../vectorstore/client. ' +
+        'Falling back to in-memory store.'
+      );
+      return new InMemoryVectorStore({ ...config, provider: 'memory' });
 
     case 'weaviate':
-      // In production, initialize Weaviate client
-      // const weaviate = weaviateClient({ ...config });
-      throw new Error('Weaviate integration not implemented. Use in-memory store.');
+      // For Weaviate support, use the new vectorstore client:
+      // import { createVectorStoreClient, WeaviateConfig } from '../vectorstore/client';
+      // const store = await createVectorStoreClient(config as WeaviateConfig);
+      console.warn(
+        '[VectorStore] For Weaviate, use createVectorStoreClient from ../vectorstore/client. ' +
+        'Falling back to in-memory store.'
+      );
+      return new InMemoryVectorStore({ ...config, provider: 'memory' });
 
     case 'chroma':
-      // In production, initialize Chroma client
-      // const chroma = new ChromaClient();
-      throw new Error('Chroma integration not implemented. Use in-memory store.');
+      // Chroma support can be added in vectorstore/client.ts
+      console.warn(
+        '[VectorStore] Chroma not yet implemented. Falling back to in-memory store.'
+      );
+      return new InMemoryVectorStore({ ...config, provider: 'memory' });
 
     default:
       return new InMemoryVectorStore(config);
@@ -279,12 +317,20 @@ export async function generateEmbedding(
   text: string,
   provider: EmbeddingProvider
 ): Promise<Embedding> {
+  // If provider supplies its own embedding function (e.g., tests), use it.
+  if (typeof provider.generateEmbedding === 'function') {
+    const emb = await provider.generateEmbedding(text);
+    return emb;
+  }
+
   // MOCK: In production, call actual embedding APIs:
   // - OpenAI: await openai.embeddings.create({ model: "text-embedding-3-small", input: text })
   // - Cohere: await cohere.embed({ texts: [text], model: "embed-english-v3.0" })
   // - HuggingFace: Use transformers.js or API
 
-  await new Promise(resolve => setTimeout(resolve, 50));
+  // Why:
+  // لا نضيف delay صناعي في الاختبارات/البيئة المحلية لأن RAG قد يستخرج claims كثيرة (100+)
+  // ما يسبب تجاوز مهلة Jest (DIRECTIVE-014).
 
   // Generate mock embedding (random normalized vector)
   const embedding: Embedding = Array.from(

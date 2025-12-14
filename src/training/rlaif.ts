@@ -282,7 +282,7 @@ async function humanValidate(
     // ابحث عن human feedback لهذا variation
     const feedbacks = getFeedbackFromStorage();
     const relevantFeedback = feedbacks.find(
-      f => f.variationId === item.variation.text.substring(0, 50)
+      (f: HumanFeedback) => f.variationId === item.variation.text.substring(0, 50)
     );
     
     if (relevantFeedback) {

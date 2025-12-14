@@ -1,9 +1,9 @@
 # أوامر توجيهية لتطوير نظام Prompt Refiner
 
-# Directives for AI Coding Agent
+## Directives for AI Coding Agent
 
 > **السياق العام**: أنت تعمل على تطوير نظام **Prompt Refiner** متقدم يقوم بتحسين البرومبتات تلقائياً لتحقيق توازن بين الجودة والتكلفة والزمن والموثوقية. المشروع مبني بـ TypeScript + React وحالياً في مرحلة MVP الأساسية.
-
+>
 > **الملفات الرئيسية الحالية**:
 >
 > - `mutations.ts` - يحتوي على 3 mutation operators أساسية
@@ -18,7 +18,7 @@
 
 ### DIRECTIVE-001: تحديد معايير التوازن
 
-```
+```text
 المهمة: قم بإنشاء ملف `config/balanceMetrics.ts` يحدد معايير التوازن بين:
 - الدقة/الجودة (Accuracy/Quality): ما هو الحد الأدنى المقبول؟
 - التكلفة (Cost): ما هو سقف التكلفة المستهدف لكل طلب؟
@@ -36,7 +36,7 @@
 
 ### DIRECTIVE-002: تصنيف أنواع البرومبتات
 
-```
+```text
 المهمة: قم بإنشاء نظام تصنيف للبرومبتات في `src/types/promptTypes.ts`
 
 المخرجات المطلوبة:
@@ -70,7 +70,7 @@
 
 ### DIRECTIVE-003: تطوير Try/Catch Style Mutation
 
-```
+```text
 المهمة: أضف mutation operator جديد في `mutations.ts` يحول أسلوب التعليمات
 
 الوظيفة المطلوبة:
@@ -92,7 +92,7 @@ export function tryCatchStyleMutation(prompt: string): PromptVariation
 
 ### DIRECTIVE-004: تطوير Context Reduction Mutation
 
-```
+```text
 المهمة: أضف mutation operator يقلل السياق الزائد
 
 الوظيفة المطلوبة:
@@ -115,7 +115,7 @@ export function reduceContextMutation(prompt: string): PromptVariation
 
 ### DIRECTIVE-005: بناء نظام Parameterized Templates [DONE]
 
-```
+```text
 المهمة: أنشئ نظام قوالب مُهيكلة في `src/templates/`
 
 البنية المطلوبة:
@@ -145,7 +145,7 @@ interface PromptTemplate {
 
 ### DIRECTIVE-006: تطوير Expand Mutation
 
-```
+```text
 المهمة: أضف mutation operator يوسّع البرومبت بتفاصيل إضافية
 
 الوظيفة المطلوبة:
@@ -167,7 +167,7 @@ export function expandMutation(prompt: string): PromptVariation
 
 ### DIRECTIVE-007: تطوير Constrain Mutation
 
-```
+```text
 المهمة: أضف mutation operator يضيف قيوداً محددة
 
 الوظيفة المطلوبة:
@@ -190,7 +190,7 @@ export function constrainMutation(prompt: string, category: PromptCategory): Pro
 
 ### DIRECTIVE-008: تطوير Task Decomposition Strategy
 
-```
+```text
 المهمة: أنشئ نظام تقسيم المهام المعقدة لمهام فرعية
 
 الوظيفة المطلوبة:
@@ -215,7 +215,7 @@ Output:
 
 ### DIRECTIVE-009: تطوير Multi-Step Prompts System
 
-```
+```text
 المهمة: أنشئ نظام prompts متعددة الخطوات
 
 البنية المطلوبة:
@@ -246,7 +246,7 @@ interface PromptStep {
 
 ### DIRECTIVE-010: إضافة قياس Latency الفعلي
 
-```
+```text
 المهمة: أضف قياساً فعلياً لزمن الاستجابة
 
 المطلوب في `evaluator.ts`:
@@ -270,7 +270,7 @@ interface PromptStep {
 
 ### DIRECTIVE-011: قياس طول الإخراج الفعلي
 
-```
+```text
 المهمة: أضف قياساً فعلياً لطول المخرجات
 
 الوظيفة المطلوبة:
@@ -299,7 +299,7 @@ interface OutputMetrics {
 
 ### DIRECTIVE-012: دمج ROUGE/BLEU Metrics
 
-```
+```text
 المهمة: أضف دعماً لمقاييس ROUGE و BLEU للمخرجات المرجعية
 
 التثبيت المطلوب:
@@ -324,7 +324,7 @@ npm install rouge-score bleu-score
 
 ### DIRECTIVE-013: بناء نظام كشف الهلوسة
 
-```
+```text
 المهمة: أنشئ نظام للكشف عن الهلوسة في المخرجات
 
 الاستراتيجيات المطلوبة:
@@ -351,7 +351,7 @@ interface HallucinationScore {
 
 ### DIRECTIVE-014: بناء فحص Factuality عبر RAG
 
-```
+```text
 المهمة: أنشئ نظام RAG للتحقق من صحة الحقائق
 
 المكونات المطلوبة:
@@ -383,7 +383,7 @@ interface FactualityCheck {
 
 ### DIRECTIVE-015: بناء نظام Human Feedback Score
 
-```
+```text
 المهمة: أنشئ نظام لجمع وإدارة تقييمات البشر
 
 قاعدة البيانات المطلوبة:
@@ -417,7 +417,7 @@ CREATE TABLE human_feedback (
 
 ### DIRECTIVE-016: مقاييس مخصصة للكود
 
-```
+```text
 المهمة: طوّر مقاييس خاصة بتقييم جودة الكود المُولّد
 
 المقاييس المطلوبة:
@@ -454,7 +454,7 @@ interface CodeQualityMetrics {
 
 ### DIRECTIVE-017: مقاييس مخصصة للتسويق/المحتوى
 
-```
+```text
 المهمة: طوّر مقاييس خاصة بتقييم جودة المحتوى التسويقي
 
 المقاييس المطلوبة:
@@ -493,7 +493,7 @@ interface ContentQualityMetrics {
 
 ### DIRECTIVE-018: تحسين Similarity باستخدام Embeddings حقيقية
 
-```
+```text
 المهمة: استبدل word frequency similarity بـ embeddings حقيقية
 
 المطلوب:
@@ -533,7 +533,7 @@ await calculateSemanticSimilarity(text1, text2)
 
 ### DIRECTIVE-019: تنفيذ Hill-Climbing Optimizer [DONE]
 
-```
+```text
 المهمة: أنشئ optimizer بسيط يستخدم Hill-Climbing
 
 المبدأ:
@@ -564,7 +564,7 @@ interface OptimizationResult {
 
 ### DIRECTIVE-020: تنفيذ Genetic/Population-based Optimizer [DONE]
 
-```
+```text
 المهمة: أنشئ optimizer يستخدم Genetic Algorithm
 
 الخطوات:
@@ -600,7 +600,7 @@ interface PopulationResult {
 
 ### DIRECTIVE-021: تنفيذ Bayesian Optimization [DONE]
 
-```
+```text
 المهمة: أنشئ optimizer للمعلمات باستخدام Bayesian Optimization
 
 الاستخدام: تحسين معلمات Template (role, constraints, examples count)
@@ -634,7 +634,7 @@ interface OptimalParameters {
 
 ### DIRECTIVE-022: تنفيذ Bandits/MCTS للفضاءات الكبيرة [DONE]
 
-```
+```text
 المهمة: أنشئ optimizer يستخدم Multi-Armed Bandits أو MCTS
 
 الاستخدام: عندما يكون عدد الـ mutations المحتملة كبير جداً
@@ -668,45 +668,56 @@ interface BanditResult {
 - `src/optimizer/mcts.ts`
 ```
 
-### DIRECTIVE-023: إعداد نظام RL (PPO-like)
+### DIRECTIVE-023: إعداد نظام RL (PPO-like) ✅ COMPLETE
 
-```
+**Status**: ✅ **COMPLETED** (2025-12-14)
+**Implementation**: `src/rl/policy.py`, `src/rl/value.py`, `src/rl/ppo_trainer.py`, `src/rl/interface.ts`
+
+```text
 المهمة: أنشئ نظام Reinforcement Learning لتحسين سياسة التوليد
 
 تحذير: هذه مهمة متقدمة جداً! تحتاج إلى:
-1. Reward Model مدرب
-2. Policy Network
-3. Value Network
-4. PPO Training Loop
+1. Reward Model مدرب ✅
+2. Policy Network ✅
+3. Value Network ✅
+4. PPO Training Loop ✅
 
 الخطوات:
-1. **أنشئ Policy Network**:
+1. **أنشئ Policy Network**: ✅
    - Input: embedding للـ prompt الأصلي
    - Output: distribution على الـ mutation actions
 
-2. **أنشئ Value Network**:
+2. **أنشئ Value Network**: ✅
    - Input: embedding للـ prompt
    - Output: تقدير للـ expected reward
 
-3. **PPO Training**:
+3. **PPO Training**: ✅
    - جمّع experiences (prompt, action, reward)
    - احسب advantages
    - حدّث Policy بحذر (clipped objective)
 
 الملفات:
-- `src/rl/policy.py` (استخدم Python + PyTorch)
-- `src/rl/value.py`
-- `src/rl/ppo_trainer.py`
-- `src/rl/interface.ts` (TypeScript wrapper)
+- `src/rl/policy.py` (استخدم Python + PyTorch) ✅
+- `src/rl/value.py` ✅
+- `src/rl/ppo_trainer.py` ✅
+- `src/rl/interface.ts` (TypeScript wrapper) ✅
 
-الموارد المطلوبة: GPU للتدريب
+الموارد المطلوبة: GPU للتدريب (optional - works on CPU too)
 
-ملاحظة: هذا للمرحلة المتقدمة جداً (Phase 3)
+**Features Implemented**:
+- PolicyNetwork with BatchNorm and Dropout
+- ValueNetwork with GAE (Generalized Advantage Estimation)
+- Full PPO trainer with clipped objective
+- HTTP server for TypeScript-Python communication
+- RLInterface and RLTrainer classes in TypeScript
+- Experience buffer and checkpointing
+- Training demo with simulated and full modes
+- Integration with RewardModel and mutations
 ```
 
 ### DIRECTIVE-024: بناء Hybrid Optimizer [DONE]
 
-```
+```text
 المهمة: ادمج عدة optimizers في نظام هجين ذكي
 
 الاستراتيجية:
@@ -745,7 +756,7 @@ interface HybridConfig {
 
 ### DIRECTIVE-025: بناء Test Suite Executor [DONE]
 
-```
+```text
 المهمة: أنشئ نظام لتشغيل prompts على test cases متوازية
 
 المكونات المطلوبة:
@@ -784,7 +795,7 @@ interface TestResults {
 
 ### DIRECTIVE-026: إضافة Caching للنتائج [DONE]
 
-```
+```text
 المهمة: أضف نظام caching ذكي لتقليل API calls
 
 أنواع الـ Cache المطلوبة:
@@ -812,7 +823,7 @@ class PromptCache {
 
 ### DIRECTIVE-027: إعداد Reference Datasets
 
-```
+```text
 المهمة: أنشئ datasets مرجعية لأنواع مختلفة من البرومبتات
 
 المطلوب:
@@ -849,7 +860,7 @@ const datasets = {
 
 ### DIRECTIVE-028: بناء نظام Lineage Tracking
 
-```
+```text
 المهمة: تتبع سلسلة النسب لكل variation (من أين جاء، لماذا، النتائج)
 
 البنية المطلوبة:
@@ -896,7 +907,7 @@ CREATE TABLE variation_lineage (
 
 ### DIRECTIVE-029: بناء Sample Selection للمراجعة البشرية [DONE]
 
-```
+```text
 المهمة: أنشئ نظام ذكي لاختيار عينات للمراجعة البشرية
 
 استراتيجيات الاختيار:
@@ -929,7 +940,7 @@ enum SamplingStrategy {
 **Status**: ✅ **COMPLETED** (2025-12-14)
 **Documentation**: See [DIRECTIVE-030-COMPLETE.md](DIRECTIVE-030-COMPLETE.md) for full details
 
-```
+```text
 المهمة: أنشئ UI بسيطة للموافقة/الرفض والتعديل اليدوي
 
 المكونات المطلوبة:
@@ -967,7 +978,7 @@ enum SamplingStrategy {
 
 ### DIRECTIVE-031: تطوير قيود الأمان
 
-```
+```text
 المهمة: أنشئ نظام فحص أمان قبل تطبيق التعديلات
 
 الفحوصات المطلوبة:
@@ -999,7 +1010,7 @@ interface SafetyViolation {
 
 ### DIRECTIVE-032: بناء نظام Rollback/Preview [DONE]
 
-```
+```text
 المهمة: أضف نظام معاينة وتراجع قبل تطبيق التغييرات
 
 الميزات المطلوبة:
@@ -1039,7 +1050,7 @@ interface SafetyViolation {
 **Status**: ✅ **COMPLETED** (2025-12-14)
 **Implementation**: `src/training/dataCollection.ts`, `src/training/dataPrep.ts`
 
-```
+```text
 المهمة: أنشئ pipeline لجمع وإعداد بيانات التدريب
 
 البنية المطلوبة:
@@ -1086,7 +1097,7 @@ interface TrainingExample {
 
 ### DIRECTIVE-034: بناء Reward Model
 
-```
+```text
 المهمة: درّب نموذج صغير للتنبؤ بجودة الـ variations
 
 الخطوات:
@@ -1123,7 +1134,7 @@ interface TrainingExample {
 
 ### DIRECTIVE-035: تنفيذ RLAIF (RL from AI Feedback) [DONE]
 
-```
+```text
 المهمة: قلل الاعتماد على البشر باستخدام AI للتقييم
 
 الاستراتيجية:
@@ -1159,7 +1170,7 @@ async function rlaifTraining(
 
 ### DIRECTIVE-036: تنفيذ Batching للطلبات
 
-```
+```text
 المهمة: أضف batching ذكي لتقليل تكلفة API calls
 
 الاستراتيجية:
@@ -1195,7 +1206,7 @@ interface BatchConfig {
 **Status**: ✅ **COMPLETED** (2025-12-14)
 **Documentation**: See [DIRECTIVE-037-COMPLETE.md](DIRECTIVE-037-COMPLETE.md) for full details
 
-```
+```text
 المهمة: استخدم نماذج صغيرة/سريعة للتقييم الأولي
 
 المفهوم:
@@ -1222,7 +1233,7 @@ class SurrogateOrchestrator {
 
 ### DIRECTIVE-038: معالجة Prompt Overfitting
 
-```
+```text
 المهمة: تأكد من أن الـ prompts المُحسّنة تعمل على مدخلات متنوعة
 
 الاستراتيجيات:
@@ -1259,7 +1270,7 @@ interface OverfittingReport {
 
 ### DIRECTIVE-039: نظام قياس تحسن Score على Benchmark [DONE]
 
-```
+```text
 المهمة: أنشئ نظام لقياس التحسن على benchmark suite
 
 المطلوب:
@@ -1287,7 +1298,7 @@ interface BenchmarkReport {
 
 ### DIRECTIVE-040: قياس انخفاض avg tokens/call
 
-```
+```text
 المهمة: تتبع متوسط استهلاك التوكنات وتكلفته
 
 المطلوب:
@@ -1317,7 +1328,7 @@ interface TokenReport {
 
 ### DIRECTIVE-041: قياس رضا المستخدم (NPS/Accept Rate)
 
-```
+```text
 المهمة: أنشئ نظام لقياس رضا المستخدمين
 
 المقاييس المطلوبة:
@@ -1349,7 +1360,7 @@ class UserSatisfactionTracker {
 
 ### DIRECTIVE-042: قياس Adoption Rate للاقتراحات
 
-```
+```text
 المهمة: تتبع معدل تبني الاقتراحات المختلفة
 
 المقاييس:
@@ -1386,7 +1397,7 @@ interface AdoptionReport {
 
 ### DIRECTIVE-043: إعداد LangChain Pipelines [DONE]
 
-```
+```text
 المهمة: أنشئ orchestration pipelines باستخدام LangChain
 
 التثبيت:
@@ -1433,14 +1444,20 @@ const result = await refinementPipeline.invoke({ prompt: "..." });
 
 ```
 
-### DIRECTIVE-044: إعداد Vector Database (Pinecone/Weaviate)
-```
+### DIRECTIVE-044: إعداد Vector Database (Pinecone/Weaviate) ✅ COMPLETE
 
+**Status**: ✅ **COMPLETED** (2025-12-14)
+**Implementation**:
+- `src/vectorstore/client.ts` - Unified interface with Pinecone & Weaviate implementations
+- `src/vectorstore/config.ts` - Configuration presets and validation
+- `src/vectorstore/index.ts` - Module exports
+
+```text
 المهمة: أنشئ vector database لتخزين prompts و embeddings
 
 الاختيار: Pinecone (سهل) أو Weaviate (open-source)
 
-**Option 1: Pinecone**
+#### Option 1: Pinecone
 
 ```typescript
 import { PineconeClient } from "@pinecone-database/pinecone";
@@ -1450,7 +1467,7 @@ import { PineconeClient } from "@pinecone-database/pinecone";
 3. إنشاء index للـ knowledge base (RAG)
 ```
 
-**Option 2: Weaviate**
+#### Option 2: Weaviate
 
 ```typescript
 import weaviate from 'weaviate-ts-client';
@@ -1473,7 +1490,7 @@ import weaviate from 'weaviate-ts-client';
 
 الملف: `src/vectorstore/client.ts`
 
-```
+```text
 
 ### DIRECTIVE-045: دمج GROQ Models
 ```
@@ -1504,7 +1521,7 @@ class GroqProvider implements LLMProvider {
 - Temperature: 0.7
 - Max tokens: حسب الحاجة
 
-```
+```text
 
 ### DIRECTIVE-046: إعداد Postgres + Prisma
 ```
@@ -1577,9 +1594,14 @@ model TestCase {
 - `prisma/schema.prisma`
 - `src/db/client.ts`
 
-```
+```text
 
-### DIRECTIVE-047: إعداد Object Storage
+### DIRECTIVE-047: إعداد Object Storage ✅ COMPLETE
+
+**Status**: ✅ **COMPLETED** (2025-12-14)
+**Implementation**: `src/storage/objectStore.ts`
+**Tests**: `src/__tests__/storage/objectStore.test.ts` (33 tests passing)
+
 ```
 
 المهمة: أضف تخزين للملفات الكبيرة (datasets, models, logs)
@@ -1599,19 +1621,20 @@ model TestCase {
 
 الوظائف المطلوبة:
 class ObjectStore {
-  async upload(key: string, data: Buffer | Stream): Promise<string>
-  async download(key: string): Promise<Buffer>
-  async delete(key: string): Promise<void>
-  async list(prefix: string): Promise<string[]>
-  async getSignedUrl(key: string, expiresIn: number): Promise<string>
+  async upload(key: `string`, data: Buffer | Stream): Promise<`string`>
+  async download(key: `string`): Promise<`Buffer`>
+  async delete(key: `string`): Promise<`void`>
+  async list(prefix: `string`): Promise<`string[]`>
+  async getSignedUrl(key: `string`, expiresIn: number): Promise<`string`>
 }
 
 الملف: `src/storage/objectStore.ts`
 
-```
+```text
 
 ### DIRECTIVE-048: إعداد Kubernetes + Autoscaling
-```
+
+```text
 
 المهمة: أنشئ deployment على Kubernetes مع autoscaling
 
@@ -1684,10 +1707,9 @@ spec:
 
 الملفات: `k8s/deployment.yaml`, `k8s/service.yaml`, `k8s/hpa.yaml`
 
-```
-
 ### DIRECTIVE-049: إعداد عُقد GPU للـ RL/Fine-tune
-```
+
+```text
 
 المهمة: أضف GPU nodes لتدريب النماذج
 
@@ -1727,10 +1749,9 @@ spec:
       restartPolicy: Never
 ```
 
-```
-
 ### DIRECTIVE-050: إعداد Prometheus + Grafana
-```
+
+```text
 
 المهمة: أنشئ نظام monitoring شامل
 
@@ -1774,10 +1795,9 @@ const tokenHistogram = new client.Histogram({
 });
 ```
 
-```
-
 ### DIRECTIVE-051: إعداد Feature Flags لـ A/B Testing
-```
+
+```text
 
 المهمة: أضف نظام feature flags للتجارب
 
@@ -1794,11 +1814,14 @@ const tokenHistogram = new client.Histogram({
 3. **Emergency Kill Switch**: إيقاف ميزة بسرعة
 
 الوظائف المطلوبة:
+
+```typescript
 class FeatureFlags {
   async isEnabled(flagName: string, userId?: string): Promise<boolean>
   async getVariant(experiment: string, userId: string): Promise<string>
   async track(event: string, properties: any): Promise<void>
 }
+```
 
 الأعلام المطلوبة:
 
@@ -1809,6 +1832,8 @@ class FeatureFlags {
 
 الملف: `src/features/flags.ts`
 
+```text
+End of DIRECTIVE-051
 ```
 
 ---
@@ -1816,7 +1841,8 @@ class FeatureFlags {
 ## 🚀 المرحلة 11: Population Search + Sandbox (المرحلة 2)
 
 ### DIRECTIVE-052: تنفيذ Population Search
-```
+
+```text
 
 المهمة: أنشئ نظام بحث قائم على السكان
 
@@ -1829,6 +1855,8 @@ class FeatureFlags {
 5. **Repeat**: كرر لعدة أجيال
 
 الوظيفة المطلوبة:
+
+```typescript
 async function populationSearch(
   initialPrompt: string,
   testSuite: TestCase[],
@@ -1842,15 +1870,13 @@ interface PopulationConfig {
   mutationProbability: number; // 0.3
   crossoverProbability: number;// 0.7
 }
+```
 
-الملف: `src/search/populationSearch.ts`
 الهدف: إيجاد variations متنوعة وعالية الجودة
 
-```
-
 ### DIRECTIVE-053: تطوير Sandbox Run على Test Suite
-```
 
+```text
 المهمة: شغّل كل variation على مجموعة اختبار كاملة
 
 الميزات:
@@ -1861,6 +1887,8 @@ interface PopulationConfig {
 4. **Result Aggregation**: اجمع النتائج وقارنها
 
 الوظيفة المطلوبة:
+
+```typescript
 async function sandboxRun(
   variation: string,
   testSuite: TestCase[],
@@ -1882,30 +1910,39 @@ interface SandboxResult {
   outputs: Map<string, string>;  // testId -> output
   errors: Map<string, Error>;
 }
+```
 
 الملف: `src/sandbox/sandboxRunner.ts`
 
-```
+### DIRECTIVE-054: جمع Human Feedback وبناء Reward Dataset ✅ COMPLETE
 
-### DIRECTIVE-054: جمع Human Feedback وبناء Reward Dataset
-```
+**Status**: ✅ **COMPLETED** (2025-12-14)
+**Implementation**: `src/training/rewardDatasetBuilder.ts`
+**Tests**: `src/__tests__/training/rewardDatasetBuilder.test.ts` (55 tests passing)
 
+```text
 المهمة: أنشئ pipeline لجمع feedback وتحويله لـ training data
 
 الخطوات:
 
-1. **Collection**: اجمع feedback من UI
-2. **Validation**: تحقق من جودة البيانات
-3. **Augmentation**: أضف features (embeddings, metadata)
-4. **Storage**: خزّن في database
-5. **Export**: صدّر للتدريب
+1. **Collection**: اجمع feedback من UI ✅
+2. **Validation**: تحقق من جودة البيانات ✅
+3. **Augmentation**: أضف features (embeddings, metadata) ✅
+4. **Storage**: خزّن في database ✅
+5. **Export**: صدّر للتدريب ✅
 
-الوظائف المطلوبة:
+الوظائف المُنفذة:
 
-1. `collectFeedback(variationId: string, feedback: Feedback): Promise<void>`
-2. `validateFeedback(feedback: Feedback): boolean`
-3. `buildRewardDataset(filters?: DatasetFilters): Promise<RewardDataset>`
-4. `exportDataset(dataset: RewardDataset, format: ExportFormat): Promise<string>`
+```typescript
+1. collectFeedback(variationId: string, feedback: Feedback): Promise<void>
+2. validateFeedback(feedback: Feedback): ValidationResult
+3. validateFeedbackBatch(feedbackList: Feedback[]): BatchValidationResult
+4. buildRewardDataset(filters?: DatasetFilters): Promise<RewardDataset>
+5. exportDataset(dataset: RewardDataset, format: ExportFormat): Promise<ExportResult>
+6. mergeDatasets(...datasets: RewardDataset[]): RewardDataset
+7. splitRewardDataset(dataset, trainRatio, valRatio): SplitResult
+8. filterByWeight(dataset, minWeight): RewardDataset
+9. getDatasetSummary(dataset): string
 
 interface RewardDataset {
   examples: RewardExample[];
@@ -1914,24 +1951,31 @@ interface RewardDataset {
     created: Date;
     version: string;
     size: number;
+    embeddingDimension: number;
+    featureCount: number;
   };
 }
 
 interface RewardExample {
+  id: string;
   promptEmbedding: number[];
   variationEmbedding: number[];
-  features: number[];  // [tokenCount, similarity, etc.]
-  label: number;       // normalized human score
+  features: number[];
+  featureNames: string[];
+  label: number;       // normalized human score (0-1)
   weight: number;      // confidence/importance
+  metadata: ExampleMetadata;
 }
+```
 
 الملف: `src/training/rewardDatasetBuilder.ts`
+الصيغ المدعومة: json, jsonl, csv, parquet (fallback), tfrecord (fallback)
 
 ```
 
 ### DIRECTIVE-055: إضافة Hallucination Checker
-```
 
+```text
 المهمة: دمج hallucination detection في pipeline الرئيسي
 
 الطرق المستخدمة:
@@ -1947,6 +1991,8 @@ interface RewardExample {
 - رفض variations مع hallucination عالية تلقائياً
 
 الوظيفة المحدّثة:
+
+```typescript
 async function evaluateSuggestions(
   originalPrompt: string,
   variations: PromptVariation[],
@@ -1959,14 +2005,13 @@ interface ScoredSuggestion {
   hallucinationScore?: number;
   hallucinationWarning?: string;
 }
+```
 
 الملف: `src/evaluator.ts` (تحديث)
 
-```
-
 ### DIRECTIVE-056: دمج RAG للـ Factuality
-```
 
+```text
 المهمة: استخدم RAG للتحقق من صحة الحقائق في المخرجات
 
 الخطوات:
@@ -1977,15 +2022,21 @@ interface ScoredSuggestion {
    - خزّنها في vector DB
 
 2. **Retrieval Function**:
-   async function retrieveRelevantFacts(claim: string): Promise<Fact[]>
 
-3. **Verification Function**:
+   ```typescript
+   async function retrieveRelevantFacts(claim: string): Promise<Fact[]>
+   ```
+
+1. **Verification Function**:
+
+   ```typescript
    async function verifyAgainstFacts(
      claim: string,
      facts: Fact[]
    ): Promise<VerificationResult>
+   ```
 
-4. **Integration**:
+1. **Integration**:
    - أضف factuality score في التقييم
    - عرض المصادر الداعمة/المتناقضة في UI
 
@@ -1995,598 +2046,4 @@ interface ScoredSuggestion {
 - `src/rag/factVerifier.ts`
 - `src/evaluator.ts` (تحديث)
 
-```
-
----
-
-## 🤖 المرحلة 12: Reward Model + RL (المرحلة 3)
-
-### DIRECTIVE-057: بناء Reward Model (Fine-tune/Supervised)
-```
-
-المهمة: درّب نموذج للتنبؤ بجودة الـ variations
-
-الخطوات (Python + PyTorch):
-
-1. **Prepare Data**:
-
-```python
-# data format
-{
-  "prompt": "...",
-  "variation": "...",
-  "score": 0.85,
-  "metadata": {...}
-}
-```
-
-2. **Model Architecture**:
-
-```python
-import torch.nn as nn
-from transformers import AutoModel
-
-class RewardModel(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.encoder = AutoModel.from_pretrained("sentence-transformers/all-mpnet-base-v2")
-        self.regressor = nn.Sequential(
-            nn.Linear(768 * 2, 512),
-            nn.ReLU(),
-            nn.Dropout(0.3),
-            nn.Linear(512, 1),
-            nn.Sigmoid()
-        )
-
-    def forward(self, prompt_emb, variation_emb):
-        combined = torch.cat([prompt_emb, variation_emb], dim=1)
-        return self.regressor(combined)
-```
-
-3. **Training**:
-
-```python
-# train.py
-optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4)
-criterion = nn.MSELoss()
-
-for epoch in range(epochs):
-    for batch in dataloader:
-        loss = criterion(model(batch.prompt, batch.variation), batch.score)
-        loss.backward()
-        optimizer.step()
-```
-
-4. **TypeScript Integration**:
-
-```typescript
-// src/models/rewardModel.ts
-class RewardModel {
-  async predict(prompt: string, variation: string): Promise<number>
-  async batchPredict(pairs: [string, string][]): Promise<number[]>
-}
-```
-
-الملفات:
-
-- `models/reward_model.py`
-- `models/train.py`
-- `src/models/rewardModel.ts`
-
-```
-
-### DIRECTIVE-058: تطبيق PPO لتحسين سياسة التوليد
-```
-
-المهمة: استخدم PPO لتدريب policy network
-
-تحذير: مهمة متقدمة جداً!
-
-المكونات (Python):
-
-1. **Policy Network**: يختار mutation action
-2. **Value Network**: يقدّر expected reward
-3. **PPO Trainer**: يحدّث Networks
-
-```python
-# policy.py
-class MutationPolicy(nn.Module):
-    def __init__(self, action_space_size):
-        super().__init__()
-        self.encoder = AutoModel.from_pretrained("...")
-        self.actor = nn.Linear(768, action_space_size)
-
-    def forward(self, prompt_emb):
-        logits = self.actor(prompt_emb)
-        return F.softmax(logits, dim=-1)
-
-# ppo_trainer.py
-class PPOTrainer:
-    def train_step(self, experiences):
-        # 1. Compute advantages
-        advantages = self.compute_advantages(experiences)
-
-        # 2. Update policy with clipped objective
-        ratio = new_policy / old_policy
-        clipped = torch.clamp(ratio, 1-epsilon, 1+epsilon)
-        loss = -torch.min(ratio * advantages, clipped * advantages).mean()
-
-        # 3. Update value network
-        value_loss = F.mse_loss(predicted_values, returns)
-```
-
-الاستخدام:
-
-1. جمّع experiences (prompt, action, reward)
-2. احسب advantages
-3. حدّث policy
-4. كرر
-
-الملفات:
-
-- `models/policy.py`
-- `models/value.py`
-- `models/ppo_trainer.py`
-
-```
-
-### DIRECTIVE-059: تنفيذ Multi-objective Optimization (Pareto)
-```
-
-المهمة: حسّن لعدة أهداف في نفس الوقت (cost vs accuracy vs latency)
-
-المفهوم:
-
-- لا يوجد حل واحد أفضل
-- ابحث عن Pareto Front (حلول غير مسيطر عليها)
-- دع المستخدم يختار من الـ Pareto set
-
-الخوارزمية:
-
-1. ولّد مجموعة من الـ variations
-2. قيّم كل واحد على جميع الأهداف
-3. احسب Pareto Front
-4. عرض الخيارات للمستخدم
-
-الوظيفة المطلوبة:
-function paretoOptimize(
-  variations: ScoredSuggestion[],
-  objectives: Objective[]
-): ParetoFront
-
-interface Objective {
-  name: string;
-  getValue: (s: ScoredSuggestion) => number;
-  minimize: boolean;  // true = lower is better
-}
-
-interface ParetoFront {
-  solutions: ScoredSuggestion[];
-  dominatedCount: number;
-  paretoCount: number;
-}
-
-// تحديد dominance
-function dominates(a: ScoredSuggestion, b: ScoredSuggestion): boolean {
-  // a dominates b إذا كان أفضل في جميع الأهداف
-}
-
-الملف: `src/optimizer/pareto.ts`
-
-```
-
-### DIRECTIVE-060: بناء آليات A/B Testing
-```
-
-المهمة: أنشئ نظام A/B testing لتجريب variations
-
-الميزات:
-
-1. **Experiment Definition**:
-   - Control group (prompt الأصلي)
-   - Treatment groups (variations مختلفة)
-   - Traffic split (50/50, 70/30, etc.)
-
-2. **Random Assignment**: وزّع المستخدمين عشوائياً
-
-3. **Metrics Collection**: اجمع مقاييس لكل group
-
-4. **Statistical Analysis**: احسب significance
-
-الوظائف المطلوبة:
-class ABTest {
-  constructor(config: ABTestConfig)
-
-  assign(userId: string): string  // returns variant
-  trackMetric(userId: string, metric: string, value: number)
-  getResults(): ABTestResults
-
-  // Statistical tests
-  calculateSignificance(): number  // p-value
-  getConfidenceInterval(metric: string): [number, number]
-}
-
-interface ABTestResults {
-  control: GroupMetrics;
-  treatments: Map<string, GroupMetrics>;
-  winner?: string;
-  significance: number;
-  recommendation: string;
-}
-
-الملف: `src/experiments/abTesting.ts`
-
-```
-
-### DIRECTIVE-061: تطوير Canary Releases
-```
-
-المهمة: أضف نظام canary deployment للـ variations الجديدة
-
-الاستراتيجية:
-
-1. **Deploy to 5%** من المستخدمين
-2. **Monitor** المقاييس لمدة ساعة
-3. **Compare** مع baseline
-4. **Decision**:
-   - إذا جيد → زد إلى 25%
-   - إذا ممتاز → زد إلى 100%
-   - إذا سيء → rollback فوراً
-
-الوظائف المطلوبة:
-class CanaryDeployment {
-  async deploy(variation: string, percentage: number): Promise<DeploymentId>
-  async monitor(deploymentId: string): Promise<HealthMetrics>
-  async scale(deploymentId: string, newPercentage: number): Promise<void>
-  async rollback(deploymentId: string): Promise<void>
-
-  // Auto decision
-  async autoScale(deploymentId: string, criteria: ScalingCriteria): Promise<void>
-}
-
-interface ScalingCriteria {
-  errorRateThreshold: number;
-  latencyThreshold: number;
-  satisfactionThreshold: number;
-  minObservations: number;
-}
-
-الملف: `src/deployment/canary.ts`
-
-```
-
-### DIRECTIVE-062: تنفيذ Auto-deploy
-```
-
-المهمة: أضف deployment تلقائي عند نجاح الاختبارات
-
-الشروط للـ Auto-deploy:
-
-1. ✅ جميع unit tests تمر
-2. ✅ Safety checks تمر
-3. ✅ Canary deployment ناجح
-4. ✅ A/B test يظهر تحسن ذو دلالة
-5. ✅ Human approval (optional, configurable)
-
-الوظيفة المطلوبة:
-class AutoDeployer {
-  async evaluateForDeploy(variation: string): Promise<DeployDecision>
-
-  async deploy(variation: string, options: DeployOptions): Promise<Deployment>
-
-  // Monitoring
-  async monitorDeployment(deploymentId: string): Promise<void>
-}
-
-interface DeployDecision {
-  shouldDeploy: boolean;
-  confidence: number;
-  checks: CheckResult[];
-  recommendation: string;
-}
-
-workflow:
-
-1. Variation created
-2. Run tests
-3. Canary deploy (5%)
-4. Monitor (1 hour)
-5. A/B test (24 hours)
-6. Auto-decision
-7. Full deploy or rollback
-
-الملف: `src/deployment/autoDeployer.ts`
-
-```
-
----
-
-## 🏢 المرحلة 13: منتج مؤسسي (المرحلة 4)
-
-### DIRECTIVE-063: تطوير Continuous Learning
-```
-
-المهمة: أنشئ نظام تعلم مستمر من الإنتاج
-
-المكونات:
-
-1. **Data Collection Pipeline**:
-   - اجمع prompts + outputs من الإنتاج
-   - اجمع user feedback تلقائياً
-   - اجمع performance metrics
-
-2. **Model Retraining**:
-   - جدولة إعادة تدريب أسبوعية/شهرية
-   - استخدم بيانات جديدة
-   - قارن النموذج الجديد بالقديم
-   - deploy إذا كان أفضل
-
-3. **Feedback Loop**:
-   - Model predictions → User interactions → Feedback → Training data → Improved model
-
-الوظائف المطلوبة:
-class ContinuousLearning {
-  async collectProductionData(timeRange: TimeRange): Promise<Dataset>
-  async triggerRetraining(dataset: Dataset): Promise<TrainingJob>
-  async evaluateNewModel(modelId: string): Promise<EvaluationReport>
-  async promoteModel(modelId: string): Promise<void>
-}
-
-الجدولة:
-
-- Weekly: جمع بيانات جديدة
-- Monthly: إعادة تدريب
-- On-demand: عند الحاجة
-
-الملف: `src/learning/continuousLearning.ts`
-
-```
-
-### DIRECTIVE-064: بناء Personalization لكل User/Org
-```
-
-المهمة: خصّص التوصيات حسب المستخدم/المنظمة
-
-الميزات:
-
-1. **User Preferences**:
-   - Mutation types المفضلة
-   - Balance weights مخصصة (cost vs quality)
-   - Prompt categories الشائعة
-
-2. **Learning from History**:
-   - تتبع ما يقبله/يرفضه المستخدم
-   - تعلّم preferences تلقائياً
-   - حسّن التوصيات بمرور الوقت
-
-3. **Org-level Settings**:
-   - Brand voice guidelines
-   - Technical constraints
-   - Budget limits
-
-الوظائف المطلوبة:
-class PersonalizationEngine {
-  async getUserProfile(userId: string): Promise<UserProfile>
-  async updateProfile(userId: string, interaction: UserInteraction): Promise<void>
-  async personalizeRecommendations(
-    variations: ScoredSuggestion[],
-    userId: string
-  ): Promise<ScoredSuggestion[]>
-}
-
-interface UserProfile {
-  userId: string;
-  preferences: {
-    favoredMutations: MutationType[];
-    balanceWeights: BalanceMetrics;
-    stylePreferences: StyleGuide;
-  };
-  history: {
-    acceptedVariations: string[];
-    rejectedVariations: string[];
-    avgAcceptanceTime: number;
-  };
-  orgSettings?: OrgSettings;
-}
-
-الملف: `src/personalization/engine.ts`
-
-```
-
-### DIRECTIVE-065: تطوير Explainability
-```
-
-المهمة: اشرح لماذا اقترح النظام variation معينة
-
-الأسئلة للإجابة عليها:
-
-1. "لماذا هذا الاقتراح؟"
-2. "ما أثر كل تغيير؟"
-3. "كيف يحسّن الجودة/التكلفة/السرعة؟"
-
-الوظائف المطلوبة:
-function explainSuggestion(suggestion: ScoredSuggestion): Explanation
-
-interface Explanation {
-  summary: string;  // "This variation reduces cost by 30% while maintaining quality"
-
-  changes: Change[];  // قائمة بالتغييرات المحددة
-
-  impact: {
-    quality: ImpactAnalysis;
-    cost: ImpactAnalysis;
-    latency: ImpactAnalysis;
-  };
-
-  reasoning: string;  // شرح تفصيلي
-
-  tradeoffs: string[];  // المقايضات
-}
-
-interface Change {
-  type: 'addition' | 'removal' | 'modification';
-  text: string;
-  reason: string;
-  impact: string;
-}
-
-interface ImpactAnalysis {
-  direction: 'improved' | 'degraded' | 'neutral';
-  magnitude: number;  // percentage
-  confidence: number;
-  explanation: string;
-}
-
-UI Component:
-
-- زر "Why this suggestion?" لكل variation
-- Modal يعرض Explanation بشكل واضح
-- Diff view للتغييرات
-
-الملف: `src/explainability/explainer.ts`
-
-```
-
-### DIRECTIVE-066: بناء Marketplace للـ Policies والقوالب
-```
-
-المهمة: أنشئ marketplace لمشاركة وتداول الـ policies
-
-الميزات:
-
-1. **Policy Library**:
-   - Mutation policies
-   - Evaluation policies
-   - Optimization strategies
-   - Prompt templates
-
-2. **Sharing & Discovery**:
-   - نشر policy
-   - بحث واكتشاف
-   - تقييمات ومراجعات
-   - تحميل واستخدام
-
-3. **Versioning & Updates**:
-   - version control للـ policies
-   - تحديثات تلقائية (optional)
-   - changelog
-
-البنية المطلوبة:
-interface Policy {
-  id: string;
-  name: string;
-  description: string;
-  author: string;
-  version: string;
-  category: PolicyCategory;
-  config: any;  // Policy-specific config
-  tags: string[];
-  downloads: number;
-  rating: number;
-  reviews: Review[];
-}
-
-class Marketplace {
-  async publishPolicy(policy: Policy): Promise<string>
-  async searchPolicies(query: string, filters: PolicyFilters): Promise<Policy[]>
-  async downloadPolicy(policyId: string): Promise<Policy>
-  async ratePolicy(policyId: string, rating: number, review?: string): Promise<void>
-  async updatePolicy(policyId: string, updates: Partial<Policy>): Promise<void>
-}
-
-الملفات:
-
-- `src/marketplace/marketplace.ts`
-- `src/marketplace/policyManager.ts`
-- `src/components/Marketplace.tsx`
-
-قاعدة البيانات:
-CREATE TABLE marketplace_policies (...)
-
-```
-
----
-
-## 📝 المرحلة 14: المهام المتبقية الصغيرة
-
-### DIRECTIVE-067 إلى DIRECTIVE-112: مهام التحسين والصقل
-
-```
-
-المهام المتبقية (45 مهمة):
-
-1. **Testing & Quality**:
-   - كتابة unit tests شاملة (10 مهام)
-   - integration tests (5 مهام)
-   - E2E tests (3 مهام)
-   - Performance benchmarks (2 مهام)
-
-2. **Documentation**:
-   - API documentation (5 مهام)
-   - User guides (3 مهام)
-   - Developer docs (2 مهام)
-   - Video tutorials (2 مهام)
-
-3. **UI/UX Improvements**:
-   - Responsive design (2 مهام)
-   - Dark mode (1 مهمة)
-   - Accessibility (2 مهام)
-   - Loading states (1 مهمة)
-
-4. **Performance**:
-   - Query optimization (2 مهام)
-   - Caching strategies (2 مهام)
-   - Bundle size reduction (1 مهمة)
-   - CDN setup (1 مهمة)
-
-5. **Security**:
-   - Authentication/Authorization (2 مهام)
-   - Rate limiting (1 مهمة)
-   - Input validation (1 مهمة)
-   - Audit logging (1 مهمة)
-
-6. **DevOps**:
-   - CI/CD pipelines (2 مهام)
-   - Backup strategies (1 مهمة)
-   - Disaster recovery (1 مهمة)
-   - Cost monitoring (1 مهمة)
-
-```
-
----
-
-## 🎯 ملخص الأولويات
-
-### الأولوية الفائقة (Critical Path - المرحلة 1):
-- DIRECTIVE-018: Embeddings حقيقية
-- DIRECTIVE-027: Reference Datasets
-- DIRECTIVE-005: Parameterized Templates
-- DIRECTIVE-006: Expand Mutation
-- DIRECTIVE-019: Hill-Climbing Optimizer
-
-### الأولوية العالية (المرحلة 2):
-- DIRECTIVE-025: Test Suite Executor
-- DIRECTIVE-026: Caching
-- DIRECTIVE-052: Population Search
-- DIRECTIVE-013: Hallucination Detection
-- DIRECTIVE-030: Human Review UI
-
-### الأولوية المتوسطة (المرحلة 3):
-- DIRECTIVE-057: Reward Model
-- DIRECTIVE-059: Pareto Optimization
-- DIRECTIVE-060: A/B Testing
-- DIRECTIVE-043: LangChain Pipelines
-
-### الأولوية المنخفضة (المرحلة 4):
-- DIRECTIVE-058: PPO Training
-- DIRECTIVE-063: Continuous Learning
-- DIRECTIVE-066: Marketplace
-
----
-
-**ملاحظات نهائية**:
-1. كل directive مستقل ويمكن تنفيذه بشكل منفصل
-2. اتبع الأولويات لتحقيق أقصى قيمة
-3. اختبر كل مكون قبل الانتقال للتالي
-4. وثّق كل شيء أثناء التطوير
-5. استخدم git commits واضحة
+```text

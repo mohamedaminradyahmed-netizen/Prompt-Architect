@@ -118,5 +118,125 @@
       "process": "Clear step-by-step explanation of how service works",
       "accessibility": "Offers multiple ways to get started"
     }
+  },
+  {
+    "id": "marketing_011",
+    "prompt": "Write a short Instagram ad for a fitness studio offering a free first class",
+    "expectedOutput": "Your first class is on us.\n\nTry StudioPulse this week—strength, HIIT, and mobility sessions designed for real schedules.\n\n✅ Beginner-friendly\n✅ Small class sizes\n✅ Coaches who correct form\n\nClaim your FREE first class: studiopulse.com/free\n\n#FitnessStudio #FreeClass #HIIT #StrengthTraining #Mobility #HealthyHabits",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "cta": "Clear call to action and link",
+      "clarity": "Communicates offer quickly",
+      "benefits": "Highlights beginner-friendly value",
+      "conversion": "Mentions limited-time urgency implicitly"
+    }
+  },
+  {
+    "id": "marketing_012",
+    "prompt": "Create a product tagline and 3 bullet benefits for a password manager",
+    "expectedOutput": "Tagline: Passwords, solved.\n\nBenefits:\n• Generate strong passwords in one click\n• Autofill across devices with secure sync\n• Built-in breach alerts so you can act fast",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "clarity": "Simple and direct messaging",
+      "benefits": "Outcome-focused bullets",
+      "security": "Mentions breach alerts responsibly",
+      "brevity": "Short and scannable"
+    }
+  },
+  {
+    "id": "marketing_013",
+    "prompt": "Write a Google Ads headline + description for a plumbing emergency service",
+    "expectedOutput": "Headline: 24/7 Emergency Plumber — Fast Arrival\nDescription: Burst pipe? No hot water? Licensed & insured plumbers. Upfront pricing. Book now for same-day help.",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "local": "Implied fast arrival",
+      "trust": "Mentions licensed/insured",
+      "conversion": "Clear booking intent",
+      "clarity": "Fits ad style"
+    }
+  },
+  {
+    "id": "marketing_014",
+    "prompt": "Write an email subject line + preview text for a winter sale on outdoor jackets",
+    "expectedOutput": "Subject: Winter Jackets Up to 40% Off — This Weekend Only\nPreview: Stay warm without the bulk. Limited sizes left—shop early for the best picks.",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "specials": "Clear discount and time window",
+      "urgency": "Mentions limited sizes",
+      "clarity": "Short subject + preview",
+      "conversion": "Encourages early action"
+    }
+  },
+  {
+    "id": "marketing_015",
+    "prompt": "Create a short LinkedIn post announcing a new B2B feature release",
+    "expectedOutput": "We just shipped Team Approvals 🎉\n\nNow admins can require review before a workflow goes live—so changes stay safe and auditable.\n\nWhat’s included:\n- Approval policies by project\n- Required reviewers\n- Full change history\n\nIf you’re managing multiple teams, this is for you. Reply “APPROVALS” and we’ll send a demo link.",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "credibility": "Mentions concrete features",
+      "b2b": "Targets admin/team workflows",
+      "engagement": "Encourages replies",
+      "clarity": "Short and structured"
+    }
+  },
+  {
+    "id": "marketing_016",
+    "prompt": "Write a short landing hero section for an online course platform",
+    "expectedOutput": "Teach online in minutes.\n\nCreate courses, host videos, and sell subscriptions—without needing a developer.\n\nStart free • Launch your first lesson today",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "clarity": "Instant value proposition",
+      "benefits": "Mentions what user can do",
+      "cta": "Clear next step",
+      "brevity": "Hero-length copy"
+    }
+  },
+  {
+    "id": "marketing_017",
+    "prompt": "Write a short promotional SMS for a spa appointment reminder with upgrade option",
+    "expectedOutput": "Hi! Reminder: your spa appointment is tomorrow at 3:00 PM. Reply YES to confirm. Want to upgrade to a 15-min hot stone add-on for $15? Reply STONE.",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "clarity": "Clear time and action",
+      "conversion": "Offers upgrade option",
+      "brevity": "SMS-friendly length",
+      "tone": "Friendly and direct"
+    }
+  },
+  {
+    "id": "marketing_018",
+    "prompt": "Create a short product description for a reusable water bottle",
+    "expectedOutput": "HydraSteel 24oz is the leakproof bottle that keeps drinks cold for 24 hours and hot for 12. BPA-free, sweat-free, and built to survive everyday drops. Pick your color and stay hydrated anywhere.",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "benefits": "Highlights outcomes (temp retention)",
+      "clarity": "Easy to read",
+      "features": "Mentions key specs",
+      "conversion": "Encourages choosing a color"
+    }
+  },
+  {
+    "id": "marketing_019",
+    "prompt": "Write a short testimonial-style ad for an accounting service",
+    "expectedOutput": "“I finally stopped dreading taxes.”\n\nBrightLedger cleaned up our books, set up monthly reports, and saved us hours every week.\n\nGet a free consultation: brightledger.co",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "social": "Uses testimonial style",
+      "credibility": "Mentions concrete outcomes",
+      "cta": "Clear next step",
+      "brevity": "Short and scannable"
+    }
+  },
+  {
+    "id": "marketing_020",
+    "prompt": "Write a short CTA banner copy for a website offering a free trial",
+    "expectedOutput": "Start your free trial today — no credit card required. Build your first project in under 5 minutes.",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "cta": "Strong action phrase",
+      "friction": "Mentions no credit card",
+      "clarity": "Simple promise",
+      "conversion": "Encourages quick start"
+    }
   }
 ]
