@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "prompt-refiner"
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["prompt-refiner:3000"]
