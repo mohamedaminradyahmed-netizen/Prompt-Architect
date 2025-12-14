@@ -40,6 +40,13 @@ export class TokenAnalytics {
   }
   private estimateMonthlySavings(baseline: number, current: number): number {
     if (!baseline || !this.records.length) return 0;
+    
+    // Why (Bug Fix):
+    // - عندما يكون records.length < 2، فإن windowMs = 0 (لأن records[0] === records[length-1])
+    // - بعد Math.max(1, ...) يصبح windowMs = 1ms، ما يجعل dailyCalls ضخم جداً (86.4M)
+    // - الحل: إرجاع 0 إذا لم يكن هناك على الأقل سجلان لحساب نافذة زمنية معقولة.
+    if (this.records.length < 2) return 0;
+    
     const windowMs = Math.max(1, (this.records[this.records.length - 1].timestamp - this.records[0].timestamp) || 1);
     const dailyCalls = this.records.length / Math.max(1, windowMs / (1000 * 60 * 60 * 24));
     const unitCost = this.defaultCostPerThousand || 0;

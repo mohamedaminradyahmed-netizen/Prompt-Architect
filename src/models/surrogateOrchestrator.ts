@@ -451,14 +451,24 @@ export class SurrogateOrchestrator {
 
   /**
    * Get alternative models for a given mode
+   *
+   * Why (Bug Fix):
+   * - المقارنة السابقة `m.model !== this.customModelMap[mode]` كانت تقارن:
+   *   • m.model: اسم النموذج (مثل "gpt-4")
+   *   • this.customModelMap[mode]: registry key (مثل "openai-gpt4")
+   * - هذه المقارنة دائماً true، فلم يتم استبعاد النموذج الحالي.
+   * - الحل: استخدام Object.entries للوصول لـ registry key ومقارنته مباشرة.
    */
   private getAlternativeModels(
     mode: EvaluationMode,
     request: EvaluationRequest
   ): ModelConfig[] {
     const targetTier = this.getModeTargetTier(mode);
-    return Object.values(this.modelRegistry)
-      .filter(m => m.tier === targetTier && m.model !== this.customModelMap[mode])
+    const currentModelKey = this.customModelMap[mode];
+    
+    return Object.entries(this.modelRegistry)
+      .filter(([key, m]) => m.tier === targetTier && key !== currentModelKey)
+      .map(([_, m]) => m)
       .slice(0, 3);
   }
 

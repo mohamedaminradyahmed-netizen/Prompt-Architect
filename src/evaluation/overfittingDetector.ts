@@ -719,7 +719,8 @@ export async function comprehensiveOverfittingAnalysis(
     );
     
     // 6. Held-out Validation
-    const heldOutValidation = await heldOutValidation(prompt, testCases, executor);
+    // NOTE(Why): تجنب shadowing/TDZ. اسم المتغير لا يجب أن يطابق اسم الدالة المستوردة/المعرفة.
+    const heldOutResult = await heldOutValidation(prompt, testCases, executor);
     
     // 7. حساب Regularization
     const regularizationPenalty = calculateRegularization(prompt);
@@ -733,7 +734,7 @@ export async function comprehensiveOverfittingAnalysis(
     return {
         overfittingReport,
         crossValidation,
-        heldOutValidation,
+        heldOutValidation: heldOutResult,
         diversityAnalysis,
         regularizationPenalty,
         simplifiedPrompt
