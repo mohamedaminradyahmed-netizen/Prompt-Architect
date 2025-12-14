@@ -1,0 +1,242 @@
+[
+  {
+    "id": "code_001",
+    "prompt": "Write a function to calculate the factorial of a number using recursion",
+    "expectedOutput": "function factorial(n) {\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should handle base case and recursive case properly",
+      "syntax": "Valid JavaScript syntax",
+      "efficiency": "O(n) time complexity",
+      "readability": "Clear variable names and structure"
+    }
+  },
+  {
+    "id": "code_002",
+    "prompt": "Create a TypeScript function to validate email addresses using regex",
+    "expectedOutput": "function validateEmail(email: string): boolean {\n  const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  return emailRegex.test(email);\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should validate common email formats",
+      "typescript": "Proper TypeScript typing",
+      "regex": "Valid and comprehensive regex pattern",
+      "edgeCases": "Handle empty strings and invalid formats"
+    }
+  },
+  {
+    "id": "code_003",
+    "prompt": "Implement a binary search algorithm in Python",
+    "expectedOutput": "def binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should find existing elements and return -1 for non-existing",
+      "efficiency": "O(log n) time complexity",
+      "pythonic": "Follow Python coding conventions",
+      "edgeCases": "Handle empty arrays and single elements"
+    }
+  },
+  {
+    "id": "code_004",
+    "prompt": "Write a function to reverse a string without using built-in reverse methods",
+    "expectedOutput": "function reverseString(str) {\n  let reversed = '';\n  for (let i = str.length - 1; i >= 0; i--) {\n    reversed += str[i];\n  }\n  return reversed;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should reverse any input string correctly",
+      "noBuiltin": "Must not use reverse() or similar methods",
+      "efficiency": "O(n) time complexity",
+      "readability": "Clear and understandable code"
+    }
+  },
+  {
+    "id": "code_005",
+    "prompt": "Create a function to find the largest number in an array",
+    "expectedOutput": "function findLargest(arr) {\n  if (arr.length === 0) return null;\n  let max = arr[0];\n  for (let i = 1; i < arr.length; i++) {\n    if (arr[i] > max) {\n      max = arr[i];\n    }\n  }\n  return max;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should return the largest number or null for empty array",
+      "efficiency": "O(n) single pass through array",
+      "errorHandling": "Handle empty arrays gracefully",
+      "readability": "Clear variable names and logic"
+    }
+  },
+  {
+    "id": "code_006",
+    "prompt": "Write a function to check if a string is a palindrome",
+    "expectedOutput": "function isPalindrome(str) {\n  const cleanStr = str.toLowerCase().replace(/[^a-z0-9]/g, '');\n  const reversed = cleanStr.split('').reverse().join('');\n  return cleanStr === reversed;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should correctly identify palindromes ignoring case and punctuation",
+      "stringHandling": "Proper string cleaning and comparison",
+      "efficiency": "O(n) time complexity",
+      "edgeCases": "Handle empty strings and single characters"
+    }
+  },
+  {
+    "id": "code_007",
+    "prompt": "Write a function to merge two sorted arrays into one sorted array",
+    "expectedOutput": "function mergeSorted(arr1, arr2) {\n  const result = [];\n  let i = 0, j = 0;\n  while (i < arr1.length && j < arr2.length) {\n    if (arr1[i] < arr2[j]) {\n      result.push(arr1[i++]);\n    } else {\n      result.push(arr2[j++]);\n    }\n  }\n  return result.concat(arr1.slice(i)).concat(arr2.slice(j));\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should merge arrays maintaining sorted order",
+      "efficiency": "O(n + m) time complexity",
+      "twoPointer": "Proper two-pointer technique implementation",
+      "edgeCases": "Handle empty arrays and different lengths"
+    }
+  },
+  {
+    "id": "code_008",
+    "prompt": "Write a function to remove duplicates from an array",
+    "expectedOutput": "function removeDuplicates(arr) {\n  const seen = new Set();\n  const result = [];\n  for (const item of arr) {\n    if (!seen.has(item)) {\n      seen.add(item);\n      result.push(item);\n    }\n  }\n  return result;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should remove all duplicates while preserving order",
+      "efficiency": "O(n) time complexity using Set",
+      "orderPreservation": "Maintain original order of first occurrences",
+      "memory": "Efficient space usage"
+    }
+  },
+  {
+    "id": "code_009",
+    "prompt": "Write a function to calculate the nth Fibonacci number",
+    "expectedOutput": "function fibonacci(n) {\n  if (n <= 1) return n;\n  let a = 0, b = 1;\n  for (let i = 2; i <= n; i++) {\n    [a, b] = [b, a + b];\n  }\n  return b;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should calculate correct Fibonacci numbers",
+      "efficiency": "O(n) iterative solution",
+      "noRecursion": "Should use iteration not recursion",
+      "edgeCases": "Handle n = 0 and n = 1 correctly"
+    }
+  },
+  {
+    "id": "code_010",
+    "prompt": "Write a function to convert Celsius to Fahrenheit",
+    "expectedOutput": "function celsiusToFahrenheit(celsius) {\n  return (celsius * 9/5) + 32;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should apply correct conversion formula",
+      "precision": "Handle decimal values properly",
+      "simplicity": "Clean and concise implementation",
+      "formula": "Use (C × 9/5) + 32 formula"
+    }
+  },
+  {
+    "id": "code_011",
+    "prompt": "Write a function to validate a password (min 8 chars, has uppercase, lowercase, number, special char)",
+    "expectedOutput": "function validatePassword(password) {\n  if (password.length < 8) return false;\n  const hasUpper = /[A-Z]/.test(password);\n  const hasLower = /[a-z]/.test(password);\n  const hasNumber = /\\d/.test(password);\n  const hasSpecial = /[!@#$%^&*(),.?\":{}|<>]/.test(password);\n  return hasUpper && hasLower && hasNumber && hasSpecial;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should validate all password requirements",
+      "regex": "Proper regex patterns for each requirement",
+      "length": "Check minimum length of 8 characters",
+      "readability": "Clear variable names and structure"
+    }
+  },
+  {
+    "id": "code_012",
+    "prompt": "Write a function to flatten a nested array",
+    "expectedOutput": "function flattenArray(arr) {\n  const result = [];\n  function flatten(item) {\n    if (Array.isArray(item)) {\n      item.forEach(flatten);\n    } else {\n      result.push(item);\n    }\n  }\n  arr.forEach(flatten);\n  return result;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should flatten any level of nesting",
+      "recursion": "Proper recursive approach",
+      "edgeCases": "Handle empty arrays and non-array elements",
+      "efficiency": "Reasonable performance for typical cases"
+    }
+  },
+  {
+    "id": "code_013",
+    "prompt": "Write a function to count the occurrences of each character in a string",
+    "expectedOutput": "function countCharacters(str) {\n  const counts = {};\n  for (const char of str) {\n    counts[char] = (counts[char] || 0) + 1;\n  }\n  return counts;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should count all characters accurately",
+      "objectHandling": "Proper object/Map usage for counting",
+      "efficiency": "O(n) single pass through string",
+      "edgeCases": "Handle empty strings correctly"
+    }
+  },
+  {
+    "id": "code_014",
+    "prompt": "Write a function to find common elements between two arrays",
+    "expectedOutput": "function findCommon(arr1, arr2) {\n  const set2 = new Set(arr2);\n  const common = [];\n  const seen = new Set();\n  for (const item of arr1) {\n    if (set2.has(item) && !seen.has(item)) {\n      common.push(item);\n      seen.add(item);\n    }\n  }\n  return common;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should find all common elements without duplicates",
+      "efficiency": "O(n + m) time complexity using Set",
+      "duplicates": "Handle duplicates properly in both arrays",
+      "order": "Maintain reasonable output order"
+    }
+  },
+  {
+    "id": "code_015",
+    "prompt": "Write a function to generate all permutations of a string",
+    "expectedOutput": "function getPermutations(str) {\n  if (str.length <= 1) return [str];\n  const permutations = [];\n  for (let i = 0; i < str.length; i++) {\n    const char = str[i];\n    const remaining = str.slice(0, i) + str.slice(i + 1);\n    const remainingPerms = getPermutations(remaining);\n    for (const perm of remainingPerms) {\n      permutations.push(char + perm);\n    }\n  }\n  return permutations;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should generate all possible permutations",
+      "recursion": "Proper recursive approach",
+      "efficiency": "Handle factorial complexity appropriately",
+      "duplicates": "Handle strings with duplicate characters"
+    }
+  },
+  {
+    "id": "code_016",
+    "prompt": "Write a function to implement a basic queue using two stacks",
+    "expectedOutput": "class Queue {\n  constructor() {\n    this.stack1 = [];\n    this.stack2 = [];\n  }\n  enqueue(item) {\n    this.stack1.push(item);\n  }\n  dequeue() {\n    if (this.stack2.length === 0) {\n      while (this.stack1.length > 0) {\n        this.stack2.push(this.stack1.pop());\n      }\n    }\n    return this.stack2.pop();\n  }\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should implement FIFO queue behavior",
+      "twoStacks": "Proper use of two-stack technique",
+      "efficiency": "Amortized O(1) for operations",
+      "edgeCases": "Handle empty queue properly"
+    }
+  },
+  {
+    "id": "code_017",
+    "prompt": "Write a function to find the longest word in a sentence",
+    "expectedOutput": "function longestWord(sentence) {\n  const words = sentence.split(/\\s+/);\n  let longest = '';\n  for (const word of words) {\n    const cleanWord = word.replace(/[^a-zA-Z]/g, '');\n    if (cleanWord.length > longest.length) {\n      longest = cleanWord;\n    }\n  }\n  return longest;\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should find the longest alphabetic word",
+      "stringHandling": "Proper word splitting and cleaning",
+      "punctuation": "Handle punctuation correctly",
+      "edgeCases": "Handle empty strings and single words"
+    }
+  },
+  {
+    "id": "code_018",
+    "prompt": "Write a function to check if two strings are anagrams",
+    "expectedOutput": "function areAnagrams(str1, str2) {\n  const clean = str => str.toLowerCase().replace(/[^a-z]/g, '').split('').sort().join('');\n  return clean(str1) === clean(str2);\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should correctly identify anagrams",
+      "normalization": "Handle case and punctuation properly",
+      "efficiency": "O(n log n) due to sorting",
+      "simplicity": "Clean and concise solution"
+    }
+  },
+  {
+    "id": "code_019",
+    "prompt": "Write a function to implement a basic stack with push, pop, and peek operations",
+    "expectedOutput": "class Stack {\n  constructor() {\n    this.items = [];\n  }\n  push(item) {\n    this.items.push(item);\n  }\n  pop() {\n    return this.items.length > 0 ? this.items.pop() : null;\n  }\n  peek() {\n    return this.items.length > 0 ? this.items[this.items.length - 1] : null;\n  }\n  isEmpty() {\n    return this.items.length === 0;\n  }\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should implement LIFO stack behavior",
+      "operations": "All required operations implemented",
+      "edgeCases": "Handle empty stack properly",
+      "encapsulation": "Proper class structure"
+    }
+  },
+  {
+    "id": "code_020",
+    "prompt": "Write a function to calculate the sum of all numbers in an array using reduce",
+    "expectedOutput": "function arraySum(arr) {\n  return arr.reduce((sum, num) => sum + num, 0);\n}",
+    "category": "CODE_GENERATION",
+    "evaluationCriteria": {
+      "correctness": "Should calculate correct sum",
+      "reduce": "Proper use of reduce method",
+      "initialValue": "Correct initial value (0)",
+      "simplicity": "Clean and concise implementation"
+    }
+  }
+]

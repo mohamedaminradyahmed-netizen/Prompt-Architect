@@ -1,0 +1,122 @@
+[
+  {
+    "id": "marketing_001",
+    "prompt": "Create a Facebook ad for a local coffee shop",
+    "expectedOutput": "☕ LOCAL LOVE COFFEE ☕\n\nYour neighborhood coffee shop where everybody knows your name (and your order)!\n\nWhat makes us special?\n\n✨ Locally-roasted beans from family farms\n🍃 Organic syrups and alternative milk options\n🎂 Fresh-baked pastries and muffins daily\n🎵 Acoustic music on weekends\n📚 Quiet corners with free WiFi for studying\n\nGrand Opening Special:\n\nBuy any drink, get a FREE pastry!\nValid Tuesday-Sunday, 7 AM-6 PM\n\nLocated at 456 Community Avenue\nFollow us on Instagram @locallovecoffee for daily specials and beautiful latte art photos!\n\n#LocalLoveCoffee #CommunityFirst #CoffeeLovers #LatteArt #NeighborhoodCafe #SupportLocal #OrganicCoffee #FreeWiFi #StudySpot #WeekendMusic",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "local": "Emphasizes community connection",
+      "specials": "Clear promotion with expiration date",
+      "social": "Encourages following on social media",
+      "atmosphere": "Describes ambiance and experience"
+    }
+  },
+  {
+    "id": "marketing_002",
+    "prompt": "Write a Google Ads copy for a mobile car detailing service",
+    "expectedOutput": "✨ SPARKLE CAR DETAILING ✨\n\nWe come to YOU! Professional mobile car detailing at your home or office.\n\nWhat we do:\n• Exterior hand wash and wax\n• Interior vacuum and steam clean\n• Leather conditioning and protection\n• Headlight restoration\n• Engine bay degreasing\n\nWhy choose us:\n• We come to your location - no waiting at shops\n• Premium products that protect your investment\n• Same-day service available\n• 100% satisfaction guarantee\n• Licensed and insured\n\nBook today: Call 555-123-4567 or visit sparklecardetailing.com\n\nServing: Greater Metro Area\nHours: Monday-Saturday, 8 AM-8 PM\n\nSpecial offer: 20% OFF first-time customers!\n\n#MobileDetailing #CarDetailing #AutoDetailing #ProfessionalDetailing #SameDayService #WeComeToYou #SatisfactionGuaranteed #LicensedAndInsured #PremiumProducts #ProtectYourInvestment",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "convenience": "Emphasizes mobile service coming to customer",
+      "services": "Clear list of what's included",
+      "guarantee": "Mentions satisfaction guarantee",
+      "special": "Provides discount for first-time customers"
+    }
+  },
+  {
+    "id": "marketing_003",
+    "prompt": "Create an Instagram caption for a sustainable fashion brand",
+    "expectedOutput": "🌿 SLOW FASHION, FAST IMPACT 🌿\n\nYour wardrobe can change the world! Our sustainable pieces are:\n\n✨ Made from organic cotton and bamboo fibers\n🌱 Dyed with natural plant-based colors\n♻️ Produced in small batches to reduce waste\n🌍 Shipped in recycled packaging materials\n💚 Designed to last for years, not seasons\n\nWhat makes us different:\n• Transparent supply chain from farm to closet\n• Fair wages for artisans and farmers\n• Carbon-neutral shipping on all orders\n• Tree planted for every purchase through our partnership with @onetreeplanted\n\nShop consciously: Link in bio to browse our collection\n\n#SustainableFashion #SlowFashion #OrganicCotton #NaturalDyes #SmallBatchProduction #RecycledPackaging #CarbonNeutralShipping #TreePlanting #TransparentSupplyChain #FairWages #LongLastingDesign #ConsciousConsumer #EcoFriendlyFashion #PlanetFriendly #EthicalFashion #SustainableLiving",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "values": "Emphasizes environmental and social values",
+      "transparency": "Clear about production and supply chain",
+      "impact": "Shows how purchases make a difference",
+      "community": "Encourages following and engagement"
+    }
+  },
+  {
+    "id": "marketing_004",
+    "prompt": "Write a LinkedIn post for a career coaching service",
+    "expectedOutput": "🚀 CAREER MOMENTUM 🚀\n\nReady to take your professional life to the next level? Our career coaching services help you:\n\nWhat we do:\n• Resume optimization and LinkedIn profile enhancement\n• Interview preparation and salary negotiation coaching\n• Career transition planning and job search strategy\n• Leadership development and executive presence coaching\n\nWhy work with us:\n• 15+ years of experience in talent acquisition and career development\n• 95% of clients land interviews within 30 days\n• Average salary increase of 25% for clients who negotiate\n• Personalized approach tailored to your specific goals and industry\n\nResults speak louder than words:\n\n\"Sarah helped me transition from teaching to tech sales. Within 3 months, I landed my dream role with a 40% salary increase!\" - Jennifer M.\n\n\"I was stuck in middle management for years. Thanks to Career Momentum, I secured a C-suite position with the company of my dreams!\" - David K.\n\nReady to accelerate your career? \n\nBook your free consultation: Schedule a call at careermomentum.co or DM us here on LinkedIn\n\n#CareerCoaching #ProfessionalDevelopment #CareerTransition #JobSearchStrategy #InterviewPreparation #SalaryNegotiation #LeadershipDevelopment #ExecutiveCoaching #CareerAdvancement #LinkedInOptimization #ResumeWriting #CareerMilestone #NextLevel #ProfessionalGrowth #CareerSuccess",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "credibility": "Establishes expertise and track record",
+      "results": "Provides specific outcomes and testimonials",
+      "specialization": "Focuses on particular career challenges",
+      "accessibility": "Offers multiple ways to get started"
+    }
+  },
+  {
+    "id": "marketing_005",
+    "prompt": "Create a Twitter thread for a new productivity app",
+    "expectedOutput": "1/ 🚀 PRODUCTIVITY BREAKTHROUGH 🚀\n\nWhat if you could get more done in less time without burning out?\n\nIntroducing: FocusFlow App\n\n#Productivity #TimeManagement #FocusApp #ProductivityTools #WorkSmarter #Efficiency #ProfessionalDevelopment #CareerSuccess #WorkLifeBalance #TechForGood\n\n2/ THE PROBLEM:\n\n• Information overload and constant distractions\n• Too many productivity apps with unnecessary features\n• Difficulty maintaining focus for extended periods\n• Burnout from trying to do too much too quickly\n\n#ProductivityProblems #ModernWorkplace #DigitalOverload #FocusChallenges #WorkplaceStress #ProfessionalBurnout #EfficiencyProblems #TimeManagementIssues #WorkLifeIntegration #CareerChallenges\n\n3/ THE SOLUTION:\n\nFocusFlow uses neuroscience-based techniques to help you:\n• Block distractions and prioritize important tasks\n• Work in focused 90-minute sessions with built-in breaks\n• Track your progress with simple, meaningful metrics\n• Maintain sustainable productivity without exhaustion\n\n#Neuroscience #FocusTechniques #ProductivityScience #SustainableProductivity #SmartWork #EfficientWork #ProfessionalWellness #WorkplaceOptimization #CareerDevelopment #ProfessionalGrowth #WorkLifeBalance #TechSolutions #DigitalWellness\n\n4/ WHAT MAKES US DIFFERENT:\n\n• Science-backed methodology, not gimmicks\n• Designed for professionals who value their time\n• Simple interface that doesn't require learning curve\n• Available offline so you can stay focused anywhere\n• Privacy-focused - we don't sell your data\n\n#ScienceBased #EvidenceDriven #ProfessionalTools #SimpleDesign #PrivacyFirst #OfflineAccess #NoDistractions #ProfessionalGrade #TrustedTechnology #EthicalTech #UserPrivacy #DataProtection #SecurityFocus #ReliableSolutions\n\n5/ REAL RESULTS:\n\n\"FocusFlow helped me write my dissertation in half the time while maintaining my sanity!\" - Graduate Student\n\n\"I finally feel in control of my workday instead of constantly reacting to emails and notifications.\" - Marketing Manager\n\n\"The 90-minute sessions are perfect for my ADHD brain. I get more done without feeling overwhelmed.\" - Software Developer\n\n#RealResults #UserTestimonials #ProfessionalFeedback #ActualOutcomes #SuccessStories #ClientExperiences #UserSatisfaction #ProvenResults #MeasurableImpact #TangibleBenefits #ProfessionalSuccess #CareerAdvancement #WorkplaceEfficiency #ProductivityWins #FocusSuccess\n\n6/ READY TO TRANSFORM YOUR PRODUCTIVITY?\n\nDownload FocusFlow free on the App Store and Google Play\n\nPremium features available for $9.99/month\n\nStart your free trial: focusflow.co/download\n\n#DownloadNow #FreeTrial #PremiumFeatures #TransformProductivity #FocusFlow #ProductivityApp #WorkSmarter #ProfessionalTools #CareerSuccess #WorkLifeBalance #EfficiencyTools #TimeManagement #FocusBetter #AchieveMore #ProfessionalGrowth #WorkplaceSuccess #DigitalProductivity #ModernWorkplace #TechForProfessionals #ProductivitySolutions #WorkplaceOptimization #CareerDevelopmentTools #ProfessionalWellnessApps #EfficiencyAtWork #FocusOnWhatMatters #ProductivityBreakthrough #WorkLifeIntegration #ProfessionalDevelopment #CareerAdvancement #WorkplaceProductivity #EfficientProfessional #SmartWorkSolutions #TechForGood #ProfessionalEfficiency #WorkplaceWellness #CareerSuccessTools #ProductivityTransformation #FocusFlowApp #DownloadToday #TransformYourWorkday #ProductivityRevolution #WorkplaceEfficiency #ProfessionalProductivity #CareerSuccess #WorkLifeBalance #EfficiencyTools #FocusBetter #AchieveMore #ProfessionalGrowth #WorkplaceSuccess #DigitalProductivity #ModernWorkplace #TechForProfessionals #ProductivitySolutions #WorkplaceOptimization #CareerDevelopmentTools #ProfessionalWellnessApps #EfficiencyAtWork #FocusOnWhatMatters #ProductivityBreakthrough #WorkLifeIntegration #ProfessionalDevelopment #CareerAdvancement #WorkplaceProductivity #EfficientProfessional #SmartWorkSolutions #TechForGood #ProfessionalEfficiency #WorkplaceWellness #CareerSuccessTools #ProductivityTransformation #FocusFlowApp #DownloadToday #TransformYourWorkday #ProductivityRevolution",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "thread": "Proper Twitter thread format with numbered tweets",
+      "engagement": "Encourages retweets and replies",
+      "clarity": "Each tweet stands alone with clear message",
+      "conversion": "Provides specific download link and pricing"
+    }
+  },
+  {
+    "id": "marketing_006",
+    "prompt": "Create a promotional email for a local bookstore anniversary sale",
+    "expectedOutput": "📚 LOCAL LOVE BOOKS 📚\n\nCelebrating 5 years of connecting readers with great books!\n\nSubject: 5th Anniversary Sale - This Week Only!\n\nDear Book Lovers,\n\nCan you believe it's been five years since we opened our doors? Neither can we! To celebrate this milestone, we're having our biggest sale ever:\n\n🎉 ANNIVERSARY SPECIALS:\n\n• Buy 2 books, get 1 FREE (mix and match any genres)\n• 30% OFF all new releases and bestsellers\n• 50% OFF anniversary tote bags with any purchase\n• FREE coffee and cookies with every visit\n\n📚 WHAT MAKES US SPECIAL:\n\n• Carefully curated selection - we read every book we sell\n• Personalized recommendations from passionate booksellers\n• Cozy reading nooks with free WiFi\n• Community events and book clubs weekly\n• Support local authors and independent presses\n\n📍 Visit us at 789 Community Street\n⏰ Monday-Saturday, 9 AM-9 PM\n📞 Questions? Call 555-987-6543\n\n🌟 FOLLOW US:\nInstagram @locallovebooks for daily book recommendations and beautiful bookstore photos!\n\n#LocalLoveBooks #AnniversarySale #BookLovers #IndependentBookstore #CommunityFirst #SupportLocal #BookRecommendations #CozyBookstore #FreeWiFi #BookClubs #LocalAuthors #BookSale #AnniversarySpecial #BookstoreAnniversary #5YearsStrong #BookCommunity #ReadingTogether #LocalBookstore #CommunityBookstore #BookstoreSale #AnniversaryCelebration #BookLoversUnite #SupportIndependentBookstores #BookstoreAnniversary #LocalLoveBooks #AnniversarySale #BookLovers #IndependentBookstore #CommunityFirst #SupportLocal #BookRecommendations #CozyBookstore #FreeWiFi #BookClubs #LocalAuthors #BookSale #AnniversarySpecial #BookstoreAnniversary #5YearsStrong #BookCommunity #ReadingTogether #LocalBookstore #CommunityBookstore #BookstoreSale #AnniversaryCelebration #BookLoversUnite #SupportIndependentBookstores",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "community": "Emphasizes local connection and relationships",
+      "experience": "Describes atmosphere and personal service",
+      "specials": "Clear promotions with expiration dates",
+      "culture": "Welcomes all types of readers and community members"
+    }
+  },
+  {
+    "id": "marketing_007",
+    "prompt": "Write a landing page for a virtual assistant service for small businesses",
+    "expectedOutput": "Delegate. Focus. Grow.\n\nVirtual Assistant Services for Small Business Owners\n\nRunning a small business means wearing many hats - but what if you could delegate the tasks that drain your time and energy?\n\nWhat we handle:\n• Email management and customer service\n• Social media posting and engagement\n• Calendar scheduling and appointment setting\n• Bookkeeping and expense tracking\n• Research and data entry\n• Travel planning and logistics\n\nWhy choose us:\n• 10+ years of experience supporting small businesses\n• 95% of clients report increased productivity within 30 days\n• Average time savings of 15 hours per week\n• 100% satisfaction guarantee\n• Bilingual services available (English/Spanish)\n• Secure, confidential handling of your business information\n\nPerfect for:\n• Solopreneurs who need administrative support\n• Business owners who want to focus on growth strategies\n• Professionals who travel frequently and need reliable assistance\n• Anyone who wants to reclaim their evenings and weekends\n\nHow it works:\n1. Schedule a free consultation to discuss your needs\n2. We match you with a dedicated virtual assistant\n3. Your VA learns your preferences and business processes\n4. You delegate tasks and reclaim your time\n\nReady to delegate and focus on what matters most?\n\nBook your free consultation: delegatefocusgrow.com/consultation\n\n#VirtualAssistant #SmallBusinessSupport #DelegateAndFocus #TimeManagement #ProductivitySolutions #BusinessGrowth #ProfessionalServices #BilingualServices #ConfidentialSupport #SmallBusinessOwners #Solopreneurs #DelegateTasks #FocusOnGrowth #VirtualAssistantServices #BusinessEfficiency #TimeSavings #DelegateFocusGrow",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "painPoints": "Addresses specific challenges small business owners face",
+      "credibility": "Establishes expertise and track record",
+      "process": "Clear step-by-step explanation of how service works",
+      "accessibility": "Offers multiple ways to get started"
+    }
+  },
+  {
+    "id": "marketing_008",
+    "prompt": "Create a Pinterest pin description for a DIY home organization blog",
+    "expectedOutput": "🏠 ORGANIZED HOME, HAPPY LIFE 🏠\n\nTransform your cluttered spaces into peaceful, functional rooms with our simple DIY organization solutions!\n\nWhat you'll find:\n• Budget-friendly storage solutions using items you already own\n• Creative repurposing ideas for containers and baskets\n• Step-by-step tutorials for maximizing small spaces\n• Color-coded systems that make maintaining organization effortless\n• Before and after transformations that inspire you to tackle your own spaces\n\nWhy follow:\n• We share only what actually works - no expensive gadgets or complicated systems\n• Our solutions are designed for real homes with real budgets\n• We believe organization should be beautiful and functional\n• Free printables and checklists to help you stay organized\n• Community support and encouragement for your organization journey\n\nReady to create the peaceful, organized home you deserve?\n\nClick through to read the full tutorial: organizedhomehappylife.com/diy-organization\n\n#DIYOrganization #HomeOrganization #BudgetFriendly #SmallSpaceSolutions #ColorCoded #BeforeAndAfter #PeacefulHome #FunctionalSpaces #CreativeStorage #RepurposingIdeas #BeautifulOrganization #OrganizedHome #HappyLife #DIYHomeProjects #OrganizationSolutions #RealBudgets #BeautifulAndFunctional #OrganizationJourney #CommunitySupport #FreePrintables #OrganizedHomeHappyLife #DIYHomeOrganization",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "aspirational": "Shows transformation possibilities",
+      "practical": "Provides doable solutions with existing items",
+      "community": "Offers support and encouragement for process",
+      "beautiful": "Emphasizes aesthetic appeal alongside functionality"
+    }
+  },
+  {
+    "id": "marketing_009",
+    "prompt": "Write a Yelp review for a new board game café",
+    "expectedOutput": "★★★★★ GAME NIGHT REINVENTED ★★★★★\n\nI never knew I needed a board game café in my life until I visited Dice & Drinks!\n\nWhat makes this place special:\n\n🎲 EXTENSIVE GAME LIBRARY\nWith over 500 games from classics like Monopoly to modern strategy games like Catan and Ticket to Ride, there's something for every skill level and interest. The staff are passionate gamers who love teaching new games and suggesting perfect matches for your group.\n\n☕ CAFFEINATED AND CRAFTED\nThe coffee is locally roasted and expertly prepared, with creative signature drinks like the \"Critical Hit\" (espresso with vanilla and cinnamon) and the \"Natural 20\" (cold brew with orange peel). They also offer local craft beers and wines for those who prefer adult beverages with their games.\n\n🎮 KNOWLEDGEABLE GAME SOMMELIERS\nThe staff are more than just servers - they're game enthusiasts who love sharing their passion. They'll teach you new games, suggest perfect matches for your group's interests and skill levels, and even help you discover hidden gems you've never heard of.\n\n🌟 COMMUNITY FOCUSED\nThey host weekly game nights, tournaments, and themed events that bring people together. The atmosphere is welcoming and inclusive, with comfortable seating arrangements that encourage conversation and connection.\n\n💡 PERFECT FOR:\n• Date nights that are more engaging than dinner and a movie\n• Friend gatherings where you want to do something different\n• Team building activities that are actually fun\n• Family outings that work for all ages and interests\n• Solo visits where you can join other groups or learn new games\n\nReady to roll the dice on your next game night?\n\nVisit: Dice & Drinks\nLocation: 789 Entertainment District\nHours: Tuesday-Sunday, 11 AM-11 PM\n\n#BoardGameCafé #GameNight #BoardGames #CoffeeAndGames #LocalBusiness #CommunityGaming #DateNightIdeas #FriendGatherings #TeamBuilding #FamilyFun #SomethingDifferent #GameSommelier #PassionateStaff #Natural20 #CriticalHit #DiceAndDrinks #GameNightReinvented #BoardGameCafé #GameNight #BoardGames #CoffeeAndGames #LocalBusiness #CommunityGaming #DateNightIdeas #FriendGatherings #TeamBuilding #FamilyFun #SomethingDifferent #GameSommelier #PassionateStaff #Natural20 #CriticalHit #DiceAndDrinks",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "specificity": "Mentions concrete details and moments",
+      "enthusiasm": "Expresses genuine excitement and passion",
+      "helpful": "Provides recommendations and suggestions",
+      "inclusive": "Welcomes all types of visitors and groups"
+    }
+  },
+  {
+    "id": "marketing_010",
+    "prompt": "Write a landing page for a meal planning subscription service for busy families",
+    "expectedOutput": "Plan. Shop. Cook. Together.\n\nMeal Planning Made Simple for Busy Families\n\nWhat if dinner didn't have to be stressful? Our meal planning subscription service helps you:\n\nWhat we deliver:\n• Weekly meal plans with 5 dinners for busy weeknights\n• Organized grocery lists sorted by store sections\n• Step-by-step recipes that take 30 minutes or less\n• Prep-ahead tips for weekends when you have more time\n• Leftover transformation ideas for creative lunches\n\nWhy families love us:\n• 5+ years of experience helping busy families\n• 95% of subscribers report less dinner stress within 30 days\n• Average time savings of 2 hours per week\n• 100% satisfaction guarantee\n• Accommodates dietary restrictions and preferences\n• Budget-friendly options that don't break the bank\n\nPerfect for:\n• Working parents who want healthy family dinners\n• Families who want to reduce food waste and save money\n• Households with picky eaters and different preferences\n• Anyone who wants to reclaim their evenings and weekends\n\nHow it works:\n1. Choose your family's preferences and dietary needs\n2. We create personalized meal plans and grocery lists\n3. You shop and cook with our easy-to-follow recipes\n4. Enjoy stress-free dinners and quality family time\n\nReady to make dinner the best part of your day?\n\nStart your free trial: planshopcooktogether.com/trial\n\n#MealPlanning #FamilyDinner #BusyFamilies #GroceryLists #StepByStepRecipes #PrepAheadTips #LeftoverIdeas #StressFreeDinner #QualityFamilyTime #BudgetFriendly #DietaryRestrictions #PersonalizedMealPlans #PlanShopCookTogether #MealPlanningMadeSimple #FamilyMealPlanning #BusyFamilySolutions #DinnerMadeEasy #FamilyTogetherTime #PlanShopCookTogether",
+    "category": "MARKETING_COPY",
+    "evaluationCriteria": {
+      "painPoints": "Addresses specific challenges busy families face",
+      "credibility": "Establishes expertise and track record",
+      "process": "Clear step-by-step explanation of how service works",
+      "accessibility": "Offers multiple ways to get started"
+    }
+  }
+]

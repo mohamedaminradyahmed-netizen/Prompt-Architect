@@ -1,0 +1,134 @@
+[
+  {
+    "id": "content_001",
+    "prompt": "Write a blog post about the importance of regular exercise",
+    "expectedOutput": "Regular exercise is one of the most important habits you can develop for your overall health and wellbeing. When you exercise consistently, you strengthen your cardiovascular system, build muscle mass, improve your immune function, and enhance your mental health through the release of endorphins. Studies show that people who exercise regularly live longer, have better cognitive function, and report higher life satisfaction than those who are sedentary. Exercise doesn't have to be complicated or time-consuming - even simple activities like walking, swimming, or cycling for 30 minutes daily can provide significant health benefits.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Informative and encouraging",
+      "structure": "Clear introduction, body, and conclusion",
+      "readability": "Accessible language for general audience",
+      "engagement": "Includes personal benefits and practical tips"
+    }
+  },
+  {
+    "id": "content_002",
+    "prompt": "Create a product description for a smart home security camera",
+    "expectedOutput": "SecureCam Pro: Advanced AI-Powered Home Security\n\nProtect your home with cutting-edge technology that learns and adapts to your lifestyle. SecureCam Pro features:\n\n• Crystal-clear 4K video recording\n• AI-powered motion detection that reduces false alarms by 90%\n• Two-way audio communication\n• Night vision up to 50 feet\n• Weather-resistant design for indoor/outdoor use\n• Easy installation with magnetic mount\n\nWith SecureCam Pro, you can monitor your home from anywhere using our mobile app. Receive instant notifications when motion is detected, and communicate with visitors through the built-in speaker and microphone. The AI system learns your daily patterns and distinguishes between family members, pets, and strangers.\n\nPrice: $199.99\nWarranty: 2 years",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Professional and trustworthy",
+      "features": "Clear bullet points highlighting key features",
+      "benefits": "Emphasizes security and convenience",
+      "technical": "Accurate specifications without jargon"
+    }
+  },
+  {
+    "id": "content_003",
+    "prompt": "Write an article explaining blockchain technology to beginners",
+    "expectedOutput": "Blockchain Explained: A Beginner's Guide\n\nBlockchain is a revolutionary technology that allows digital information to be distributed but not copied. Think of it as a spreadsheet that is duplicated thousands of times across a network of computers, and the spreadsheet is regularly updated.\n\nHere's how it works:\n\n1. Digital information is stored in blocks\n2. Each block contains a timestamp and link to the previous block\n3. When a new block is created, it's shared across the network\n4. Computers in the network validate the new block\n5. Once validated, the block is added to the chain\n\nThe beauty of blockchain is that it's decentralized - no single person or organization controls it. Everyone can access the information, but no one can alter it without the network's consensus.\n\nBlockchain technology is the backbone of cryptocurrencies like Bitcoin, but its applications extend far beyond digital currencies. Industries from healthcare to supply chain management are exploring blockchain solutions.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "simplicity": "Avoids technical jargon",
+      "analogies": "Uses familiar comparisons",
+      "applications": "Mentions real-world uses beyond cryptocurrency",
+      "accuracy": "Factually correct information"
+    }
+  },
+  {
+    "id": "content_004",
+    "prompt": "Create a social media post for Earth Day",
+    "expectedOutput": "🌍 Happy Earth Day! 🌱\n\nToday we celebrate our beautiful planet and commit to protecting it for future generations. Every small action counts:\n\n• Plant a tree or start a garden\n• Reduce, reuse, recycle\n• Use reusable bags and water bottles\n• Walk or bike instead of driving when possible\n• Support local farmers and buy organic produce\n\nWhat will you do today to make Earth a better place? Share your eco-friendly tips in the comments! \n\n#EarthDay #Sustainability #GoGreen #ProtectOurPlanet #ClimateAction #ZeroWaste #TogetherForPlanet",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Positive and inspiring",
+      "hashtags": "Relevant and trending hashtags included",
+      "engagement": "Asks followers to share their own tips",
+      "actionable": "Provides specific, doable suggestions"
+    }
+  },
+  {
+    "id": "content_005",
+    "prompt": "Write a restaurant review for a new Italian restaurant in your neighborhood",
+    "expectedOutput": "Bella Vista: A Taste of Italy in Our Neighborhood\n\nLast weekend, my family and I tried the new Italian restaurant that opened on Main Street, and we were pleasantly surprised!\n\nFrom the moment we walked in, the cozy atmosphere transported us to a small trattoria in Tuscany. The exposed brick walls, warm lighting, and checkered tablecloths created the perfect ambiance.\n\nOur meal started with complimentary bruschetta - crispy bread topped with fresh tomatoes, basil, and a drizzle of olive oil. For the main course, I ordered the linguine alle vongole (linguine with clams), which was perfectly al dente with a light white wine sauce that didn't overpower the delicate seafood.\n\nMy husband had the osso buco, a traditional Milanese dish of braised veal shank that was fall-off-the-bone tender and served with saffron risotto. The kids enjoyed their margherita pizza with a thin, crispy crust and fresh mozzarella.\n\nWe finished our meal with tiramisu that was light, creamy, and not too sweet.\n\nService was attentive without being intrusive, and our server was knowledgeable about the menu and wine pairings.\n\nPrices are reasonable for the quality - our family of four spent around $120 including wine and dessert.\n\nOverall, Bella Vista is a wonderful addition to our neighborhood dining scene. Whether you're looking for a casual weeknight dinner or celebrating a special occasion, this charming Italian spot is worth visiting.\n\nRating: 4.5/5 stars\nPrice: $$ (Moderate)\nLocation: 123 Main Street\nHours: Tuesday-Sunday, 5-10 PM",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Personal and authentic",
+      "details": "Specific dishes and atmosphere described",
+      "balance": "Mentions both positives and areas for improvement",
+      "helpful": "Provides practical information for readers"
+    }
+  },
+  {
+    "id": "content_006",
+    "prompt": "Write a welcome email for new employees joining a tech startup",
+    "expectedOutput": "Subject: Welcome to the Team! 🚀\n\nHi [Name],\n\nWe're thrilled to have you join our growing team at TechFlow! As you embark on this exciting journey with us, we want to ensure you feel welcomed and supported from day one.\n\nHere's what you can expect during your first week:\n\nMonday: Orientation and office tour (if you're local)\nTuesday: Meet your team and learn about our products\nWednesday: Set up your workspace and accounts\nThursday: Shadow a team member and observe our daily standup\nFriday: Welcome lunch with the entire team!\n\nOur culture is built on collaboration, innovation, and continuous learning. We believe in empowering our team members to take ownership of their work and make meaningful contributions.\n\nIf you have any questions before your start date, please don't hesitate to reach out to me directly at [email].\n\nLooking forward to having you on board!\n\nBest regards,\n[Your Name]\nPeople Operations Manager\nTechFlow\n\nP.S. Don't forget to follow us on LinkedIn and Twitter for company updates and industry insights!",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "tone": "Warm and welcoming",
+      "structure": "Clear weekly schedule provided",
+      "culture": "Emphasizes collaboration and innovation",
+      "actionable": "Provides specific next steps"
+    }
+  },
+  {
+    "id": "content_007",
+    "prompt": "Create a product comparison between three different noise-canceling headphones",
+    "expectedOutput": "Noise-Canceling Headphones Comparison: Which One Should You Choose?\n\nWe've tested three popular models to help you decide which pair is right for your needs and budget.\n\n**Bose QuietComfort 45** ($329)\n\nBest for: Frequent travelers and office workers\n\nThese industry-leading headphones feature exceptional noise cancellation that adapts to your environment, whether you're on a plane or in a busy office. The lightweight design makes them comfortable for all-day wear, and the 24-hour battery life means you won't need to recharge during long flights.\n\nThe sound quality is balanced and natural, making them perfect for calls and music. The companion app allows you to customize settings and access firmware updates.\n\n**Sony WH-1000XM5** ($399)\n\nBest for: Audiophiles and tech enthusiasts\n\nThese premium headphones deliver the most advanced noise cancellation technology available, with industry-leading performance that adapts to your location and activity. The 30-hour battery life is impressive, and the quick charge feature provides 5 hours of playback with just 10 minutes of charging.\n\nThe sound quality is exceptional with customizable EQ settings through the companion app. The touch controls are responsive, and the speak-to-chat feature automatically pauses music when you start talking.\n\n**Apple AirPods Max** ($549)\n\nBest for: Apple ecosystem users\n\nThese beautifully designed headphones seamlessly integrate with your Apple devices and deliver excellent noise cancellation. The spatial audio feature creates an immersive listening experience, and the digital crown provides intuitive control.\n\nThe build quality is exceptional with premium materials, but the weight might be noticeable during extended wear. The battery life is 20 hours, which is sufficient for most users.\n\n**Bottom Line**\n\nChoose Bose if you prioritize comfort and reliability for business travel. Select Sony if you're an audiophile who wants the most advanced technology. Opt for Apple if you're deeply invested in the Apple ecosystem and value premium design.\n\nAll three provide excellent noise cancellation, so your decision should be based on your specific needs, budget, and ecosystem preferences.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "objectivity": "Presents facts without bias",
+      "comparisons": "Clear pros and cons for each option",
+      "recommendations": "Specific guidance based on user needs",
+      "technical": "Accurate specifications and features"
+    }
+  },
+  {
+    "id": "content_008",
+    "prompt": "Write a newsletter for a local community garden",
+    "expectedOutput": "🌱 Community Garden Newsletter - Spring Edition\n\nDear Garden Family,\n\nSpring has arrived, and our garden is bursting with new life! Here's what's happening in our little patch of paradise:\n\n**What's Growing**\n\nOur tomato seedlings are thriving in the greenhouse, and we expect to transplant them outside by mid-April. The spinach and kale we planted in February are ready for harvest - stop by this weekend to pick some fresh greens for your family!\n\n**Volunteer Opportunities**\n\nWe need help with:\n• Tuesday mornings: Watering and weeding (perfect for retirees)\n• Saturday afternoons: Leading children's gardening workshops\n• Anytime: Composting and seed starting\n\n**Upcoming Events**\n\nApril 15: Seed starting workshop for beginners\nApril 22: Earth Day celebration with live music and local vendors\nMay 6: Plant sale fundraiser\n\n**Community Spotlight**\n\nThis month, we're featuring Maria Rodriguez, who has been volunteering with us for the past five years. She leads our bilingual gardening workshops and has helped create a welcoming space for our Spanish-speaking neighbors.\n\n\"The garden is more than just plants,\" Maria says. \"It's where we grow community connections and cultural understanding.\"\n\n**Recipe of the Month**\n\nTry Maria's famous salsa verde using tomatillos from our garden:\n\nIngredients:\n• 1 pound tomatillos\n• 2 jalapeños\n• 1 bunch cilantro\n• 1 clove garlic\n• Salt to taste\n\nBoil tomatillos and jalapeños for 10 minutes, then blend with cilantro and garlic. Add salt to taste. Serve with tortilla chips or as a sauce for enchiladas.\n\n**How to Get Involved**\n\nVisit us at 123 Community Street, Tuesday-Saturday, 9 AM-6 PM. No experience necessary - we provide tools and guidance!\n\nQuestions? Email us at communitygarden@localfood.org or stop by the garden.\n\nHappy growing!\n\nThe Community Garden Team\n\nP.S. Don't forget to follow us on Facebook and Instagram for daily updates and beautiful photos!",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "community": "Focuses on people and connections",
+      "inclusivity": "Welcomes all experience levels",
+      "practical": "Provides specific volunteer opportunities",
+      "engagement": "Encourages participation through multiple channels"
+    }
+  },
+  {
+    "id": "content_009",
+    "prompt": "Write a landing page copy for a meditation app",
+    "expectedOutput": "Find Your Inner Peace with MindFlow\n\nIn today's chaotic world, finding moments of tranquility is more important than ever. MindFlow is your personal meditation companion that fits in your pocket.\n\n**Why MindFlow?**\n\n✨ **Personalized Sessions**\nOur AI learns your preferences and creates custom meditation sessions based on your mood, schedule, and experience level.\n\n🎧 **Crystal-Clear Audio**\nPremium noise-canceling technology delivers immersive 3D audio that transports you to peaceful environments.\n\n⏰ **Flexible Timing**\nWhether you have 5 minutes or 50, we have sessions that fit your lifestyle - from quick breathing exercises to extended guided visualizations.\n\n**Features You'll Love**\n\n• Daily mindfulness reminders\n• Progress tracking and streaks\n• Offline access to your favorite sessions\n• Gentle wake-up alarms with nature sounds\n• Integration with your favorite music apps\n\n**What Our Users Say**\n\n\"MindFlow has transformed my morning routine. I wake up feeling centered and ready for the day ahead.\" - Sarah M.\n\n\"As someone who struggles with anxiety, having guided meditations available whenever I need them has been life-changing.\" - David K.\n\n**Perfect For**\n\n• Busy professionals who need quick stress relief\n• Parents looking for family-friendly mindfulness activities\n• Students wanting to improve focus and concentration\n• Anyone seeking better sleep and relaxation\n\n**Start Your Journey Today**\n\nDownload MindFlow free on the App Store and Google Play. Premium features available for $9.99/month.\n\n**30-Day Challenge**\n\nCommit to just 10 minutes daily for the next month, and experience the transformative power of consistent meditation. Track your progress and celebrate milestones with our in-app rewards system.\n\n**Questions?**\n\nVisit mindflow.com/help or email support@mindflow.com\n\nReady to find your inner peace? Download MindFlow today and discover what mindfulness can do for you.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "benefits": "Focuses on user outcomes not features",
+      "socialProof": "Includes authentic testimonials",
+      "accessibility": "Welcomes all experience levels",
+      "action": "Clear next steps for visitors"
+    }
+  },
+  {
+    "id": "content_010",
+    "prompt": "Write a thank-you note for wedding vendors",
+    "expectedOutput": "Dear [Vendor Name],\n\nWe hope this note finds you well. As we settle into married life, we've been reflecting on our wedding day and wanted to express our heartfelt gratitude for your role in making it so special.\n\n**The Ceremony**\n\nOur guests are still talking about the beautiful floral arrangements that transformed the venue into a romantic garden. The way you incorporated our favorite flowers (peonies and ranunculus) made the space feel uniquely ours.\n\n**The Reception**\n\nThe lighting design created the perfect ambiance - warm and inviting during dinner, then transitioning to energetic and fun for dancing. Our photographer captured so many beautiful moments thanks to your timing and expertise.\n\n**What We'll Remember Most**\n\n• How you calmed our nerves before the ceremony\n• The way you seamlessly handled last-minute changes\n• Your attention to the tiny details we didn't even notice\n• How you made our families feel welcomed and included\n\n**Beyond Professional**\n\nThroughout the planning process, you became more than vendors - you became friends. We loved sharing coffee and brainstorming sessions, and your enthusiasm for our vision made the entire experience enjoyable rather than stressful.\n\n**Looking Forward**\n\nWe can't wait to recommend you to our engaged friends! Your talent and professionalism deserve recognition, and we're excited to see what beautiful weddings you'll help create next.\n\n**Staying in Touch**\n\nPlease keep in touch - we'd love to know what weddings you're working on and see photos of your recent projects. Follow us on Instagram @newlyweds for updates on our married life adventures!\n\nWith love and appreciation,\n\n[Your Names]\n[Date]\n\nP.S. We've left reviews on your preferred platforms and shared your contact information with three engaged couples who asked for recommendations. We can't wait to see what beautiful celebrations you'll help create next!",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "specificity": "Mentions concrete details and moments",
+      "emotional": "Expresses genuine feelings and connections",
+      "helpful": "Provides recommendations and referrals",
+      "ongoing": "Suggests continuing relationship"
+    }
+  },
+  {
+    "id": "content_010",
+    "prompt": "Write a comparison of three different meal kit delivery services",
+    "expectedOutput": "Meal Kit Delivery Services: Which One Fits Your Lifestyle?\n\nWe've tested three popular services to help you decide which subscription is right for your cooking needs and budget.\n\n**HelloFresh** ($9.99/serving)\n\nBest for: Families and busy professionals\n\nHelloFresh offers the most variety with over 25 recipes weekly, including global cuisines and dietary accommodations. The portions are generous, making them perfect for families or leftovers for lunch the next day.\n\nThe ingredients arrive fresh and well-organized, with color-coded labels that make cooking foolproof even for beginners. The recipe cards are clear and concise, with step-by-step instructions that take 30-45 minutes from start to finish.\n\n**Blue Apron** ($11.99/serving)\n\nBest for: Food enthusiasts and wine lovers\n\nThese premium meal kits feature the most sophisticated recipes available, with chef-designed meals that introduce you to new ingredients and cooking techniques. The wine pairing suggestions are educational, and the optional wine subscription complements the meals perfectly.\n\nThe ingredients are sourced from small farms and artisanal producers, supporting local food systems. The recipe cards include wine pairing suggestions and cooking tips that help you develop culinary skills.\n\n**Sun Basket** ($12.99/serving)\n\nBest for: Health-conscious individuals and dietary restrictions\n\nThese organic meal kits accommodate the most dietary restrictions with paleo, vegan, gluten-free, and diabetic-friendly options. The nutritional information is comprehensive, and the ingredients are certified organic and sustainably sourced.\n\nThe portions are designed for optimal nutrition, with balanced macronutrients and anti-inflammatory ingredients. The recipe cards include nutritional information and wellness tips that help you make informed decisions about your health.\n\n**Bottom Line**\n\nChoose HelloFresh if you prioritize variety and family-friendly options. Select Blue Apron if you're a food enthusiast who wants to learn new cooking techniques. Opt for Sun Basket if you're health-conscious and have specific dietary requirements.\n\nAll three provide excellent convenience, so your decision should be based on your specific cooking goals, budget, and dietary preferences.",
+    "category": "CONTENT_WRITING",
+    "evaluationCriteria": {
+      "objectivity": "Presents facts without favoring any service",
+      "comparisons": "Clear pros and cons for each option",
+      "recommendations": "Specific guidance based on user needs",
+      "practical": "Focuses on real-world cooking scenarios"
+    }
+  }
+]

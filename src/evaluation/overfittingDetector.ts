@@ -348,27 +348,42 @@ export function splitDataset(
 }
 
 /**
+ * خيارات أو تقسيمات التحقق المحتجز
+ */
+export interface HeldOutValidationOptions {
+    train: TestCase[];
+    validation: TestCase[];
+    test: TestCase[];
+    trainResults?: TestResults;
+    valResults?: TestResults;
+    testResults?: TestResults;
+}
+
+/**
  * تحقق Held-out كامل
  * 
  * @param prompt البرومبت للاختبار
  * @param testCases جميع حالات الاختبار
  * @param executor وظيفة تنفيذ LLM
+ * @param options خيارات التقسيم والنتائج المسبقة
  * @returns نتيجة التحقق الكامل
  */
 export async function heldOutValidation(
     prompt: string,
     testCases: TestCase[],
     executor: LLMExecutor,
-    splits?: { train: TestCase[]; validation: TestCase[]; test: TestCase[] }
+    options?: HeldOutValidationOptions
 ): Promise<HeldOutValidationResult> {
 
-    const { train, validation, test } = splits || splitDataset(testCases);
+    // استخدام الخيارات المقدمة أو تقسيم جديد
+    // NOTE: We cast because we modified the type to include optional results
+    const { train, validation, test, trainResults: preTrain, valResults: preVal, testResults: preTest } = options || splitDataset(testCases) as any;
 
-    // تشغيل على كل مجموعة
+    // تشغيل الاختبارات (استخدام النتائج المسبقة إذا توفرت لتجنب إعادة التشغيل وضمان الاتساق)
     const [trainResults, valResults, testResults] = await Promise.all([
-        executeTestSuite([prompt], train, executor),
-        executeTestSuite([prompt], validation, executor),
-        executeTestSuite([prompt], test, executor)
+        preTrain ? Promise.resolve([preTrain]) : executeTestSuite([prompt], train, executor),
+        preVal ? Promise.resolve([preVal]) : executeTestSuite([prompt], validation, executor),
+        preTest ? Promise.resolve([preTest]) : executeTestSuite([prompt], test, executor)
     ]);
 
     const trainScore = trainResults[0].aggregateScore;
@@ -697,10 +712,11 @@ export async function comprehensiveOverfittingAnalysis(
     // 2. تقسيم البيانات
     const { train, validation, test } = splitDataset(testCases);
 
-    // 3. تشغيل على Train و Validation
-    const [trainResults, valResults] = await Promise.all([
+    // 3. تشغيل على Train و Validation و Test
+    const [trainResults, valResults, testResults] = await Promise.all([
         executeTestSuite([prompt], train, executor),
-        executeTestSuite([prompt], validation, executor)
+        executeTestSuite([prompt], validation, executor),
+        executeTestSuite([prompt], test, executor)
     ]);
 
     // 4. كشف Overfitting
@@ -721,7 +737,15 @@ export async function comprehensiveOverfittingAnalysis(
 
     // 6. Held-out Validation
     // NOTE(Why): تجنب shadowing/TDZ. اسم المتغير لا يجب أن يطابق اسم الدالة المستوردة/المعرفة.
-    const heldOutResult = await heldOutValidation(prompt, testCases, executor, { train, validation, test });
+    // تمرير النتائج المحسوبة مسبقاً لمنع إعادة التشغيل
+    const heldOutResult = await heldOutValidation(prompt, testCases, executor, {
+        train,
+        validation,
+        test,
+        trainResults: trainResults[0],
+        valResults: valResults[0],
+        testResults: testResults[0]
+    });
 
     // 7. حساب Regularization
     const regularizationPenalty = calculateRegularization(prompt);
