@@ -1685,7 +1685,7 @@ spec:
 
 الملفات: `k8s/deployment.yaml`, `k8s/service.yaml`, `k8s/hpa.yaml`
 
-```
+```text
 
 ### DIRECTIVE-049: إعداد عُقد GPU للـ RL/Fine-tune
 
@@ -1812,7 +1812,7 @@ class FeatureFlags {
 
 الملف: `src/features/flags.ts`
 
-```
+```text
 
 ---
 
@@ -1854,7 +1854,7 @@ interface PopulationConfig {
 
 الهدف: إيجاد variations متنوعة وعالية الجودة
 
-```
+```text
 
 ### DIRECTIVE-053: تطوير Sandbox Run على Test Suite
 
@@ -1896,7 +1896,7 @@ interface SandboxResult {
 
 الملف: `src/sandbox/sandboxRunner.ts`
 
-```
+```text
 
 ### DIRECTIVE-054: جمع Human Feedback وبناء Reward Dataset
 
@@ -1974,7 +1974,7 @@ interface ScoredSuggestion {
   hallucinationScore?: number;
   hallucinationWarning?: string;
 }
-```
+```text
 
 الملف: `src/evaluator.ts` (تحديث)
 
@@ -1998,7 +1998,7 @@ interface ScoredSuggestion {
    async function retrieveRelevantFacts(claim: string): Promise<Fact[]>
    ```
 
-3. **Verification Function**:
+1. **Verification Function**:
 
    ```typescript
    async function verifyAgainstFacts(
@@ -2007,7 +2007,7 @@ interface ScoredSuggestion {
    ): Promise<VerificationResult>
    ```
 
-4. **Integration**:
+1. **Integration**:
    - أضف factuality score في التقييم
    - عرض المصادر الداعمة/المتناقضة في UI
 
