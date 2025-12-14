@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Prompt {
+  id          String   @id @default(uuid())
+  text        String
+  category    String
+  userId      String?
+  createdAt   DateTime @default(now())
+  variations  Variation[]
+  feedback    Feedback[]
+}
+
+model Variation {
+  id          String   @id @default(uuid())
+  promptId    String
+  prompt      Prompt   @relation(fields: [promptId], references: [id])
+  text        String
+  mutation    String
+  score       Float
+  tokenCount  Int
+  cost        Float
+  createdAt   DateTime @default(now())
+  lineage     Lineage?
+}
+
+model Feedback {
+  id          String   @id @default(uuid())
+  promptId    String
+  prompt      Prompt   @relation(fields: [promptId], references: [id])
+  variationId String?
+  score       Int
+  comment     String?
+  userId      String
+  createdAt   DateTime @default(now())
+}
+
+model Lineage {
+  id            String    @id @default(uuid())
+  variationId   String    @unique
+  variation     Variation @relation(fields: [variationId], references: [id])
+  parentId      String?
+  mutationParams Json?
+  score         Float
+  createdAt     DateTime  @default(now())
+}
+
+model TestCase {
+  id          String   @id @default(uuid())
+  prompt      String
+  expected    String?
+  category    String
+  metadata    Json?
+  createdAt   DateTime @default(now())
+}

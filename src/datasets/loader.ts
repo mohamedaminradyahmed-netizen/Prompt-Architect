@@ -107,16 +107,11 @@ export interface MarketingDatasetItem extends DatasetItem {
     experience?: string;
     painPoints?: string;
     process?: string;
-    painPoints?: string;
-    process?: string;
     access?: string;
     specificity?: string;
     enthusiasm?: string;
     helpful?: string;
     inclusive?: string;
-    painPoints?: string;
-    process?: string;
-    access?: string;
   };
 }
 
