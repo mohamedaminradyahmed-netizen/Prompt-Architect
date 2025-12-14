@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: reward-model-training
+spec:
+  template:
+    spec:
+      containers:
+      - name: trainer
+        image: pytorch/pytorch:2.0-cuda11.8
+        command: ["python", "train_reward.py"]
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+      restartPolicy: Never

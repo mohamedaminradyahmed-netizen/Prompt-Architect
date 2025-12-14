@@ -1,0 +1,26 @@
+# GPU Node Pool (cloud-specific)
+# ملاحظة: تعريف Node Pool يختلف حسب المزود (GKE/AKS/EKS/Karpenter). هذا ملف مرجعي يضع الحد الأدنى من متطلبات GPU عبر labels/taints.
+# عدّل apiVersion/kind حسب مكوّن إدارة العقد لديك.
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: gpu-nodepool
+spec:
+  labels:
+    accelerator: nvidia
+  taints:
+    - key: nvidia.com/gpu
+      value: "true"
+      effect: NoSchedule
+  requirements:
+    - key: kubernetes.io/arch
+      operator: In
+      values: ["amd64"]
+  # أمثلة اختيار أنواع عقد GPU (عدّلها حسب مزودك):
+  # - AWS: p3, p4
+  # - GCP: a2-highgpu
+  # - Azure: Standard_NC*
+  limits:
+    resources:
+      cpu: "256"
+  ttlSecondsAfterEmpty: 60
