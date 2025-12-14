@@ -21,7 +21,8 @@ export async function createRunnableSequence<I, O>(
     const mod = (await import('@langchain/core/runnables')) as any;
     if (mod?.RunnableSequence?.from) {
       const seq = mod.RunnableSequence.from(steps);
-      return { invoke: (input: I) => seq.invoke(input) };
+      // Ensure we always return a Promise to match RunnableLike contract (and our fallback impl).
+      return { invoke: async (input: I) => seq.invoke(input) };
     }
   } catch {
     // Ignore: LangChain is optional in this codebase right now.

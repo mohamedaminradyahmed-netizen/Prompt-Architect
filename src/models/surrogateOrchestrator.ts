@@ -255,6 +255,15 @@ export class SurrogateOrchestrator {
   private stats: OrchestratorStats;
   private balanceMetrics: BalanceMetrics;
   private customModelMap: Record<EvaluationMode, string>;
+  /**
+   * Instance-level model registry.
+   *
+   * Why:
+   * - `MODEL_REGISTRY` is exported as a shared default catalog.
+   * - Mutating it from within an orchestrator instance breaks encapsulation and can leak state across
+   *   tests/instances. لذا نأخذ نسخة لكل instance ونضيف عليها النماذج المخصصة محلياً فقط.
+   */
+  private modelRegistry: Record<string, ModelConfig>;
   private cacheTTL: number;
   private maxCacheSize: number;
 
@@ -265,7 +274,12 @@ export class SurrogateOrchestrator {
     maxCacheSize?: number;       // Max cache entries
   }) {
     this.balanceMetrics = config?.balanceMetrics || BALANCED;
-    this.customModelMap = config?.modeModelMap || DEFAULT_MODE_MODELS;
+    // Clone defaults to avoid mutating shared constants across instances.
+    this.customModelMap = { ...DEFAULT_MODE_MODELS, ...(config?.modeModelMap ?? {}) };
+    // Clone shared catalog to an instance-level registry (avoid global mutations).
+    this.modelRegistry = Object.fromEntries(
+      Object.entries(MODEL_REGISTRY).map(([key, value]) => [key, { ...value }])
+    ) as Record<string, ModelConfig>;
     this.cacheTTL = config?.cacheTTL || 24 * 60 * 60 * 1000; // 24 hours default
     this.maxCacheSize = config?.maxCacheSize || 1000;
 
@@ -413,7 +427,7 @@ export class SurrogateOrchestrator {
     request: EvaluationRequest
   ): ModelSelectionResult {
     const modelKey = this.customModelMap[mode];
-    const model = MODEL_REGISTRY[modelKey];
+    const model = this.modelRegistry[modelKey];
 
     if (!model) {
       throw new Error(`Model not found: ${modelKey}`);
@@ -443,7 +457,7 @@ export class SurrogateOrchestrator {
     request: EvaluationRequest
   ): ModelConfig[] {
     const targetTier = this.getModeTargetTier(mode);
-    return Object.values(MODEL_REGISTRY)
+    return Object.values(this.modelRegistry)
       .filter(m => m.tier === targetTier && m.model !== this.customModelMap[mode])
       .slice(0, 3);
   }
@@ -697,7 +711,7 @@ export class SurrogateOrchestrator {
    * Estimate cost if using premium model
    */
   private estimatePremiumCost(tokens: number): number {
-    const premiumModel = MODEL_REGISTRY['openai-gpt4'];
+    const premiumModel = this.modelRegistry['openai-gpt4'];
     return (tokens / 1000) * premiumModel.costPer1kTokens;
   }
 
@@ -729,7 +743,7 @@ export class SurrogateOrchestrator {
    * Set model for a specific mode
    */
   setModeModel(mode: EvaluationMode, modelKey: string): void {
-    if (!MODEL_REGISTRY[modelKey]) {
+    if (!this.modelRegistry[modelKey]) {
       throw new Error(`Unknown model: ${modelKey}`);
     }
     this.customModelMap[mode] = modelKey;
@@ -746,7 +760,8 @@ export class SurrogateOrchestrator {
    * Add custom model to registry
    */
   addCustomModel(key: string, config: ModelConfig): void {
-    MODEL_REGISTRY[key] = config;
+    // Instance-level extension only (no global mutation).
+    this.modelRegistry[key] = { ...config };
   }
 
   // ============================================================================
