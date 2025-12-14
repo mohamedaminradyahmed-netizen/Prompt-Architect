@@ -193,8 +193,8 @@ describe('kFoldCrossValidation', () => {
         const stableExecutor = createMockExecutor(0.8, 0.05);
         const stableResult = await kFoldCrossValidation('prompt', testCases, stableExecutor);
 
-        // Unstable executor (high variance)
-        const unstableExecutor = createMockExecutor(0.6, 0.8);
+        // Unstable executor (high variance) - same baseScore to isolate variance effect
+        const unstableExecutor = createMockExecutor(0.8, 0.8);
         const unstableResult = await kFoldCrossValidation('prompt', testCases, unstableExecutor);
 
         // Stable should have lower std deviation
