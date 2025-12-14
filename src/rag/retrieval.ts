@@ -188,10 +188,25 @@ export async function addDocuments(
 
   for (const doc of documents) {
     try {
-      withEmbeddings.push({
-        ...doc,
-        embedding: doc.embedding ?? (await generateEmbedding(doc.content, embeddingProvider)),
-      });
+      // Why:
+      // Chunking بسيط أثناء ingestion يزيد احتمال تطابق claim القصير مع جزء من الوثيقة (RAG عمليًا)،
+      // ويمنع فشل claims صحيحة بسبب similarity threshold على نص طويل (اختبارات DIRECTIVE-014).
+      const chunks = doc.content
+        .split(/[.!?]+/)
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      const effectiveChunks = chunks.length > 1 ? chunks : [doc.content.trim()];
+
+      for (let i = 0; i < effectiveChunks.length; i++) {
+        const content = effectiveChunks[i];
+        withEmbeddings.push({
+          ...doc,
+          id: chunks.length > 1 ? `${doc.id}#chunk_${i}` : doc.id,
+          content,
+          embedding: await generateEmbedding(content, embeddingProvider),
+        });
+      }
     } catch {
       // Fail-safe: تجاهل وثيقة واحدة لا يجب أن يوقف ingestion كله.
       continue;
@@ -341,18 +356,26 @@ export function extractClaims(text: string): Claim[] {
   // Filter for sentences that look like factual claims
   const claims: Claim[] = [];
 
-  const factualPatterns = [
-    /\b(is|are|was|were|has|have|will|would)\b/i,  // Factual verbs
-    /\b\d+/,                                         // Numbers
-    /\b(the|a|an)\s+[A-Z][a-z]+/,                   // Named entities
-    /\b(in|on|at|during)\s+\d{4}/,                  // Dates
-  ];
+  const hasFactualVerb = (s: string) => /\b(is|are|was|were|has|have|will|would)\b/i.test(s);
+  const hasNumber = (s: string) => /\b\d+\b/.test(s);
+  const hasProperNoun = (s: string) => /\b[A-Z][a-z]{2,}\b/.test(s);
+  const hasYearPhrase = (s: string) => /\b(in|on|at|during)\s+\d{4}\b/i.test(s);
 
   for (const sentence of sentences) {
-    const matchesPatterns = factualPatterns.filter(pattern => pattern.test(sentence)).length;
+    // Why:
+    // - نمنع false positives مثل "Hello world" (capitalized token فقط).
+    // - وفي نفس الوقت نلتقط claims القصيرة القابلة للتحقق مثل "Paris is the capital of France".
+    const verb = hasFactualVerb(sentence);
+    const num = hasNumber(sentence);
+    const noun = hasProperNoun(sentence);
+    const year = hasYearPhrase(sentence);
 
-    // Require at least 2 factual patterns
-    if (matchesPatterns >= 2) {
+    const isClaim =
+      year ||
+      (verb && (noun || num || sentence.length >= 15)) ||
+      (num && (verb || noun));
+
+    if (isClaim) {
       // Extract keywords (simple approach)
       const keywords = extractKeywords(sentence);
 

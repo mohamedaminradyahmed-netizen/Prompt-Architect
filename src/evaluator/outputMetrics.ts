@@ -357,7 +357,8 @@ export function compareOutputMetrics(
   const lengthDiff = metricsB.avgLength - metricsA.avgLength;
   const tokenDiff = metricsB.avgTokens - metricsA.avgTokens;
   const varianceDiff = metricsB.variance - metricsA.variance;
-  const qualityDiff = metricsB.quality - metricsA.quality;
+  // Why: نتجنب فروقات floating point مثل -0.10000000000000009 التي تكسر اختبارات المساواة الصارمة.
+  const qualityDiff = Math.round((metricsB.quality - metricsA.quality) * 100) / 100;
 
   // Generate recommendation
   let recommendation = '';
