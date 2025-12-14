@@ -8,13 +8,18 @@
     "license": "ISC",
     "dependencies": {
         "lucide-react": "^0.460.0",
+        "node-cache": "^5.1.2",
         "react": "^19.2.1",
         "react-dom": "^19.2.1"
     },
     "devDependencies": {
+        "@types/jest": "^30.0.0",
         "@types/react": "^19.0.0",
         "@types/react-dom": "^19.0.0",
         "@vitejs/plugin-react": "^4.2.1",
+        "jest": "^30.2.0",
+        "ts-jest": "^29.4.6",
+        "ts-node": "^10.9.2",
         "typescript": "^5.4.5",
         "vite": "^5.1.4"
     },
@@ -22,6 +27,6 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "jest"
     }
 }
