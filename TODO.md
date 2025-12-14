@@ -1892,26 +1892,35 @@ interface SandboxResult {
 
 الملف: `src/sandbox/sandboxRunner.ts`
 
-### DIRECTIVE-054: جمع Human Feedback وبناء Reward Dataset
+### DIRECTIVE-054: جمع Human Feedback وبناء Reward Dataset ✅ COMPLETE
+
+**Status**: ✅ **COMPLETED** (2025-12-14)
+**Implementation**: `src/training/rewardDatasetBuilder.ts`
+**Tests**: `src/__tests__/training/rewardDatasetBuilder.test.ts` (55 tests passing)
 
 ```text
 المهمة: أنشئ pipeline لجمع feedback وتحويله لـ training data
 
 الخطوات:
 
-1. **Collection**: اجمع feedback من UI
-2. **Validation**: تحقق من جودة البيانات
-3. **Augmentation**: أضف features (embeddings, metadata)
-4. **Storage**: خزّن في database
-5. **Export**: صدّر للتدريب
+1. **Collection**: اجمع feedback من UI ✅
+2. **Validation**: تحقق من جودة البيانات ✅
+3. **Augmentation**: أضف features (embeddings, metadata) ✅
+4. **Storage**: خزّن في database ✅
+5. **Export**: صدّر للتدريب ✅
 
-الوظائف المطلوبة:
+الوظائف المُنفذة:
 
 ```typescript
 1. collectFeedback(variationId: string, feedback: Feedback): Promise<void>
-2. validateFeedback(feedback: Feedback): boolean
-3. buildRewardDataset(filters?: DatasetFilters): Promise<RewardDataset>
-4. exportDataset(dataset: RewardDataset, format: ExportFormat): Promise<string>
+2. validateFeedback(feedback: Feedback): ValidationResult
+3. validateFeedbackBatch(feedbackList: Feedback[]): BatchValidationResult
+4. buildRewardDataset(filters?: DatasetFilters): Promise<RewardDataset>
+5. exportDataset(dataset: RewardDataset, format: ExportFormat): Promise<ExportResult>
+6. mergeDatasets(...datasets: RewardDataset[]): RewardDataset
+7. splitRewardDataset(dataset, trainRatio, valRatio): SplitResult
+8. filterByWeight(dataset, minWeight): RewardDataset
+9. getDatasetSummary(dataset): string
 
 interface RewardDataset {
   examples: RewardExample[];
@@ -1920,19 +1929,25 @@ interface RewardDataset {
     created: Date;
     version: string;
     size: number;
+    embeddingDimension: number;
+    featureCount: number;
   };
 }
 
 interface RewardExample {
+  id: string;
   promptEmbedding: number[];
   variationEmbedding: number[];
-  features: number[];  // [tokenCount, similarity, etc.]
-  label: number;       // normalized human score
+  features: number[];
+  featureNames: string[];
+  label: number;       // normalized human score (0-1)
   weight: number;      // confidence/importance
+  metadata: ExampleMetadata;
 }
 ```
 
 الملف: `src/training/rewardDatasetBuilder.ts`
+الصيغ المدعومة: json, jsonl, csv, parquet (fallback), tfrecord (fallback)
 
 ```
 
