@@ -1,61 +1,150 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
+// ============================================
+// نموذج Prompt - لتخزين البرومبتات الأصلية
+// ============================================
 model Prompt {
-  id          String   @id @default(uuid())
-  text        String
-  category    String
-  userId      String?
-  createdAt   DateTime @default(now())
-  variations  Variation[]
-  feedback    Feedback[]
+  id         String      @id @default(uuid())
+  text       String      @db.Text
+  category   String
+  userId     String?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  variations Variation[]
+  feedback   Feedback[]
+
+  @@index([category])
+  @@index([userId])
+  @@index([createdAt])
 }
 
+// ============================================
+// نموذج Variation - لتخزين المتغيرات المُحسّنة
+// ============================================
 model Variation {
-  id          String   @id @default(uuid())
-  promptId    String
-  prompt      Prompt   @relation(fields: [promptId], references: [id])
-  text        String
-  mutation    String
-  score       Float
-  tokenCount  Int
-  cost        Float
-  createdAt   DateTime @default(now())
-  lineage     Lineage?
+  id         String   @id @default(uuid())
+  promptId   String
+  prompt     Prompt   @relation(fields: [promptId], references: [id], onDelete: Cascade)
+  text       String   @db.Text
+  mutation   String   // نوع التعديل المُطبق
+  score      Float
+  tokenCount Int
+  cost       Float
+  latency    Float?   // زمن الاستجابة بالميلي ثانية
+  createdAt  DateTime @default(now())
+  lineage    Lineage?
+
+  @@index([promptId])
+  @@index([score])
+  @@index([mutation])
+  @@index([createdAt])
 }
 
+// ============================================
+// نموذج Feedback - لتخزين تقييمات المستخدمين
+// ============================================
 model Feedback {
   id          String   @id @default(uuid())
   promptId    String
-  prompt      Prompt   @relation(fields: [promptId], references: [id])
+  prompt      Prompt   @relation(fields: [promptId], references: [id], onDelete: Cascade)
   variationId String?
-  score       Int
-  comment     String?
+  score       Int      @db.SmallInt // 1-5
+  comment     String?  @db.Text
   userId      String
-  createdAt   DateTime @default(now())
-}
-
-model Lineage {
-  id            String    @id @default(uuid())
-  variationId   String    @unique
-  variation     Variation @relation(fields: [variationId], references: [id])
-  parentId      String?
-  mutationParams Json?
-  score         Float
-  createdAt     DateTime  @default(now())
-}
-
-model TestCase {
-  id          String   @id @default(uuid())
-  prompt      String
-  expected    String?
-  category    String
+  feedbackType String? // "star_rating", "approve", "reject", "quick_feedback"
   metadata    Json?
   createdAt   DateTime @default(now())
+
+  @@index([promptId])
+  @@index([variationId])
+  @@index([userId])
+  @@index([score])
+  @@index([createdAt])
+}
+
+// ============================================
+// نموذج Lineage - لتتبع سلسلة نسب المتغيرات
+// ============================================
+model Lineage {
+  id             String    @id @default(uuid())
+  variationId    String    @unique
+  variation      Variation @relation(fields: [variationId], references: [id], onDelete: Cascade)
+  parentId       String?
+  originalPrompt String?   @db.Text
+  mutationParams Json?
+  score          Float
+  createdAt      DateTime  @default(now())
+
+  @@index([parentId])
+  @@index([score])
+}
+
+// ============================================
+// نموذج TestCase - لتخزين حالات الاختبار
+// ============================================
+model TestCase {
+  id          String   @id @default(uuid())
+  name        String?
+  prompt      String   @db.Text
+  expected    String?  @db.Text
+  category    String
+  difficulty  String?  // "easy", "medium", "hard"
+  tags        String[] // مصفوفة من الوسوم
+  metadata    Json?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([isActive])
+  @@index([createdAt])
+}
+
+// ============================================
+// نموذج BenchmarkResult - لتخزين نتائج الاختبارات
+// ============================================
+model BenchmarkResult {
+  id            String   @id @default(uuid())
+  testCaseId    String
+  variationText String   @db.Text
+  score         Float
+  tokenCount    Int
+  latency       Float?
+  output        String?  @db.Text
+  metadata      Json?
+  createdAt     DateTime @default(now())
+
+  @@index([testCaseId])
+  @@index([score])
+  @@index([createdAt])
+}
+
+// ============================================
+// نموذج AnalyticsEvent - لتتبع الأحداث التحليلية
+// ============================================
+model AnalyticsEvent {
+  id         String   @id @default(uuid())
+  eventType  String   // "suggestion_shown", "suggestion_accepted", "nps_score", etc.
+  userId     String?
+  sessionId  String?
+  properties Json?
+  createdAt  DateTime @default(now())
+
+  @@index([eventType])
+  @@index([userId])
+  @@index([sessionId])
+  @@index([createdAt])
 }
