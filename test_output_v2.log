@@ -1,0 +1,108 @@
+FAIL src/__tests__/evaluation/overfittingDetector.test.ts
+  detectOverfitting
+    √ should detect no overfitting when scores are similar (3 ms)
+    √ should detect mild overfitting
+    √ should detect moderate overfitting
+    √ should detect severe overfitting (1 ms)
+    √ should respect custom threshold (1 ms)
+    √ should analyze complexity correctly (1 ms)
+    √ should include recommendations (1 ms)
+  kFoldCrossValidation
+    √ should perform 5-fold validation (3 ms)
+    √ should identify best and worst folds (1 ms)
+    √ should determine stability correctly (1 ms)
+    √ should throw error if k < 2 (21 ms)
+    √ should throw error if not enough test cases
+  splitDataset
+    √ should split dataset with default ratios
+    √ should split with custom ratios
+    √ should not have overlapping samples (1 ms)
+  heldOutValidation
+    √ should return scores for all three sets (2 ms)
+    √ should calculate generalization score correctly (1 ms)
+  analyzeDiversity
+    √ should calculate diversity for uniform distribution
+    √ should calculate low diversity for skewed distribution
+    √ should identify sufficient diversity (2 ms)
+    √ should handle uncategorized data (1 ms)
+  calculateRegularization
+    √ should penalize longer prompts more
+    √ should respect lambda parameter
+    √ should return positive penalty
+  simplifyPrompt
+    √ should reduce prompt length
+    × should remove examples (1 ms)
+    √ should remove explanations (1 ms)
+    √ should respect target reduction
+    √ should preserve at least minimum lines
+  comprehensiveOverfittingAnalysis
+    √ should return all analysis components (2 ms)
+    × should generate simplified prompt for complex prompts (1 ms)
+    √ should not generate simplified prompt for simple prompts (1 ms)
+  Integration Tests
+    × complete workflow: detect and fix overfitting (2 ms)
+
+  ● simplifyPrompt › should remove examples
+
+    expect(received).not.toContain(expected) // indexOf
+
+    Expected substring: not "Example:"
+    Received string:        "Write a function.
+    Example: function add(a, b) { return a + b; }
+    Make it efficient."
+
+    [0m [90m 397 |[39m         [36mconst[39m simplified [33m=[39m simplifyPrompt(prompt)[33m;[39m
+     [90m 398 |[39m
+    [31m[1m>[22m[39m[90m 399 |[39m         expect(simplified)[33m.[39mnot[33m.[39mtoContain([32m'Example:'[39m)[33m;[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 400 |[39m     })[33m;[39m
+     [90m 401 |[39m
+     [90m 402 |[39m     test([32m'should remove explanations'[39m[33m,[39m () [33m=>[39m {[0m
+
+      at Object.<anonymous> (src/__tests__/evaluation/overfittingDetector.test.ts:399:32)
+
+  ● comprehensiveOverfittingAnalysis › should generate simplified prompt for complex prompts
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 5000
+    Received:   5000
+
+    [0m [90m 470 |[39m
+     [90m 471 |[39m         expect(analysis[33m.[39msimplifiedPrompt)[33m.[39mtoBeDefined()[33m;[39m
+    [31m[1m>[22m[39m[90m 472 |[39m         expect(analysis[33m.[39msimplifiedPrompt[33m![39m[33m.[39mlength)[33m.[39mtoBeLessThan(complexPrompt[33m.[39mlength)[33m;[39m
+     [90m     |[39m                                                   [31m[1m^[22m[39m
+     [90m 473 |[39m     })[33m;[39m
+     [90m 474 |[39m
+     [90m 475 |[39m     test([32m'should not generate simplified prompt for simple prompts'[39m[33m,[39m [36masync[39m () [33m=>[39m {[0m
+
+      at src/__tests__/evaluation/overfittingDetector.test.ts:472:51
+      at step (src/__tests__/evaluation/overfittingDetector.test.ts:48:23)
+      at Object.next (src/__tests__/evaluation/overfittingDetector.test.ts:29:53)
+      at fulfilled (src/__tests__/evaluation/overfittingDetector.test.ts:20:58)
+
+  ● Integration Tests › complete workflow: detect and fix overfitting
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 519 |[39m
+     [90m 520 |[39m         [90m// 5. Verify overfitting detected[39m
+    [31m[1m>[22m[39m[90m 521 |[39m         expect(analysis[33m.[39moverfittingReport[33m.[39misOverfit)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m     |[39m                                                      [31m[1m^[22m[39m
+     [90m 522 |[39m         expect(analysis[33m.[39moverfittingReport[33m.[39mseverity)[33m.[39mnot[33m.[39mtoBe([32m'none'[39m)[33m;[39m
+     [90m 523 |[39m
+     [90m 524 |[39m         [90m// 6. Verify simplified prompt generated[39m[0m
+
+      at src/__tests__/evaluation/overfittingDetector.test.ts:521:54
+      at step (src/__tests__/evaluation/overfittingDetector.test.ts:48:23)
+      at Object.next (src/__tests__/evaluation/overfittingDetector.test.ts:29:53)
+      at fulfilled (src/__tests__/evaluation/overfittingDetector.test.ts:20:58)
+
+Test Suites: 1 failed, 1 total
+Tests:       3 failed, 30 passed, 33 total
+Snapshots:   0 total
+Time:        0.552 s, estimated 1 s
+Ran all test suites matching src/__tests__/evaluation/overfittingDetector.test.ts.
