@@ -33,7 +33,13 @@ export function estimateCost(tokenCount: number): number {
 }
 
 /**
- * Calculate cosine similarity between two texts
+ * Calculate similarity between two texts
+ *
+ * LEGACY: This function uses simple word frequency for backward compatibility.
+ * For better semantic similarity, use calculateSemanticSimilarity from
+ * src/evaluator/semanticSimilarity.ts (DIRECTIVE-018)
+ *
+ * @deprecated Use calculateSemanticSimilarity for better results
  */
 export function calculateSimilarity(text1: string, text2: string): number {
     const normalize = (text: string) =>
@@ -70,6 +76,35 @@ export function calculateSimilarity(text1: string, text2: string): number {
     }
 
     return dotProduct / (magnitude1 * magnitude2);
+}
+
+/**
+ * Calculate semantic similarity using embeddings (DIRECTIVE-018)
+ *
+ * This is a wrapper around the semanticSimilarity module.
+ * To use real embeddings, configure an embedding provider:
+ *
+ * Example with OpenAI:
+ * ```typescript
+ * import { calculateSemanticSimilarity, createOpenAIProvider } from './evaluator/semanticSimilarity';
+ *
+ * const provider = createOpenAIProvider(process.env.OPENAI_API_KEY!);
+ * const similarity = await calculateSemanticSimilarity(text1, text2, provider);
+ * ```
+ *
+ * For now, this uses mock embeddings for development.
+ */
+export async function calculateSemanticSimilarityWrapper(
+    text1: string,
+    text2: string
+): Promise<number> {
+    // Dynamic import to avoid circular dependencies
+    const { calculateSemanticSimilarity, createMockProvider } = await import('./evaluator/semanticSimilarity');
+
+    // Use mock provider by default (can be configured later)
+    const provider = createMockProvider(384);
+
+    return calculateSemanticSimilarity(text1, text2, provider, true);
 }
 
 /**

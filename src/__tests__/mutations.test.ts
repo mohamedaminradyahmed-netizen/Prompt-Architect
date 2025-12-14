@@ -5,7 +5,7 @@
  */
 
 import { describe, it, expect } from '@jest/globals';
-import { tryCatchStyleMutation, reduceContextMutation, PromptVariation } from '../mutations';
+import { tryCatchStyleMutation, reduceContextMutation, expandMutation, PromptVariation } from '../mutations';
 
 describe('Try/Catch Style Mutation (DIRECTIVE-003)', () => {
   describe('Basic Imperative Transformations', () => {
@@ -510,6 +510,341 @@ describe('Context Reduction Mutation (DIRECTIVE-004)', () => {
       expect(result.text).toContain('explain');
       expect(result.text).not.toContain('Obviously');
       expect(result.text).not.toContain('Needless to say');
+    });
+  });
+
+  // ============================================================================
+  // EXPAND MUTATION TESTS
+  // ============================================================================
+
+  describe('expandMutation', () => {
+    describe('Technical Term Expansion', () => {
+      it('should add definitions for technical terms', () => {
+        const input = 'Build a REST API with JWT authentication';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('REST');
+        expect(result.text).toContain('Representational State Transfer');
+        expect(result.text).toContain('JWT');
+        expect(result.text).toContain('JSON Web Token');
+        expect(result.text).toContain('Technical Context:');
+      });
+
+      it('should expand prompts with Docker and Kubernetes', () => {
+        const input = 'Deploy the app using Docker and Kubernetes';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Docker');
+        expect(result.text).toContain('containerized applications');
+        expect(result.text).toContain('Kubernetes');
+        expect(result.text).toContain('orchestration');
+      });
+
+      it('should expand database-related terms', () => {
+        const input = 'Create a CRUD API using MongoDB and PostgreSQL';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('CRUD');
+        expect(result.text).toContain('Create, Read, Update, Delete');
+        expect(result.text).toContain('MongoDB');
+        expect(result.text).toContain('PostgreSQL');
+      });
+
+      it('should limit technical term expansion to 3 terms', () => {
+        const input = 'Build a REST API with JWT, OAuth, GraphQL, WebSocket, and Redis';
+        const result = expandMutation(input);
+
+        const technicalContextMatch = result.text.match(/Technical Context:\n((?:- .+\n?)+)/);
+        expect(technicalContextMatch).toBeTruthy();
+
+        if (technicalContextMatch) {
+          const definitions = technicalContextMatch[1].split('\n').filter(line => line.trim());
+          expect(definitions.length).toBeLessThanOrEqual(3);
+        }
+      });
+
+      it('should not add definitions if terms are already defined', () => {
+        const input = 'Build a REST API. REST stands for Representational State Transfer.';
+        const result = expandMutation(input);
+
+        // Should not add duplicate definition
+        const restCount = (result.text.match(/Representational State Transfer/g) || []).length;
+        expect(restCount).toBe(1);
+      });
+    });
+
+    describe('General Instruction Expansion', () => {
+      it('should expand "optimize" instruction into steps', () => {
+        const input = 'Optimize this code';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Detailed Steps:');
+        expect(result.text).toContain('Analyze current performance bottlenecks');
+        expect(result.text).toContain('Identify optimization opportunities');
+        expect(result.text).toContain('Implement improvements');
+        expect(result.text).toContain('Measure and validate performance gains');
+      });
+
+      it('should expand "refactor" instruction', () => {
+        const input = 'Refactor the authentication module';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Detailed Steps:');
+        expect(result.text).toContain('Review current code structure');
+        expect(result.text).toContain('Identify code smells');
+        expect(result.text).toContain('Implement changes incrementally');
+        expect(result.text).toContain('Ensure tests pass');
+      });
+
+      it('should expand "implement" instruction', () => {
+        const input = 'Implement user authentication';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Detailed Steps:');
+        expect(result.text).toContain('Design the solution architecture');
+        expect(result.text).toContain('Break down into smaller components');
+        expect(result.text).toContain('Add error handling');
+        expect(result.text).toContain('Write tests and documentation');
+      });
+
+      it('should expand "debug" instruction', () => {
+        const input = 'Debug the login issue';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Detailed Steps:');
+        expect(result.text).toContain('Reproduce the issue consistently');
+        expect(result.text).toContain('Identify the root cause');
+        expect(result.text).toContain('Test the fix thoroughly');
+      });
+
+      it('should expand "design" instruction', () => {
+        const input = 'Design a user dashboard';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Detailed Steps:');
+        expect(result.text).toContain('Gather requirements');
+        expect(result.text).toContain('Create initial sketches');
+        expect(result.text).toContain('Develop detailed specifications');
+      });
+    });
+
+    describe('Example Addition', () => {
+      it('should add examples for code-related prompts', () => {
+        const input = 'Write a function to validate email';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Example:');
+        expect(result.text).toContain('Input');
+        expect(result.text).toContain('Expected Output');
+        expect(result.text).toContain('Edge Case');
+      });
+
+      it('should add examples for content writing prompts', () => {
+        const input = 'Write a blog post about TypeScript';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Example:');
+        expect(result.text).toContain('Sample opening');
+        expect(result.text).toContain('compelling hook');
+      });
+
+      it('should add examples for analysis prompts', () => {
+        const input = 'Analyze the security vulnerabilities';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Example:');
+        expect(result.text).toContain('Key findings');
+        expect(result.text).toContain('Recommendations');
+      });
+
+      it('should not add examples if already present', () => {
+        const input = 'Write a function. Example: function add(a, b) { return a + b; }';
+        const result = expandMutation(input);
+
+        // Count "Example:" occurrences
+        const exampleCount = (result.text.match(/Example:/g) || []).length;
+        expect(exampleCount).toBe(1);
+      });
+
+      it('should not add examples if code block exists', () => {
+        const input = 'Write a function:\n```typescript\nfunction test() {}\n```';
+        const result = expandMutation(input);
+
+        // Should not add duplicate example section
+        const exampleCount = (result.text.match(/Example:/g) || []).length;
+        expect(exampleCount).toBe(0);
+      });
+    });
+
+    describe('Success Criteria Addition', () => {
+      it('should add general success criteria', () => {
+        const input = 'Create a user profile page';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Success Criteria:');
+        expect(result.text).toContain('Output is clear and well-structured');
+        expect(result.text).toContain('All requirements from the prompt are addressed');
+      });
+
+      it('should add code-specific criteria', () => {
+        const input = 'Write a function to parse JSON';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Success Criteria:');
+        expect(result.text).toContain('Code is syntactically correct');
+        expect(result.text).toContain('Code follows best practices');
+      });
+
+      it('should add test-specific criteria', () => {
+        const input = 'Write unit tests for the authentication module';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Success Criteria:');
+        expect(result.text).toContain('All tests pass successfully');
+        expect(result.text).toContain('Edge cases are covered');
+      });
+
+      it('should add performance criteria for optimization prompts', () => {
+        const input = 'Optimize the database queries for better performance';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Success Criteria:');
+        expect(result.text).toContain('Measurable performance improvement');
+      });
+
+      it('should add security criteria', () => {
+        const input = 'Implement secure password storage';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Success Criteria:');
+        expect(result.text).toContain('Security best practices');
+        expect(result.text).toContain('No vulnerabilities');
+      });
+
+      it('should add UX criteria for user-facing features', () => {
+        const input = 'Design a user-friendly login form';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Success Criteria:');
+        expect(result.text).toContain('User experience is intuitive');
+      });
+
+      it('should limit success criteria to 4 items', () => {
+        const input = 'Write secure, optimized, tested code with great UX';
+        const result = expandMutation(input);
+
+        const criteriaMatch = result.text.match(/Success Criteria:\n((?:\d+\. .+\n?)+)/);
+        expect(criteriaMatch).toBeTruthy();
+
+        if (criteriaMatch) {
+          const criteria = criteriaMatch[1].split('\n').filter(line => line.trim());
+          expect(criteria.length).toBeLessThanOrEqual(4);
+        }
+      });
+    });
+
+    describe('Overall Expansion Behavior', () => {
+      it('should return expansion mutation type', () => {
+        const input = 'Optimize this API';
+        const result = expandMutation(input);
+
+        expect(result.mutationType).toBe('expansion');
+      });
+
+      it('should include expansion metadata', () => {
+        const input = 'Build a REST API';
+        const result = expandMutation(input);
+
+        expect(result.metadata).toBeDefined();
+        expect(result.metadata?.originalLength).toBe(input.length);
+        expect(result.metadata?.expandedLength).toBeGreaterThan(input.length);
+        expect(result.metadata?.expansionRatio).toBeGreaterThan(0);
+        expect(result.metadata?.expansions).toBeDefined();
+        expect(Array.isArray(result.metadata?.expansions)).toBe(true);
+      });
+
+      it('should increase length by 50-100% for typical prompts', () => {
+        const input = 'Implement JWT authentication for the API';
+        const result = expandMutation(input);
+
+        const originalLength = input.length;
+        const expandedLength = result.text.length;
+        const expansionRatio = ((expandedLength / originalLength) - 1) * 100;
+
+        expect(expansionRatio).toBeGreaterThanOrEqual(50);
+      });
+
+      it('should set expected impact correctly', () => {
+        const input = 'Optimize the code';
+        const result = expandMutation(input);
+
+        expect(result.expectedImpact.quality).toBe('increase');
+        expect(result.expectedImpact.cost).toBe('increase');
+        expect(result.expectedImpact.latency).toBe('increase');
+        expect(result.expectedImpact.reliability).toBe('increase');
+      });
+
+      it('should provide meaningful change description', () => {
+        const input = 'Build a REST API with JWT';
+        const result = expandMutation(input);
+
+        expect(result.changeDescription).toBeTruthy();
+        expect(result.changeDescription.length).toBeGreaterThan(0);
+        expect(result.metadata?.expansions.length).toBeGreaterThan(0);
+      });
+
+      it('should handle simple prompts without technical terms', () => {
+        const input = 'Write a function to add two numbers';
+        const result = expandMutation(input);
+
+        // Should still add success criteria and possibly examples
+        expect(result.text.length).toBeGreaterThan(input.length);
+        expect(result.text).toContain('Success Criteria:');
+      });
+
+      it('should handle complex prompts with multiple expansions', () => {
+        const input = 'Optimize the REST API authentication using JWT and Redis';
+        const result = expandMutation(input);
+
+        // Should have technical terms, steps, and criteria
+        expect(result.text).toContain('Technical Context:');
+        expect(result.text).toContain('Detailed Steps:');
+        expect(result.text).toContain('Success Criteria:');
+        expect(result.metadata?.expansions.length).toBeGreaterThan(2);
+      });
+    });
+
+    describe('Real-World Examples', () => {
+      it('should expand a production deployment prompt', () => {
+        const input = 'Deploy the microservices using Docker and Kubernetes';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('Docker');
+        expect(result.text).toContain('Kubernetes');
+        expect(result.text).toContain('Success Criteria:');
+        expect(result.text.length / input.length).toBeGreaterThan(1.5);
+      });
+
+      it('should expand a database optimization prompt', () => {
+        const input = 'Optimize the PostgreSQL queries';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('PostgreSQL');
+        expect(result.text).toContain('Detailed Steps:');
+        expect(result.text).toContain('Analyze current performance');
+        expect(result.text).toContain('performance improvement');
+      });
+
+      it('should expand a full-stack development prompt', () => {
+        const input = 'Implement a GraphQL API with TypeScript and MongoDB';
+        const result = expandMutation(input);
+
+        expect(result.text).toContain('GraphQL');
+        expect(result.text).toContain('TypeScript');
+        expect(result.text).toContain('MongoDB');
+        expect(result.text).toContain('Detailed Steps:');
+        expect(result.text).toContain('Success Criteria:');
+      });
     });
   });
 });

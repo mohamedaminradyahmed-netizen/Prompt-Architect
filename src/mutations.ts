@@ -410,12 +410,267 @@ export function constrainMutation(prompt: string, category: PromptCategory): Pro
 }
 
 // ============================================================================
+// EXPANSION MUTATION
+// ============================================================================
+
+/**
+ * Expand Mutation
+ *
+ * Expands a prompt by adding:
+ * 1. Definitions for technical terms
+ * 2. Specific steps for general instructions
+ * 3. Illustrative examples if not present
+ * 4. Clear success criteria
+ *
+ * Goal: Increase length by 50-100% while improving clarity
+ *
+ * @param prompt - The original prompt
+ * @returns PromptVariation with expanded content
+ */
+export function expandMutation(prompt: string): PromptVariation {
+  const originalLength = prompt.length;
+  let expandedPrompt = prompt;
+  const expansions: string[] = [];
+
+  // 1. Identify and expand technical terms
+  const technicalTerms = identifyTechnicalTerms(prompt);
+  if (technicalTerms.length > 0) {
+    const definitions = technicalTerms
+      .map(term => `- ${term.term}: ${term.definition}`)
+      .join('\n');
+
+    expandedPrompt += `\n\nTechnical Context:\n${definitions}`;
+    expansions.push(`Added definitions for ${technicalTerms.length} technical terms`);
+  }
+
+  // 2. Expand general instructions into specific steps
+  const generalInstructions = identifyGeneralInstructions(prompt);
+  if (generalInstructions.length > 0) {
+    const steps = generalInstructions[0].steps
+      .map((step, i) => `${i + 1}. ${step}`)
+      .join('\n');
+
+    expandedPrompt += `\n\nDetailed Steps:\n${steps}`;
+    expansions.push('Expanded general instructions into specific steps');
+  }
+
+  // 3. Add examples if not present
+  if (!hasExamples(prompt)) {
+    const example = generateExample(prompt);
+    if (example) {
+      expandedPrompt += `\n\nExample:\n${example}`;
+      expansions.push('Added illustrative example');
+    }
+  }
+
+  // 4. Add success criteria
+  const criteria = generateSuccessCriteria(prompt);
+  if (criteria.length > 0) {
+    const criteriaText = criteria.map((c, i) => `${i + 1}. ${c}`).join('\n');
+    expandedPrompt += `\n\nSuccess Criteria:\n${criteriaText}`;
+    expansions.push(`Added ${criteria.length} success criteria`);
+  }
+
+  const expansionRatio = ((expandedPrompt.length / originalLength) - 1) * 100;
+
+  return {
+    text: expandedPrompt,
+    mutationType: 'expansion',
+    changeDescription: expansions.join('; '),
+    expectedImpact: {
+      quality: 'increase',
+      cost: 'increase', // More tokens = higher cost
+      latency: 'increase', // Longer prompt = more processing time
+      reliability: 'increase' // More clarity = better results
+    },
+    metadata: {
+      originalLength,
+      expandedLength: expandedPrompt.length,
+      expansionRatio: Math.round(expansionRatio),
+      expansions
+    }
+  };
+}
+
+/**
+ * Identify technical terms in the prompt
+ */
+function identifyTechnicalTerms(prompt: string): Array<{ term: string; definition: string }> {
+  const technicalPatterns: Record<string, string> = {
+    'API': 'Application Programming Interface - a set of protocols for building software',
+    'REST': 'Representational State Transfer - an architectural style for web services',
+    'SQL': 'Structured Query Language - language for managing relational databases',
+    'NoSQL': 'Non-relational database systems that store data in flexible formats',
+    'async/await': 'JavaScript syntax for handling asynchronous operations',
+    'JWT': 'JSON Web Token - secure way to transmit information between parties',
+    'OAuth': 'Open Authorization - standard protocol for access delegation',
+    'CRUD': 'Create, Read, Update, Delete - basic database operations',
+    'MVC': 'Model-View-Controller - software design pattern',
+    'ORM': 'Object-Relational Mapping - technique for database access',
+    'CI/CD': 'Continuous Integration/Continuous Deployment - automated software delivery',
+    'Docker': 'Platform for developing and running containerized applications',
+    'Kubernetes': 'Container orchestration platform',
+    'GraphQL': 'Query language for APIs',
+    'WebSocket': 'Protocol for two-way communication between client and server',
+    'TypeScript': 'Typed superset of JavaScript',
+    'Redux': 'State management library for JavaScript applications',
+    'MongoDB': 'Document-oriented NoSQL database',
+    'PostgreSQL': 'Advanced open-source relational database',
+    'Redis': 'In-memory data structure store used as database and cache'
+  };
+
+  const found: Array<{ term: string; definition: string }> = [];
+  const promptLower = prompt.toLowerCase();
+
+  for (const [term, definition] of Object.entries(technicalPatterns)) {
+    if (promptLower.includes(term.toLowerCase()) && !prompt.includes(definition)) {
+      found.push({ term, definition });
+    }
+  }
+
+  return found.slice(0, 3); // Limit to 3 terms to avoid over-expansion
+}
+
+/**
+ * Identify general instructions that can be expanded
+ */
+function identifyGeneralInstructions(prompt: string): Array<{ instruction: string; steps: string[] }> {
+  const generalPatterns: Record<string, string[]> = {
+    'optimize': [
+      'Analyze current performance bottlenecks',
+      'Identify optimization opportunities',
+      'Implement improvements',
+      'Measure and validate performance gains'
+    ],
+    'refactor': [
+      'Review current code structure',
+      'Identify code smells and improvement areas',
+      'Plan refactoring approach',
+      'Implement changes incrementally',
+      'Ensure tests pass after each change'
+    ],
+    'implement': [
+      'Design the solution architecture',
+      'Break down into smaller components',
+      'Implement core functionality',
+      'Add error handling and validation',
+      'Write tests and documentation'
+    ],
+    'debug': [
+      'Reproduce the issue consistently',
+      'Identify the root cause',
+      'Develop a fix',
+      'Test the fix thoroughly',
+      'Document the solution'
+    ],
+    'design': [
+      'Gather requirements',
+      'Create initial sketches or wireframes',
+      'Develop detailed specifications',
+      'Review and iterate based on feedback',
+      'Finalize the design'
+    ]
+  };
+
+  const found: Array<{ instruction: string; steps: string[] }> = [];
+  const promptLower = prompt.toLowerCase();
+
+  for (const [pattern, steps] of Object.entries(generalPatterns)) {
+    if (promptLower.includes(pattern)) {
+      found.push({ instruction: pattern, steps });
+      break; // Only expand the first match
+    }
+  }
+
+  return found;
+}
+
+/**
+ * Check if prompt already has examples
+ */
+function hasExamples(prompt: string): boolean {
+  const examplePatterns = [
+    /example:/i,
+    /for example/i,
+    /e\.g\./i,
+    /such as/i,
+    /like this:/i,
+    /```/  // Code blocks often contain examples
+  ];
+
+  return examplePatterns.some(pattern => pattern.test(prompt));
+}
+
+/**
+ * Generate an example based on prompt content
+ */
+function generateExample(prompt: string): string | null {
+  const promptLower = prompt.toLowerCase();
+
+  // Code generation prompts
+  if (promptLower.includes('function') || promptLower.includes('code')) {
+    return `Input: "data"\nExpected Output: Processed result\nEdge Case: Empty input should return default value`;
+  }
+
+  // Content writing prompts
+  if (promptLower.includes('write') || promptLower.includes('content')) {
+    return `Sample opening: "Start with a compelling hook that captures attention..."\nSample closing: "End with a clear call-to-action or summary..."`;
+  }
+
+  // Analysis prompts
+  if (promptLower.includes('analyz') || promptLower.includes('review')) {
+    return `Analysis format:\n- Key findings: [List main points]\n- Recommendations: [Actionable suggestions]\n- Next steps: [Clear action items]`;
+  }
+
+  return null;
+}
+
+/**
+ * Generate success criteria for the prompt
+ */
+function generateSuccessCriteria(prompt: string): string[] {
+  const criteria: string[] = [];
+  const promptLower = prompt.toLowerCase();
+
+  // Always add general criteria
+  criteria.push('Output is clear and well-structured');
+  criteria.push('All requirements from the prompt are addressed');
+
+  // Add specific criteria based on content
+  if (promptLower.includes('code') || promptLower.includes('function')) {
+    criteria.push('Code is syntactically correct and runs without errors');
+    criteria.push('Code follows best practices and is well-documented');
+  }
+
+  if (promptLower.includes('test')) {
+    criteria.push('All tests pass successfully');
+    criteria.push('Edge cases are covered');
+  }
+
+  if (promptLower.includes('optim') || promptLower.includes('performance')) {
+    criteria.push('Measurable performance improvement is demonstrated');
+  }
+
+  if (promptLower.includes('secur')) {
+    criteria.push('Security best practices are followed');
+    criteria.push('No vulnerabilities are introduced');
+  }
+
+  if (promptLower.includes('user') || promptLower.includes('UI')) {
+    criteria.push('User experience is intuitive and smooth');
+  }
+
+  return criteria.slice(0, 4); // Limit to 4 criteria
+}
+
+// ============================================================================
 // EXPORTS
 // ============================================================================
 
 export default {
   tryCatchStyleMutation,
   reduceContextMutation,
+  expandMutation,
   hasImperativeLanguage,
   splitIntoSentences,
   extractMainVerb,
